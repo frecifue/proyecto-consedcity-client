@@ -1,5 +1,5 @@
 import React from 'react'
-import { Banner } from '../../../components/Web'
+import { Banner, ContactForm } from '../../../components/Web'
 import {Team} from "../Team"
 import { Blog } from '../Blog'
 import { About } from '../About'
@@ -13,6 +13,7 @@ export function Home() {
       <Blog/>
       <Team/>
       <OurWork/>
+      <ContactForm/>
     </div>
   )
 }

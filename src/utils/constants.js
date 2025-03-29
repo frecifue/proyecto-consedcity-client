@@ -42,6 +42,9 @@ export const ENV = {
             CREATE_GENERAL_INFO: "general_info",
             UPDATE_GENERAL_INFO: "general_info",
             DELETE_GENERAL_INFO: "general_info",
+        },
+        CONTACT:{
+            CONTACT: "contact",
         }
     },
 };
