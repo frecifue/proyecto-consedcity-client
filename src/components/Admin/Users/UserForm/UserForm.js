@@ -1,0 +1,147 @@
+import React, { useCallback } from 'react'
+import "./UseForm.scss"
+import { Form, Image } from 'semantic-ui-react';
+import { useFormik } from 'formik';
+import { initialValues, validationSchema } from './UserForm.form';
+import { useDropzone } from 'react-dropzone';
+import {image} from "../../../../assets"
+import {User} from "../../../../api"
+import {useAuth} from "../../../../hooks"
+import { ENV } from '../../../../utils';
+// import { ToastContainer, toast } from 'react-toastify';
+
+const userController = new User()
+
+export function UserForm(props) {
+    const {close, onReload, user} = props;
+    const {accessToken} = useAuth();
+console.log(user);
+
+    const formik = useFormik({
+        initialValues: initialValues(user),
+        validationSchema: validationSchema(user),
+        validateOnChange: false,
+        onSubmit: async (formValue) =>{
+            try {
+                if(!user){
+                    await userController.createUser(accessToken, formValue)
+                }else{
+                    await userController.updateUser(accessToken, user.usu_id, formValue)
+                }
+                onReload();
+                close();
+                
+            } catch (error) {
+                console.error(error)
+            }
+        }
+    });
+
+    const onDrop = useCallback((acceptedFiles)=>{
+        const file = acceptedFiles[0];
+        formik.setFieldValue("avatar", URL.createObjectURL(file))
+        formik.setFieldValue("fileAvatar", file);
+    })
+
+    const {getRootProps, getInputProps} = useDropzone({
+        accept: "image/jpeg, image/png",
+        onDrop,
+    });
+
+    const getAvatar = () =>{
+        if(formik.values.fileAvatar){
+            return formik.values.avatar;
+        }else if(formik.values.avatar){
+            return `${ENV.BASE_PATH}/${formik.values.avatar}`
+        }
+        return image.noAvatar;
+    }
+
+    return (
+        <>
+            <Form className='user-form' onSubmit={formik.handleSubmit}>
+                <div className='user-form__avatar' {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    <Image avatar size="small" src={getAvatar()} />
+                </div>
+
+                <Form.Group widths="equal">
+                    <Form.Input 
+                        name="nombres" 
+                        placeholder="Nombres"
+                        onChange={formik.handleChange}
+                        value={formik.values.nombres}
+                        error={formik.errors.nombres}
+                        />
+                </Form.Group>
+
+                <Form.Group widths="equal">
+                    <Form.Input 
+                        name="primer_apellido" 
+                        placeholder="Primer Apellido"
+                        onChange={formik.handleChange}
+                        value={formik.values.primer_apellido}
+                        error={formik.errors.primer_apellido}
+                        />
+                    <Form.Input 
+                        name="segundo_apellido" 
+                        placeholder="Segundo Apellido"
+                        onChange={formik.handleChange}
+                        value={formik.values.segundo_apellido}
+                        error={formik.errors.segundo_apellido}
+                        />
+                </Form.Group>
+
+                <Form.Group widths="equal">
+                    <Form.Input 
+                        name="email" 
+                        placeholder="Email"
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                        error={formik.errors.email}
+                        />
+                    <Form.Dropdown 
+                        placeholder='Seleccione un rol' 
+                        options={roleOptions} 
+                        selection 
+                        defaultValue={user?.usu_rol || ""}
+                        onChange={(_,data)=> formik.setFieldValue("rol", data.value)}
+                        value={formik.values.rol}
+                        error={formik.errors.rol}
+                        />
+                </Form.Group>
+
+                <Form.Group widths="equal">
+                    <Form.Input 
+                        name="password" 
+                        type='password'
+                        placeholder="Contraseña"
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                        error={formik.errors.password}
+                        />
+                </Form.Group>
+
+                <Form.Button type='submit' primary fluid loading={formik.isSubmitting}>
+                    {user ? "Editar Usuario" : "Crear Usuario"}
+                </Form.Button>
+            </Form>
+            {/* <ToastContainer /> */}
+        </>
+        
+    )
+}
+
+// CAMBIAR ESTO Y TRAERLO POR BD!!!!
+const roleOptions = [
+    {
+        key: "colaborador",
+        text: "Colaborador",
+        value: "colaborador"
+    },
+    {
+        key: "admin",
+        text: "Administrador",
+        value: "admin"
+    }
+]

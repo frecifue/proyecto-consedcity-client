@@ -1,0 +1,30 @@
+@import "~/src/scss/index.scss";
+
+.post {
+  margin-top: 50px;
+
+  .title {
+    color: $text-light;
+    text-align: center;
+    margin-bottom: 6;
+  }
+
+  .content {
+    color: $text-light;
+    opacity: 0.6;
+    font-size: 16px;
+
+    pre {
+      background-color: #000000;
+      overflow-x: scroll;
+      padding: 20px;
+    }
+  }
+
+  .img {
+    max-width: 100%;   /* Asegura que la imagen no exceda el contenedor */
+    height: auto;      /* Mantiene la proporción de la imagen */
+    margin: 20px auto; /* Agrega un margen superior e inferior, y la centra */
+    display: block;    /* Hace que la imagen sea un bloque (para centrarla con margin) */
+  }
+}

@@ -1,0 +1,42 @@
+@import "~/src/scss/index.scss";
+
+.list-posts-web {
+  margin-top: 70px;
+
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .item {
+      // width: 33.33%;
+      width: 50%;
+      padding: 20px;
+    }
+  }
+
+  .post-title{
+    color: $text-light !important;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 2.25rem;
+    letter-spacing: 4px;
+    text-align: center;
+    // color: #7f93d0 !important;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    a {
+      color: $text-light !important;
+      opacity: 0.6;
+
+      &.active {
+        opacity: 1;
+        border-color: $text-light !important;
+      }
+    }
+  }
+}

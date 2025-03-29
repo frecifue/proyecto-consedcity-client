@@ -1,0 +1,18 @@
+import React from 'react'
+import { Banner } from '../../../components/Web'
+import {Team} from "../Team"
+import { Blog } from '../Blog'
+import { About } from '../About'
+import { OurWork } from '../../../components/Web/General_Info/OurWork'
+
+export function Home() {
+  return (
+    <div>
+      <Banner/>
+      <About/>
+      <Blog/>
+      <Team/>
+      <OurWork/>
+    </div>
+  )
+}
