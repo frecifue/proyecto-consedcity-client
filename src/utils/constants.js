@@ -45,6 +45,9 @@ export const ENV = {
         },
         CONTACT:{
             CONTACT: "contact",
+        },
+        IMAGE_GALLERY:{
+            GET_IMAGE_GALLERY: "image_gallery",
         }
     },
 };

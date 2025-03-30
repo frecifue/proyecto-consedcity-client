@@ -1,6 +1,6 @@
 export * from "./Auth"
 export * from "./Users"
-export * from "./GeneralInformation"
+export * from "./GeneralInfo"
 export * from "./Team"
 export * from "./Menu"
 export * from "./Posts"

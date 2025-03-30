@@ -1,120 +1,64 @@
-.u-section-6 {
-    background-color: #f5f5f5;
-    padding: 40px 0;
-  }
-  
-  .u-sheet {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  
-  .u-custom-font {
-    font-family: 'Arial', sans-serif;
-    font-weight: 700;
-  }
-  
-  .u-text {
-    color: #333;
-    font-size: 1.5rem;
-  }
-  
-  .u-text {
-    margin-bottom: 20px;
-  }
-  
-  .buttons-container {
+@import "~/src/scss/index.scss";
+
+.ourwork-section {
+    background-color: #fff;
+    padding: 60px 20px;
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-top: 30px;
-  }
-  
-  .u-container-style {
-    background-color: rgb(128, 128, 128);
-    color: white;
-    padding: 20px;
-    cursor: pointer;
-    border-radius: 8px;
-    width: 200px;
-    transition: background-color 0.3s ease;
-    
-    &:hover {
-      background-color: rgb(154, 152, 152);;
+
+    .container {
+        max-width: 1000px;
+        width: 100%;
+        text-align: center;
     }
-  }
-  
-  .u-container-style h5 {
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-  
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background-color: white;
-    padding: 40px;
-    border-radius: 10px;
-    max-width: 600px;
-    width: 90%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-  }
-  
-  .modal-content h1 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-  }
-  
-  .modal-content p {
-    font-size: 1.1rem;
-    color: #333;
-    margin-bottom: 25px;
-  }
-  
-  .button-container {
-    margin-top: 20px;
-  }
-  
-  .u-btn {
-    background-color: #005b96;
-    color: white;
-    padding: 12px 25px;
-    text-transform: uppercase;
-    font-size: 1rem;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-    display: inline-block;
-  }
-  
-  .u-btn:hover {
-    background-color: #0078d4;
-  }
-  
-  .close-btn {
-    margin-top: 20px;
-    padding: 8px 15px;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  
-  .close-btn:hover {
-    background-color: #c0392b;
-  }
-  
+
+    &__title {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    .description {
+        font-size: 1.2rem;
+        color: #555;
+        margin-bottom: 40px;
+        line-height: 1.5;
+    }
+
+    .additional-content {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+
+        .box {
+            flex: 1;
+            max-width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+            }
+
+            h5 {
+                font-size: 1.3rem;
+                margin-bottom: 10px;
+                color: #222;
+            }
+
+            p {
+                font-size: 1rem;
+                color: #555;
+            }
+        }
+
+        .grey-background {
+            background-color: #f5f5f5;
+        }
+    }
+}

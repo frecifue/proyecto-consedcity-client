@@ -1,31 +1,51 @@
-import React from 'react'
-import "./OurWork.scss"
+import React, { useEffect, useState } from "react";
+import "./OurWork.scss";
+import { GeneralInfo } from "../../../../api";
+import { Loader } from "semantic-ui-react";
+
+const generalInfoController = new GeneralInfo();
 
 export function OurWork() {
-    return (
-        <section className="u-align-center u-clearfix u-section-6">
-            <div className="u-clearfix u-sheet u-valign-middle">
-                <h2 className="u-custom-font u-text">NUESTRO TRABAJO</h2>
-                <h5 className="u-text">
-                    Nuestro trabajo tiene como propósito visibilizar la comunidad gamer y generar un impacto a nivel de 
-                    políticas públicas para potenciar la actividad gamer a nivel regional y nacional. 
-                    Conoce nuestros componentes de acción que se dividen en Investigación, formación y difusión.
-                </h5>
-                <p className="u-text"></p>
 
-                <div className="buttons-container">
-                    <div className="u-container-style" /* onClick={() => openModal(data.cuadros_extras.cuadro_uno)} */>
-                        <h5 className="u-align-center u-text">DIFUSIÓN</h5>
+    const [generalInfo, setGeneralInfo] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+        try {
+            const response = await generalInfoController.getGeneralInfo();
+            setGeneralInfo(response);
+        } catch (error) {
+            console.error(error);
+        }
+        })();
+    }, []);
+
+    if (!generalInfo) return <Loader active inline="centered" />;
+
+
+
+    return (
+        <section className="ourwork-section">
+            <div className="container">
+                <h2 className="ourwork-section__title">NUESTRO TRABAJO</h2>
+                <p className="description">
+                    {generalInfo[0]?.ing_nuestro_trabajo}
+                </p>
+
+                <div className="additional-content">
+                    <div className="box">
+                        <h5>DIFUSIÓN</h5>
+                        <p>{generalInfo[0]?.ing_nuestro_trabajo_difusion}</p>
                     </div>
-                    <div className="u-container-style" /* onClick={() => openModal(data.cuadros_extras.cuadro_dos)} */>
-                        <h5 className="u-align-center u-text">FORMACIÓN</h5>
+                    <div className="box grey-background">
+                        <h5>FORMACIÓN</h5>
+                        <p>{generalInfo[0]?.ing_nuestro_trabajo_formacion}</p>
                     </div>
-                    <div className="u-container-style" /* onClick={() => openModal(data.cuadros_extras.cuadro_tres)} */>
-                        <h5 className="u-align-center u-text">INVESTIGACIÓN</h5>
+                    <div className="box">
+                        <h5>INVESTIGACIÓN</h5>
+                        <p>{generalInfo[0]?.ing_nuestro_trabajo_investigacion}</p>
                     </div>
                 </div>
-
-                {/* {modalOpen && <ModalTrabajo data={modalContent} onClose={() => setModalOpen(false)} />} */}
             </div>
         </section>
     );

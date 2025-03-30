@@ -4,6 +4,7 @@ import {Team} from "../Team"
 import { Blog } from '../Blog'
 import { About } from '../About'
 import { OurWork } from '../../../components/Web/General_Info/OurWork'
+import {ImageGallery} from "../../../components/Web/ImageGallery"
 
 export function Home() {
   return (
@@ -13,6 +14,7 @@ export function Home() {
       <Blog/>
       <Team/>
       <OurWork/>
+      <ImageGallery/>
       <ContactForm/>
     </div>
   )
