@@ -1,0 +1,54 @@
+.anchor-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background-color: #333; /* Fondo oscuro */
+  padding: 10px 0;
+  box-sizing: border-box; /* Aseguramos que el padding no afecte el tamaño total */
+  overflow-x: auto; /* Permitimos el scroll horizontal cuando el menú es demasiado ancho */
+  white-space: nowrap; /* Evita que los elementos se dividan en varias líneas */
+
+  .ui.menu {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap; /* Aseguramos que los elementos no se ajusten a la siguiente línea */
+  }
+
+  .item {
+    color: #fff;
+    font-size: 1.2rem;
+    margin: 0 15px;
+    cursor: pointer;
+    text-align: center;
+
+    &:hover {
+      color: #ff6f61;
+    }
+  }
+
+  /* Estilos para dispositivos con pantallas más pequeñas */
+  @media (max-width: 768px) {
+    .ui.menu {
+      display: flex;
+      justify-content: flex-start; /* Alineamos los elementos al principio */
+    }
+
+    .item {
+      font-size: 1rem; /* Reducimos el tamaño de la fuente */
+      margin: 10px 15px; /* Añadimos margen entre los elementos */
+    }
+  }
+
+  /* Para pantallas muy pequeñas (menos de 480px) */
+  @media (max-width: 480px) {
+    .item {
+      font-size: 0.9rem; /* Aún más pequeño para pantallas muy pequeñas */
+      margin: 10px 12px; /* Reducimos el margen entre los elementos */
+    }
+  }
+}

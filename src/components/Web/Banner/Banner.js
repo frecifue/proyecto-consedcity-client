@@ -6,7 +6,7 @@ import "./Banner.scss";
 export function Banner() {
   return (
     <div className="banner">
-      <Container className="banner__container">
+      <section className="banner__container">
         <img src={Icon.LogoBlanco} alt="Logo" className="logo" />
         <h1>
             ASOCIACIÓN GAMER
@@ -18,7 +18,7 @@ export function Banner() {
             <br />
             del Biobío, Chile.
         </h2>
-      </Container>
+      </section>
 
       {/* <div className="banner__dark" /> */}
     </div>

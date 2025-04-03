@@ -22,7 +22,7 @@ export function About() {
   if (!generalInfo) return <Loader active inline="centered" />;
   
   return (
-    <section className="about-section">
+    <section className="about-section" id="about-section">
       <div className="container">
         <h2 className="about-section__title">QUIÉNES SOMOS</h2>
         <p className="description">{generalInfo[0]?.ing_quienes_somos}</p>

@@ -97,4 +97,5 @@ const options = [
   { key: "https://", text: "https://", value: "https://" },
   { key: "http://", text: "http://", value: "http://" },
   { key: "/", text: "/", value: "/" },
+  { key: "#", text: "#", value: "#" },
 ];

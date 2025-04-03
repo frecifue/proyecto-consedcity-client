@@ -33,9 +33,13 @@ export function AdminMenu() {
               <Icon name="bars"/>
               Menu
           </Menu.Item>
-          <Menu.Item as={Link} to="/admin/gemeral_info" active={isCurrentPath("/admin/gemeral_info")}>
+          <Menu.Item as={Link} to="/admin/general_info" active={isCurrentPath("/admin/general_info")}>
               <Icon name="bars"/>
               Info General
+          </Menu.Item>
+          <Menu.Item as={Link} to="/admin/team" active={isCurrentPath("/admin/team")}>
+              <Icon name="group"/>
+              Equipo
           </Menu.Item>
         </>
       )}
@@ -46,7 +50,7 @@ export function AdminMenu() {
       </Menu.Item> */}
 
       <Menu.Item as={Link} to="/admin/blog" active={isCurrentPath("/admin/blog")}>
-          <Icon name="bars"/>
+          <Icon name="newspaper"/>
           Noticias
       </Menu.Item>
     </Menu>

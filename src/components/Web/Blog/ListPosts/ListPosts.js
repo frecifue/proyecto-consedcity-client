@@ -44,7 +44,7 @@ export function ListPosts() {
   if (!posts) return <Loader active inline="centered" />;
 
   return (
-    <section className="list-posts-web">
+    <section className="list-posts-web" id="list-posts-section">
       <h2 className="text-center post-title">NOTICIAS</h2>
       {/* <div > */}
         <div className="list">

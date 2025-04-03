@@ -11,7 +11,7 @@ export class Team {
         formData.append(key, data[key]);
       });
 
-      if (data.file) {
+      if (data.fileFotoPerfil) {
         formData.append("foto_perfil", data.file);
       }
 
@@ -59,8 +59,8 @@ export class Team {
         formData.append(key, data[key]);
       });
 
-      if (data.file) {
-        formData.append("foto_perfil", data.file);
+      if (data.fileFotoPerfil) {
+        formData.append("foto_perfil", data.fileFotoPerfil);
       }
 
       const url = `${ENV.BASE_API}/${ENV.API_ROUTES.TEAM.UPDATE_TEAM}/${idTeam}`;

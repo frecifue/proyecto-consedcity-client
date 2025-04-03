@@ -25,7 +25,7 @@ export function OurWork() {
 
 
     return (
-        <section className="ourwork-section">
+        <section className="ourwork-section" id="ourwork-section">
             <div className="container">
                 <h2 className="ourwork-section__title">NUESTRO TRABAJO</h2>
                 <p className="description">

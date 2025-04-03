@@ -39,11 +39,26 @@ export function PostForm(props) {
     const file = acceptedFile[0];
     formik.setFieldValue("img_principal", URL.createObjectURL(file));
     formik.setFieldValue("file", file);
-  });
+  }, [formik]);
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: "image/jpeg, image/png",
-    onDrop,
+      accept: {
+          'image/jpeg': [],
+          'image/png': [],
+      },
+      maxSize: 2 * 1024 * 1024, // 2 MB en bytes
+      onDrop,
+      onDropRejected: (fileRejections) => {
+          fileRejections.forEach(({ file, errors }) => {
+              errors.forEach(err => {
+                  if (err.code === "file-too-large") {
+                      alert(`❌ El archivo "${file.name}" es demasiado grande. Máximo permitido: 2MB.`);
+                  } else if (err.code === "file-invalid-type") {
+                      alert(`❌ El archivo "${file.name}" tiene un formato no permitido. Solo se aceptan imágenes JPEG, PNG.`);
+                  }
+              });
+          });
+      }
   });
 
   const getMiniature = () => {

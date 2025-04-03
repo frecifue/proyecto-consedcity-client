@@ -38,7 +38,7 @@ export function ListTeam() {
   if (!team) return <Loader active inline="centered" />;
 
   return (
-    <section className="carousel-container team-section">
+    <section className="carousel-container team-section" id="team-section">
       <h2 className="text-center team-title">EQUIPO CONSEDCITY</h2>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]} // Añadir los módulos aquí

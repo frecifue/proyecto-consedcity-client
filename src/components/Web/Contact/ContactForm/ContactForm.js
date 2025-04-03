@@ -43,7 +43,7 @@ export function ContactForm() {
     });
 
     return (
-        <section className="contact-section">
+        <section className="contact-section" id="contact-section">
             <h2 className="contact-section__title">CONTÁCTANOS</h2>
 
             <div className="contact-section__content">

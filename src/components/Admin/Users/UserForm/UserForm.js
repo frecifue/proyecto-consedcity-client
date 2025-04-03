@@ -15,7 +15,7 @@ const userController = new User()
 export function UserForm(props) {
     const {close, onReload, user} = props;
     const {accessToken} = useAuth();
-console.log(user);
+// console.log(user);
 
     const formik = useFormik({
         initialValues: initialValues(user),
@@ -26,6 +26,8 @@ console.log(user);
                 if(!user){
                     await userController.createUser(accessToken, formValue)
                 }else{
+                    // console.log(formValue);
+                    
                     await userController.updateUser(accessToken, user.usu_id, formValue)
                 }
                 onReload();
@@ -41,11 +43,26 @@ console.log(user);
         const file = acceptedFiles[0];
         formik.setFieldValue("avatar", URL.createObjectURL(file))
         formik.setFieldValue("fileAvatar", file);
-    })
+    }, [formik]);
 
-    const {getRootProps, getInputProps} = useDropzone({
-        accept: "image/jpeg, image/png",
+    const { getRootProps, getInputProps } = useDropzone({
+        accept: {
+            'image/jpeg': [],
+            'image/png': [],
+        },
+        maxSize: 2 * 1024 * 1024, // 2 MB en bytes
         onDrop,
+        onDropRejected: (fileRejections) => {
+            fileRejections.forEach(({ file, errors }) => {
+                errors.forEach(err => {
+                    if (err.code === "file-too-large") {
+                        alert(`❌ El archivo "${file.name}" es demasiado grande. Máximo permitido: 2MB.`);
+                    } else if (err.code === "file-invalid-type") {
+                        alert(`❌ El archivo "${file.name}" tiene un formato no permitido. Solo se aceptan imágenes JPEG, PNG.`);
+                    }
+                });
+            });
+        }
     });
 
     const getAvatar = () =>{
@@ -104,7 +121,6 @@ console.log(user);
                         placeholder='Seleccione un rol' 
                         options={roleOptions} 
                         selection 
-                        defaultValue={user?.usu_rol || ""}
                         onChange={(_,data)=> formik.setFieldValue("rol", data.value)}
                         value={formik.values.rol}
                         error={formik.errors.rol}
@@ -115,7 +131,7 @@ console.log(user);
                     <Form.Input 
                         name="password" 
                         type='password'
-                        placeholder="Contrase�a"
+                        placeholder="Contraseña"
                         onChange={formik.handleChange}
                         value={formik.values.password}
                         error={formik.errors.password}

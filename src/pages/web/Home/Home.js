@@ -1,18 +1,18 @@
 import React from 'react'
-import { Banner, ContactForm } from '../../../components/Web'
-import {Team} from "../Team"
-import { Blog } from '../Blog'
-import { About } from '../About'
+import { Banner, ContactForm, ListPosts, ListTeam, MenuAnchor } from '../../../components/Web'
+import {About} from "../../../components/Web/General_Info/About"
 import { OurWork } from '../../../components/Web/General_Info/OurWork'
 import {ImageGallery} from "../../../components/Web/ImageGallery"
+
 
 export function Home() {
   return (
     <div>
+      <MenuAnchor />
       <Banner/>
       <About/>
-      <Blog/>
-      <Team/>
+      <ListPosts />
+      <ListTeam/>
       <OurWork/>
       <ImageGallery/>
       <ContactForm/>
