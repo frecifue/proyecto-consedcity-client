@@ -48,6 +48,9 @@ export const ENV = {
         },
         IMAGE_GALLERY:{
             GET_IMAGE_GALLERY: "image_gallery",
+            CREATE_IMAGE_GALLERY: "image_gallery",
+            UPDATE_IMAGE_GALLERY: "image_gallery",
+            DELETE_IMAGE_GALLERY: "image_gallery",
         }
     },
 };

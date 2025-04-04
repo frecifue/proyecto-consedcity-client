@@ -53,6 +53,10 @@ export function AdminMenu() {
           <Icon name="newspaper"/>
           Noticias
       </Menu.Item>
+      <Menu.Item as={Link} to="/admin/image_gallery" active={isCurrentPath("/admin/image-gallery")}>
+          <Icon name="image"/>
+          Galería de Imágenes
+      </Menu.Item>
     </Menu>
   )
 }
