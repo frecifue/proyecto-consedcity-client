@@ -1,30 +1,27 @@
 import React, { useState } from "react";
 import { Button, Icon, Confirm } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { Post } from "../../../../api";
+import { Documents } from "../../../../api";
 import { useAuth } from "../../../../hooks";
 import { BasicModal } from "../../../Shared";
-import "./PostItem.scss";
-import { PostForm } from "../PostForm";
-import { ListDocumentSelectable } from "../../Documents/ListDocumentSelectable/ListDocumentSelectable";
+import { DocumentForm } from "../DocumentForm/DocumentForm";
+import "./DocumentItem.scss"
+import { ENV } from "../../../../utils";
 
-const postController = new Post();
+const documentController = new Documents();
 
-export function PostItem(props) {
-  const { post, onReload } = props;
+export function DocumentItem(props) {
+  const { document, onReload } = props;
   const [showModal, setShowModal] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [showDocumentsModal, setShowDocumentsModal] = useState(false);
-
   const { accessToken } = useAuth();
 
   const onOpenCloseModal = () => setShowModal((prevState) => !prevState);
   const onOpenCloseConfirm = () => setShowConfirm((prevState) => !prevState);
-  const onOpenCloseDocumentsModal = () => setShowDocumentsModal((prev) => !prev);
 
   const onDelete = async () => {
     try {
-      await postController.deletePost(accessToken, post.pos_id);
+      await documentController.deleteDocument(accessToken, document.doc_id);
       onReload();
       onOpenCloseConfirm();
     } catch (error) {
@@ -36,16 +33,13 @@ export function PostItem(props) {
     <>
       <div className="post-item">
         <div className="post-item__info">
-          <span className="post-item__info-title">{post.pos_titulo}</span>
-          <span className="post-item__info-path">{post.pos_path}</span>
+          <span className="post-item__info-title">{document.doc_titulo}</span>
+          <span className="post-item__info-path">{document.doc_path}</span>
         </div>
 
         <div>
-          <Button as={Link} primary icon to={`/blog/${post.pos_path}`} target="_blank">
+          <Button as={Link} primary icon to={`${ENV.BASE_PATH}/${document.doc_documento}`} target="_blank">
             <Icon name="eye" />
-          </Button>
-          <Button icon color="green" onClick={onOpenCloseDocumentsModal}>
-            <Icon name="file pdf outline" />
           </Button>
           <Button icon color="yellow" onClick={onOpenCloseModal}>
             <Icon name="pencil" />
@@ -59,25 +53,17 @@ export function PostItem(props) {
       <BasicModal
         show={showModal}
         close={onOpenCloseModal}
-        title="Editar Noticia"
+        title="Editar Documento"
         size="large"
       >
-        <PostForm onClose={onOpenCloseModal} onReload={onReload} post={post} />
-      </BasicModal>
-
-      <BasicModal
-        show={showDocumentsModal}
-        close={onOpenCloseDocumentsModal}
-        title="Documentos asociados a la Noticia"
-      >
-        <ListDocumentSelectable active={true} onClose={onOpenCloseDocumentsModal} reload={false} onReload={onReload} post={post} />
+        <DocumentForm onClose={onOpenCloseModal} onReload={onReload} document={document} />
       </BasicModal>
 
       <Confirm
         open={showConfirm}
         onCancel={onOpenCloseConfirm}
         onConfirm={onDelete}
-        content={`¿Eliminar Noticia: ${post.pos_titulo}?`}
+        content={`¿Eliminar Documento: ${document.doc_titulo}?`}
         size="mini"
       />
     </>

@@ -29,7 +29,8 @@ export const ENV = {
             CREATE_POST: "post",
             UPDATE_POST: "post",
             DELETE_POST: "post",
-            GET_POST_PATH: "post"
+            GET_POST_PATH: "post",
+            ADD_DOCUMENTS: "post/:posId/add-documents"
         },
         TEAM:{
             GET_TEAM: "teams",
@@ -51,6 +52,13 @@ export const ENV = {
             CREATE_IMAGE_GALLERY: "image_gallery",
             UPDATE_IMAGE_GALLERY: "image_gallery",
             DELETE_IMAGE_GALLERY: "image_gallery",
+        },
+        DOCUMENTS:{
+            GET_DOCUMENTS: "documents",
+            GET_DOCUMENT: "document",
+            CREATE_DOCUMENT: "document",
+            UPDATE_DOCUMENT: "document",
+            DELETE_DOCUMENT: "document",
         }
     },
 };

@@ -1,0 +1,34 @@
+.list-documents-selectable {
+    .list-documents-selectable__header {
+      margin-bottom: 1em;
+      display: flex;
+      align-items: center;
+    }
+  
+    .list-documents-selectable__header .checkbox {
+      margin-right: 10px;
+    }
+  
+    .list-documents-selectable__items {
+      margin-bottom: 20px;
+    }
+  
+    .list-documents-selectable__item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+  
+      .checkbox {
+        margin-right: 10px;
+      }
+  
+      .document-item {
+        margin-left: 15px;
+      }
+    }
+  
+    .list-documents-selectable__pagination {
+      text-align: center;
+    }
+  }
+  

@@ -1,9 +1,9 @@
 import { ENV } from "../utils";
 
-export class Post {
+export class Documents {
   baseApi = ENV.BASE_API;
 
-  async createPost(accessToken, data) {
+  async createDocument(accessToken, data) {
     try {
       const formData = new FormData();
       Object.keys(data).forEach((key) => {
@@ -11,10 +11,10 @@ export class Post {
       });
 
       if (data.file) {
-        formData.append("img_principal", data.file);
+        formData.append("documento", data.file);
       }
 
-      const url = `${this.baseApi}/${ENV.API_ROUTES.POST.CREATE_POST}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.DOCUMENTS.CREATE_DOCUMENT}`;
       const params = {
         method: "POST",
         headers: {
@@ -34,11 +34,11 @@ export class Post {
     }
   }
 
-  async getPosts(page = 1, limit = 10) {
+  async getDocuments(page = 1, limit = 10) {
     try {
       const pageFilter = `page=${page}`;
       const limitFilter = `limit=${limit}`;
-      const url = `${this.baseApi}/${ENV.API_ROUTES.POST.GET_POST}?${pageFilter}&${limitFilter}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.DOCUMENTS.GET_DOCUMENTS}?${pageFilter}&${limitFilter}`;
 
       const response = await fetch(url);
       const result = await response.json();
@@ -51,7 +51,7 @@ export class Post {
     }
   }
 
-  async updatePost(accessToken, idPost, data) {
+  async updateDocument(accessToken, idDocument, data) {
     try {
       const formData = new FormData();
       Object.keys(data).forEach((key) => {
@@ -59,10 +59,10 @@ export class Post {
       });
 
       if (data.file) {
-        formData.append("img_principal", data.file);
+        formData.append("documento", data.file);
       }
 
-      const url = `${this.baseApi}/${ENV.API_ROUTES.POST.UPDATE_POST}/${idPost}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.DOCUMENTS.UPDATE_DOCUMENT}/${idDocument}`;
       const params = {
         method: "PATCH",
         headers: {
@@ -82,9 +82,9 @@ export class Post {
     }
   }
 
-  async deletePost(accessToken, idPost) {
+  async deleteDocument(accessToken, idDocument) {
     try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.POST.DELETE_POST}/${idPost}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.DOCUMENTS.DELETE_DOCUMENT}/${idDocument}`;
       const params = {
         method: "DELETE",
         headers: {
@@ -103,34 +103,11 @@ export class Post {
     }
   }
 
-  async getPost(path) {
+  async getDocument(path) {
     try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.POST.GET_POST_PATH}/${path}`;
+      const url = `${this.baseApi}/${ENV.API_ROUTES.DOCUMENTS.GET_DOCUMENT}/${path}`;
 
       const response = await fetch(url);
-      const result = await response.json();
-
-      if (response.status !== 200) throw result;
-
-      return result;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async addDocuments(accessToken, idPost, data) {
-    try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.POST.ADD_DOCUMENTS.replace(":posId", idPost)}`;
-      const params = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify(data),
-      };
-
-      const response = await fetch(url, params);
       const result = await response.json();
 
       if (response.status !== 200) throw result;

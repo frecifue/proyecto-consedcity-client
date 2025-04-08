@@ -1,0 +1,31 @@
+.footer-follow {
+    width: 50%;
+    text-align: center;
+    // margin: 20px 0;
+  
+    // Estilo para el texto "Siguemos en"
+    p {
+      font-size: 1.5em;  // Tamaño de fuente más grande
+      font-weight: bold;
+      margin-bottom: 20px; // Espacio debajo del texto
+      color: #333; // Color del texto
+    }
+  
+    // Estilo para los íconos de las redes sociales
+    a {
+      margin: 0 10px; // Espacio entre los iconos
+      display: inline-block; // Asegura que los iconos estén en línea
+  
+      img {
+        width: 30px;  // Tamaño del icono reducido
+        height: 30px; // Aseguramos que tenga la misma altura
+        object-fit: contain; // Asegura que el icono no se distorsione
+        transition: transform 0.3s ease-in-out; // Efecto de transición
+  
+        &:hover {
+          transform: scale(1.1); // Efecto de hover que aumenta el tamaño ligeramente
+        }
+      }
+    }
+  }
+  

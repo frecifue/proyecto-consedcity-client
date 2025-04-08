@@ -88,39 +88,21 @@ export function PostForm(props) {
           error={formik.errors.path_post}
         />
       </Form.Group>
-
-      {/* <Editor
-        init={{
-          height: 400,
-          menubar: true,
-          plugins: [
-            "advlist autolink lists link image charmap print preview anchor",
-            "searchreplace visualblocks code fullscreen",
-            "insertdatetime media table paste code help wordcount",
-          ],
-          toolbar:
-            "undo redo | formatselect | bold italic backcolor | \
-             alignleft aligncenter alignright alignjustify | \
-             bullist numlist outdent indent | removeformat | help",
-        }}
-        initialValue={formik.values.content}
-        onBlur={(e) => formik.setFieldValue("content", e.target.getContent())}
-      /> */}
+      
       <Editor 
         apiKey={process.env.REACT_APP_TINYMCE_API_KEY}
-                init={{ 
-                    height: 400, 
-                    menubar: false, 
-                    plugins: [ 
-                        "advlist autolink lists link image charmap print preview anchor",
-                        "searchreplace visualblocks code fullscreen",
-                        "insertdatetime media table paste code help wordcount",
-                    ],
-                    toolbar: 
-                        "undo redo | formatselect | bold italic backcolor | \
-                        alignleft aligncenter alignright alignjustify | \
-                        bullist numlist outdent indent | removeformat", 
-                }}
+          init={{ 
+              height: 400, 
+              menubar: true, 
+              contextmenu: false,
+              plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste code help wordcount",
+            ],
+            toolbar: 
+                "undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | link", 
+        }}
         initialValue={formik.values.contenido}
         onBlur={(e) => formik.setFieldValue("contenido", e.target.getContent())}
             /> 

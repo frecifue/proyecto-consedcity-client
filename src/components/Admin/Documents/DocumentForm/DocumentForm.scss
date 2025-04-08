@@ -1,0 +1,32 @@
+.document-form__miniature {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    cursor: pointer;
+    background-color: #fafafa;
+    transition: background-color 0.2s ease;
+  
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  
+    .icon {
+      color: #d32f2f;
+      margin-bottom: 10px;
+    }
+  
+    p {
+      margin: 0;
+      font-size: 1rem;
+      color: #333;
+    }
+  }
+  
+  .document-form__file-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  

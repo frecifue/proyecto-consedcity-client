@@ -1,9 +1,10 @@
 @import "~/src/scss/index.scss";
 
 .footer-info {
-  width: 33.33%;
+  width: 50%;
   // color: $text-light;
   color: $text-dark;
+  text-align: center;
 
   .logo {
     width: 100px;

@@ -8,23 +8,10 @@ import "./Info.scss";
 export function Info() {
   return (
     <div className="footer-info">
-      {/* <Icon.LogoWhite className="logo" /> */}
-      <img src={Icon.LogoBlanco} alt="Logo" className="logo" />
+      <img src={Icon.LogoColor} alt="Logo" className="logo" />
       <p>
-        Entra en el mundo del desarrollo web, disfruta creando proyectos de todo
-        tipo, deja que tú imaginación fluya y crea verdaderas maravillas!!
+        CONSEDCITY | Todos los derechos reservados <br/> 2025
       </p>
-
-        {map(socialData, (social) => (
-            <Button
-            key={social.type}
-            as="a"
-            target="_blank"
-            href={social.link}
-            color={social.type}
-            icon={social.icon || social.type}
-            />
-        ))}
     </div>
   );
 }

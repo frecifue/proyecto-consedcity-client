@@ -57,6 +57,11 @@ export function AdminMenu() {
           <Icon name="image"/>
           Galería de Imágenes
       </Menu.Item>
+      <Menu.Item as={Link} to="/admin/documents" active={isCurrentPath("/admin/documents")}>
+          <Icon name="download"/>
+          Estudios
+      </Menu.Item>
     </Menu>
   )
 }
+

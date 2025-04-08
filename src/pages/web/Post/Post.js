@@ -4,13 +4,14 @@ import { useParams } from "react-router-dom";
 import { Post as PostController } from "../../../api";
 import { ENV } from "../../../utils";
 import "./Post.scss";
+import DocumentsPost from "./DocumentsPost";
 
 const postController = new PostController();
 
 export function Post() {
   const [post, setPost] = useState(null);
   const { path } = useParams();
-console.log(post);
+// console.log(post);
 
   useEffect(() => {
     (async () => {
@@ -26,6 +27,7 @@ console.log(post);
   if (!post) return <Loader active inline="centered" />;
 
   return (
+    <>
     <Container className="post">
       <h1 className="title">{post.pos_titulo}</h1>
       <img src={`${ENV.BASE_PATH}/${post.pos_img_principal}`} alt="Logo" className="img" />
@@ -33,6 +35,13 @@ console.log(post);
         className="content"
         dangerouslySetInnerHTML={{ __html: post.pos_contenido }}
       />
+
+      
+      {post.documentos && post.documentos.length > 0 && (
+        <DocumentsPost post={post}/>  
+      )}
+      
     </Container>
+    </>
   );
 }

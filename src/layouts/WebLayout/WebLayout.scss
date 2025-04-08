@@ -1,13 +1,14 @@
 @import "~/src/scss/index.scss";
 
 .web-layout {
-  background-color: $background-dark;
+  background-color: $background-grey;
   min-height: 100vh;
 
   &__footer {
-    margin-top: 50px;
+    // margin-top: 50px;
     padding: 20px 0 10px 0;
-    border-top: 3px solid $primary;
+    // border-top: 3px solid $primary;
+    background-color: #cccccc;
 
     > .ui.container {
       display: flex;

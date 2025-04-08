@@ -1,7 +1,7 @@
 import React from 'react'
 import {Routes, Route} from "react-router-dom"
 import {AdminLayout} from "../layouts"
-import {Auth, Users, GeneralInfo, Team, Menu, Blog} from "../pages/admin"
+import {Auth, Users, GeneralInfo, Team, Menu, Blog, Documents} from "../pages/admin"
 import {useAuth} from "../hooks/useAuth"
 import { ImageGallery } from '../pages/admin/ImageGallery/ImageGallery'
 
@@ -35,6 +35,7 @@ export function AdminRouter() {
             <Route path={"/admin/team"} element={loadLayout(AdminLayout, Team)} />
             <Route path={"/admin/general_info"} element={loadLayout(AdminLayout, GeneralInfo)} />
             <Route path={"/admin/image_gallery"} element={loadLayout(AdminLayout, ImageGallery)} />
+            <Route path={"/admin/documents"} element={loadLayout(AdminLayout, Documents)} />
           </>
         )}
       </Routes>

@@ -8,7 +8,7 @@ import {ImageGallery} from "../../../components/Web/ImageGallery"
 export function Home() {
   return (
     <div>
-      <MenuAnchor />
+      {/* <MenuAnchor /> */}
       <Banner/>
       <About/>
       <ListPosts />

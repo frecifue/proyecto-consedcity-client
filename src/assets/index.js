@@ -12,6 +12,9 @@ import avatar03 from "./png/avatar_03.png";
 import avatar04 from "./png/avatar_04.png";
 import avatar05 from "./png/avatar_05.png";
 import avatar06 from "./png/avatar_06.png";
+import iconFacebook from "./png/facebook.png"
+import iconInstagram from "./png/instagram.png"
+import iconLinktree from "./png/linktree.png"
 
 // const Icon = {
 //   LogoWhite,
@@ -32,6 +35,9 @@ const image = {
   avatar04,
   avatar05,
   avatar06,
+  iconFacebook,
+  iconInstagram,
+  iconLinktree
 };
 
 export { Icon, image };

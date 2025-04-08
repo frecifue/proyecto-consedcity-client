@@ -16,8 +16,8 @@ export function ListPosts() {
   const [page, setPage] = useState(searchParams.get("page") || 1);
 
   
-  console.log(page)
-  console.log(searchParams.get("page"));
+  // console.log(page)
+  // console.log(searchParams.get("page"));
   useEffect(() => {
     (async () => {
       try {

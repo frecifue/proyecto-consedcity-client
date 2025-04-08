@@ -2,19 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { Icon, Menu } from 'semantic-ui-react';
 import { Menu as MenuApi } from '../../../api';
 import "./MenuAnchor.scss";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const menuController = new MenuApi();
 
 export function MenuAnchor() {
   const [menu, setMenu] = useState([]);
+  const location = useLocation(); // <--- obtenemos la ruta actual
+
+  // Detectamos si estamos en la ruta de un post
+  const isPostPage = location.pathname.startsWith('/blog/');
 
   useEffect(() => {
     (async () => {
       try {
         const response = await menuController.getMenu(1);
         setMenu(response); // Guardamos la respuesta directamente en el estado
-        console.log(response); // Para depuración
       } catch (error) {
         console.error(error);
       }
@@ -52,10 +55,12 @@ export function MenuAnchor() {
 
   return (
     <Menu fluid fixed="top" inverted className="anchor-menu">
-      <Menu.Item onClick={() => handleMenuItemClick('home')}>
-          <Icon name="home" />
+      <Menu.Item as={Link} to="/">
+        <Icon name="home" />
       </Menu.Item>
-      {menu.map((item, index) => (
+
+      {/* Mostrar solo el botón de "Home" si estamos en una página de post */}
+      {!isPostPage && menu.map((item, index) => (
         item.men_activo && (
           <Menu.Item
             key={index}

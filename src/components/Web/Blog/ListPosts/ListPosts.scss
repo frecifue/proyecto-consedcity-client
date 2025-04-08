@@ -15,7 +15,7 @@
   }
 
   .post-title{
-    color: $text-light !important;
+    // color: $text-light !important;
     text-transform: uppercase;
     font-weight: 700;
     font-size: 2.25rem;
@@ -30,12 +30,12 @@
     margin-top: 20px;
 
     a {
-      color: $text-light !important;
+      // color: $text-light !important;
       opacity: 0.6;
 
       &.active {
         opacity: 1;
-        border-color: $text-light !important;
+        // border-color: $text-light !important;
       }
     }
   }
