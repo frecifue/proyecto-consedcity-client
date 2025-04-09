@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "semantic-ui-react";
 import { Icon } from "../../../assets";
 import "./Banner.scss";
 
@@ -19,8 +18,6 @@ export function Banner() {
             del Biobío, Chile.
         </h2>
       </section>
-
-      {/* <div className="banner__dark" /> */}
     </div>
   );
 }

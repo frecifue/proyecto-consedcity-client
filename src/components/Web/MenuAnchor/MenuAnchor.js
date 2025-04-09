@@ -57,6 +57,7 @@ export function MenuAnchor() {
     <Menu fluid fixed="top" inverted className="anchor-menu">
       <Menu.Item as={Link} to="/">
         <Icon name="home" />
+        ConsedCity
       </Menu.Item>
 
       {/* Mostrar solo el botón de "Home" si estamos en una página de post */}

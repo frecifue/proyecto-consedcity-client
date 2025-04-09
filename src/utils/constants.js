@@ -30,7 +30,8 @@ export const ENV = {
             UPDATE_POST: "post",
             DELETE_POST: "post",
             GET_POST_PATH: "post",
-            ADD_DOCUMENTS: "post/:posId/add-documents"
+            ADD_DOCUMENTS: "post/:posId/add-documents",
+            ADD_IMAGES: "post/:posId/add-images"
         },
         TEAM:{
             GET_TEAM: "teams",
@@ -48,6 +49,7 @@ export const ENV = {
             CONTACT: "contact",
         },
         IMAGE_GALLERY:{
+            GET_IMAGES_GALLERY: "images_gallery",
             GET_IMAGE_GALLERY: "image_gallery",
             CREATE_IMAGE_GALLERY: "image_gallery",
             UPDATE_IMAGE_GALLERY: "image_gallery",

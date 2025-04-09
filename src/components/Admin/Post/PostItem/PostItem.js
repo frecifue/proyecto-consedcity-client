@@ -6,7 +6,8 @@ import { useAuth } from "../../../../hooks";
 import { BasicModal } from "../../../Shared";
 import "./PostItem.scss";
 import { PostForm } from "../PostForm";
-import { ListDocumentSelectable } from "../../Documents/ListDocumentSelectable/ListDocumentSelectable";
+import { ListImagesSelectable } from "../ListImagesSelectable/ListImagesSelectable";
+import { ListDocumentSelectable } from "../ListDocumentSelectable";
 
 const postController = new Post();
 
@@ -15,12 +16,14 @@ export function PostItem(props) {
   const [showModal, setShowModal] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showDocumentsModal, setShowDocumentsModal] = useState(false);
+  const [showImagesModal, setShowImagesModal] = useState(false);
 
   const { accessToken } = useAuth();
 
   const onOpenCloseModal = () => setShowModal((prevState) => !prevState);
   const onOpenCloseConfirm = () => setShowConfirm((prevState) => !prevState);
   const onOpenCloseDocumentsModal = () => setShowDocumentsModal((prev) => !prev);
+  const onOpenCloseImagesModal = () => setShowImagesModal((prev) => !prev);
 
   const onDelete = async () => {
     try {
@@ -47,6 +50,9 @@ export function PostItem(props) {
           <Button icon color="green" onClick={onOpenCloseDocumentsModal}>
             <Icon name="file pdf outline" />
           </Button>
+          <Button icon color="pink" onClick={onOpenCloseImagesModal}>
+            <Icon name="image" />
+          </Button>
           <Button icon color="yellow" onClick={onOpenCloseModal}>
             <Icon name="pencil" />
           </Button>
@@ -68,9 +74,17 @@ export function PostItem(props) {
       <BasicModal
         show={showDocumentsModal}
         close={onOpenCloseDocumentsModal}
-        title="Documentos asociados a la Noticia"
+        title="Agregar Documentos a la noticia"
       >
         <ListDocumentSelectable active={true} onClose={onOpenCloseDocumentsModal} reload={false} onReload={onReload} post={post} />
+      </BasicModal>
+
+      <BasicModal
+        show={showImagesModal}
+        close={onOpenCloseImagesModal}
+        title="Agregar Imágenes a la noticia"
+      >
+        <ListImagesSelectable active={true} onClose={onOpenCloseImagesModal} reload={false} onReload={onReload} post={post} />
       </BasicModal>
 
       <Confirm

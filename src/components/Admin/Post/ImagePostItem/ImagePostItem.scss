@@ -1,0 +1,41 @@
+.image-post-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+  
+    &__checkbox {
+      margin-top: 6px;
+      margin-right: 10px;
+    }
+  
+    &__content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex: 1;
+    }
+  
+    &__text {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    &__title {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 4px;
+    }
+  
+    &__description {
+      color: #777;
+      font-size: 0.9em;
+    }
+  
+    // botón alineado al extremo derecho
+    .ui.button {
+      margin-left: auto;
+    }
+  }
+  

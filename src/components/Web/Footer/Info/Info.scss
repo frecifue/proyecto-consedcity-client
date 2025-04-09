@@ -1,18 +1,23 @@
 @import "~/src/scss/index.scss";
 
 .footer-info {
+  display: flex;
+  flex-direction: column;  /* Alinea los elementos verticalmente */
+  justify-content: center; /* Centra los elementos verticalmente */
+  align-items: center;     /* Centra los elementos horizontalmente */
   width: 50%;
-  // color: $text-light;
   color: $text-dark;
   text-align: center;
 
-  .logo {
+  .logo-footer {
     width: 100px;
+    margin-bottom: 10px;  /* Separa el logo del texto */
+    padding-top: 10px;
   }
 
   p {
     opacity: 0.4;
-    margin: 20px 0;
+    font-size: 16px;
   }
 
   a {

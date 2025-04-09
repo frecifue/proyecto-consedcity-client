@@ -1,0 +1,132 @@
+import React, { useEffect, useState } from 'react';
+import { map, size } from 'lodash';
+import { Loader, Pagination, Button } from 'semantic-ui-react';
+import { ImageGallery, Post } from '../../../../api';
+import { useAuth } from '../../../../hooks';
+import './ListImagesSelectable.scss';
+import { ImagePostItem } from '../ImagePostItem/ImagePostItem';
+
+const imgGalleryController = new ImageGallery();
+const postController = new Post();
+
+export function ListImagesSelectable(props) {
+  const { active, reload, onReload, onClose, post } = props;
+  const [images, setImages] = useState(null);
+  const [pagination, setPagination] = useState(null);
+  const [page, setPage] = useState(1);
+  const [selectedImages, setSelectedImages] = useState(new Set()); // Set to track selected documents
+
+  const { accessToken } = useAuth();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setImages(null);
+        const response = await imgGalleryController.getImagesGallery(page, 10);
+        setImages(response.images);
+        setPagination({
+          limit: response.limit,
+          page: response.page,
+          pages: response.totalPages,
+          total: response.total,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [active, reload, page]);
+
+  useEffect(() => {
+    // Si hay imagenes asociados al post, marcarlos como seleccionados
+    if (post.imagenes && post.imagenes.length > 0) {
+      const associatedImages = post.imagenes.map(gim => gim.gim_id);
+      
+      // si post viene con el array imagenes, recorreremos las imagenes y tomaremos el gim_id
+      // luego, lo enviamos al setSelectedImages
+      setSelectedImages(new Set(associatedImages));
+    }
+  }, [post.imagenes]);
+
+  const changePage = (_, data) => {
+    setPage(data.activePage);
+  };
+
+  const toggleSelection = (gimId) => {
+    setSelectedImages((prev) => {
+      const newSelection = new Set(prev);
+      if (newSelection.has(gimId)) {
+        newSelection.delete(gimId);
+      } else {
+        newSelection.add(gimId);
+      }
+      return newSelection;
+    });
+  };
+
+  const handleAddImages = async () => {
+    try {
+      // Convertimos el Set de imagenes seleccionados a un array
+      const selectedImgArray = Array.from(selectedImages);
+
+      const data = {
+        imagesIds : selectedImgArray
+      }
+      
+      // Llamamos a la API para agregar los documentos seleccionados al post
+      const response = await postController.addImages(accessToken, post.pos_id, data);
+      
+      console.log('Imagenes agregados:', response);
+      onReload();
+      onClose();
+      // Aquí puedes hacer algo con la respuesta, como cerrar el modal o recargar los datos
+    } catch (error) {
+      console.error('Error al agregar imagenes:', error);
+    }
+  };
+
+  if (!images) return <Loader active inline="centered" />;
+  if (size(images) === 0) return 'No se han encontrado imágenes';
+
+  return (
+    <div className="list-images-selectable">
+
+      {/* Images list */}
+      <div className="list-images-selectable__items">
+        {map(images, (item) => (
+          <div key={item.gim_id} className="list-images-selectable__item">
+            <ImagePostItem 
+              image={item} 
+              isSelected={selectedImages.has(item.gim_id)}
+              onSelect={toggleSelection}/>
+          </div>
+        ))}
+      </div>
+
+      {/* Pagination */}
+      <div className="list-images-selectable__pagination">
+        <Pagination
+          totalPages={pagination.pages}
+          defaultActivePage={pagination.page}
+          ellipsisItem={null}
+          firstItem={null}
+          lastItem={null}
+          onPageChange={changePage}
+        />
+      </div>
+
+      <hr/>
+
+      {/* Add Documents Button */}
+      <div className="list-images-selectable__add-button">
+        <Button
+          primary
+          fluid
+          onClick={handleAddImages}
+        >
+          Agregar
+        </Button>
+      </div>
+
+    </div>
+  );
+}

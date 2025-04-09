@@ -16,7 +16,6 @@ export function ListImageGallery(props) {
             setImgGallery(null);
             const response = await imgGalleryController.getImageGallery();
             setImgGallery(response);
-         console.log(imgGallery);
             
         } catch (error) {
             console.error(error);

@@ -5,13 +5,14 @@ import { Post as PostController } from "../../../api";
 import { ENV } from "../../../utils";
 import "./Post.scss";
 import DocumentsPost from "./DocumentsPost";
+import { ImagesPost } from "./ImagesPost";
 
 const postController = new PostController();
 
 export function Post() {
   const [post, setPost] = useState(null);
   const { path } = useParams();
-// console.log(post);
+console.log(post);
 
   useEffect(() => {
     (async () => {
@@ -39,6 +40,10 @@ export function Post() {
       
       {post.documentos && post.documentos.length > 0 && (
         <DocumentsPost post={post}/>  
+      )}
+
+      {post.imagenes && post.imagenes.length > 0 && (
+        <ImagesPost post={post}/>  
       )}
       
     </Container>

@@ -1,5 +1,3 @@
-@import "~/src/scss/index.scss";
-
 .carousel-slide {
   display: flex;
   justify-content: center;
@@ -17,9 +15,10 @@
 
 .content-wrapper {
   display: flex;
-  justify-content: space-between; /* Alinea la imagen y la caja de texto a los extremos */
+  justify-content: space-between; /* Alinea la imagen y la caja de texto lado a lado en pantallas grandes */
   align-items: center;
-  width: 50%;
+  width: 100%;
+  max-width: 1000px; /* Limita el ancho máximo para que no se estire demasiado */
 }
 
 .info-box {
@@ -31,9 +30,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  // align-items: flex-start;
   box-sizing: border-box;
-  text-align: center !important;
+  text-align: center;
+  margin: 10px;
 }
 
 .team-name {
@@ -41,7 +40,8 @@
   font-weight: 700;
   font-size: 2.25rem;
   letter-spacing: 4px;
-  color: #7f93d0 !important;
+  color: #7f93d0;
+  margin-bottom: 10px;
 }
 
 .team-description {
@@ -51,23 +51,55 @@
 
 .team-image {
   border-radius: 20px;
-  width: 500px;  /* Dimensiones fijas para la imagen */
-  height: 460px; /* Dimensiones fijas para la imagen */
+  width: 500px;  /* Asegura que la imagen tenga las mismas dimensiones que la caja */
+  height: 460px; /* Asegura que la imagen tenga las mismas dimensiones que la caja */
   object-fit: cover;
-  margin-right: 15px; /* Se ajustó el margen para que la separación sea en el lado derecho */
+  margin-right: 15px; /* Ajusta el margen para la separación entre imagen y caja */
 }
 
-.team-title{
+.team-title {
   font-size: 30px;
-  // color: $text-light;
-  font-weight: normal;
-  text-align: center;
-  text-decoration: solid;;
-  padding: 100px 0 50px 0;
   font-weight: bold;
+  text-align: center;
+  padding: 100px 0 50px 0;
   margin: 50px 0 50px 0;
 }
 
-.team-section{
+.team-section {
   background-color: #e5e5e5;
+}
+
+/* Media Query para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column; /* Apila los elementos en pantallas pequeñas */
+    width: 100%;
+  }
+
+  .info-box {
+    width: 100%; /* Asegura que ocupe el 100% del ancho */
+    height: auto; /* La altura es automática en pantallas pequeñas */
+    margin-bottom: 20px; /* Añade margen inferior para que no se pegue la imagen a la caja */
+  }
+
+  .team-image {
+    border-radius: 20px;
+    width: 500px;  /* Asegura que la imagen tenga las mismas dimensiones que la caja */
+    height: 460px; /* Asegura que la imagen tenga las mismas dimensiones que la caja */
+    object-fit: cover; /* Mantiene la imagen proporcional sin distorsionar, cubriendo el contenedor */
+    object-position: center; /* Centra la imagen en el contenedor */
+    margin-right: 15px; /* Ajusta el margen para la separación entre imagen y caja */
+  }
+
+  .team-description {
+    font-size: 1.2rem;
+  }
+
+  .team-name {
+    font-size: 1.5rem;
+  }
+
+  .team-title {
+    font-size: 24px; /* Reducir el tamaño del título en pantallas pequeñas */
+  }
 }

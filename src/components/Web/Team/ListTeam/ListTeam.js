@@ -51,11 +51,6 @@ export function ListTeam() {
       >
         {map(team, (item) => (
           <SwiperSlide key={item.equ_id} className="carousel-slide">
-            {/* <div className="slide-content">
-              <h3>{item.equ_nombre}</h3>
-              <p>{item.equ_descripcion}</p>
-              <img src={item.equ_foto_perfil} alt={item.equ_nombre} />
-            </div> */}
             <div className="slide-content">
               <div className="content-wrapper">
                 <div className="info-box">

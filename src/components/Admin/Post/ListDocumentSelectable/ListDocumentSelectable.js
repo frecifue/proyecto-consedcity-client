@@ -22,7 +22,7 @@ export function ListDocumentSelectable(props) {
     (async () => {
       try {
         setDocuments(null);
-        const response = await documentController.getDocuments(page, 2);
+        const response = await documentController.getDocuments(page, 10);
         setDocuments(response.documents);
         setPagination({
           limit: response.limit,
@@ -85,38 +85,17 @@ export function ListDocumentSelectable(props) {
     }
   };
 
-  // const handleSelectAll = () => {
-  //   if (selectedDocuments.size === documents.length) {
-  //     setSelectedDocuments(new Set()); // Deselect all if all are selected
-  //   } else {
-  //     const allDocs = new Set(documents.map((doc) => doc.doc_id));
-  //     setSelectedDocuments(allDocs); // Select all documents
-  //   }
-  // };
 
   if (!documents) return <Loader active inline="centered" />;
   if (size(documents) === 0) return 'No se han encontrado documentos';
 
   return (
     <div className="list-documents-selectable">
-      {/* Header with Select All checkbox */}
-      {/* <div className="list-documents-selectable__header">
-        <Checkbox
-          checked={selectedDocuments.size === documents.length}
-          onChange={handleSelectAll}
-          label="Seleccionar todos"
-        />
-      </div> */}
 
       {/* Document list */}
       <div className="list-documents-selectable__items">
         {map(documents, (item) => (
           <div key={item.doc_id} className="list-documents-selectable__item">
-            {/* <Checkbox
-              checked={selectedDocuments.has(item.doc_id)}
-              onChange={() => toggleSelection(item.doc_id)}
-              label={item.doc_titulo}
-            /> */}
             <DocumentPostItem 
               document={item} 
               isSelected={selectedDocuments.has(item.doc_id)}
@@ -145,7 +124,6 @@ export function ListDocumentSelectable(props) {
           primary
           fluid
           onClick={handleAddDocuments}
-          disabled={selectedDocuments.size === 0} // Disable button if no document is selected
         >
           Agregar
         </Button>

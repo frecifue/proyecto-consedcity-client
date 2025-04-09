@@ -1,5 +1,7 @@
 @import "~/src/scss/index.scss";
 
+
+
 .banner {
   height: 500px;
   background-image: url("../../../assets/jpg/home-banner.jpg");
@@ -7,49 +9,52 @@
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
-  opacity: 0.9;
+  opacity: 0.9; /* Ajusta esta propiedad para darle más opacidad a la imagen */
+}
 
-  &__dark {
-    background-color: #000;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0.2;
-  }
+.banner__container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* Centra el contenido verticalmente */
+  align-items: center;      /* Centra el contenido horizontalmente */
+  text-align: center;       /* Centra el texto */
+  position: relative;
+  z-index: 1; /* Asegúrate de que el contenido se mantenga por encima de la imagen */
+}
 
-  &__container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;  /* Centra el contenido verticalmente */
-    align-items: center;      /* Centra el contenido horizontalmente */
-    text-align: center;       /* Centra el texto */
-    z-index: 1;
-  }
+.banner::before {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.4);  /* Cambia el valor para hacer el banner más oscuro */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0; /* Asegúrate de que la capa oscura esté debajo del contenido */
+}
 
-  .logo {
-    color: $text-light; /* Blanco */
-    max-width: 150px; /* Ajusta el tamaño máximo del logo */
-    margin-bottom: 20px; /* Espaciado debajo del logo */
-    z-index: 1;
-    margin-top: 50px;
-  }
 
-  h1 {
-    color: $text-light; /* Blanco */
-    font-size: 700;
-    line-height: 2.25rem !important;
-    margin-bottom: 10px;  /* Espaciado debajo del título */
-    z-index: 1 !important;
-    font-weight: 700 !important;
-  }
+.logo {
+  color: $text-light; /* Blanco */
+  max-width: 150px; /* Ajusta el tamaño máximo del logo */
+  margin-bottom: 20px; /* Espaciado debajo del logo */
+  z-index: 1; /* Asegura que el logo esté encima de la imagen */
+  margin-top: 50px;
+}
 
-  h2 {
-    color: $text-light; /* Blanco */
-    font-weight: 100;
-    font-size: 22px;
-    z-index: 1;
-  }
+h1 {
+  color: $text-light; /* Blanco */
+  font-size: 700;
+  line-height: 2.25rem !important;
+  margin-bottom: 10px; /* Espaciado debajo del título */
+  z-index: 1 !important;
+  font-weight: 700 !important;
+}
+
+h2 {
+  color: $text-light; /* Blanco */
+  font-weight: 100;
+  font-size: 22px;
+  z-index: 1;
 }
