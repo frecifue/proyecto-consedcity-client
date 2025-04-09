@@ -1,12 +1,11 @@
 import React, {useState} from 'react'
 import "./MenuItem.scss";
-import { Image, Button, Icon, Confirm } from 'semantic-ui-react'; 
-import { image } from '../../../../assets';
-import { ENV } from '../../../../utils';
+import { Button, Icon, Confirm } from 'semantic-ui-react'; 
 import { BasicModal } from '../../../Shared';
 import { Menu } from '../../../../api';
 import {useAuth} from "../../../../hooks"
 import { MenuForm } from '../MenuForm';
+import { toast } from 'react-toastify';
 
 
 const menuController = new Menu();
@@ -38,15 +37,22 @@ export function MenuItem(props) {
 
     const onChangeStatus = async ()=>{
         try {
-            const nuevo = !menu.men_activo;
-
-            await menuController.updateMenu(accessToken, menu.men_id, {
+            const response = await menuController.updateMenu(accessToken, menu.men_id, {
                 activo: !menu.men_activo
             });
-            onReload();
-            onOpenCloseConfirm();
+console.log(response);
+
+            if (response.status === 200) {
+                toast.success("El menú ha cambiado de estado correctamente", {theme: "colored",});
+                onReload();
+                onOpenCloseConfirm();
+            } else {
+                throw new Error(); 
+            }
+
         } catch (error) {
             console.error(error);
+            toast.error("Ha ocurrido un problema al cambiar el estado del menú", {theme: "colored",});
         }
     }
 
