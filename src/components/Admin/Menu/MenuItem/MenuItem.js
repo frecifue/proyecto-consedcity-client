@@ -37,17 +37,26 @@ export function MenuItem(props) {
 
     const onChangeStatus = async ()=>{
         try {
+            const nuevoEstado = !menu.men_activo;
             const response = await menuController.updateMenu(accessToken, menu.men_id, {
-                activo: !menu.men_activo
+                activo: nuevoEstado
             });
-console.log(response);
 
             if (response.status === 200) {
-                toast.success("El menú ha cambiado de estado correctamente", {theme: "colored",});
+                toast.success(
+                    nuevoEstado ? "Menú activado correctamente" : "Menú desactivado correctamente",
+                    { theme: "colored" }
+                );
                 onReload();
                 onOpenCloseConfirm();
+            } else if (response.status === 400) {
+                toast.warning(response.data?.msg || "Error al actualizar Menú", { theme: "colored" });
+            } else if (response.status === 404) {
+                toast.warning(response.data?.msg || "Menú no encontrado", { theme: "colored" });
+            } else if (response.status === 500) {
+                toast.error("Error interno del servidor", { theme: "colored" });
             } else {
-                throw new Error(); 
+                toast.error("Ha ocurrido un problema al cambiar el estado del menú", { theme: "colored" });
             }
 
         } catch (error) {
@@ -62,15 +71,28 @@ console.log(response);
         onOpenCloseConfirm();
     }
 
-    const onDelete = async () =>{
+    const onDelete = async () => {
         try {
-            await menuController.deleteMenu(accessToken, menu.men_id)
-            onReload();
-            onOpenCloseConfirm();
+            const response = await menuController.deleteMenu(accessToken, menu.men_id);
+
+            if (response.status === 200) {
+                toast.success("Menú eliminado exitosamente", { theme: "colored" });
+                onReload();
+                onOpenCloseConfirm();
+            } else if (response.status === 400) {
+                toast.warning(response.data?.msg || "Error al eliminar el menú", { theme: "colored" });
+            } else if (response.status === 404) {
+                toast.warning(response.data?.msg || "Menú no encontrado", { theme: "colored" });
+            } else if (response.status === 500) {
+                toast.error("Error interno del servidor", { theme: "colored" });
+            } else {
+                toast.error("Ha ocurrido un problema al eliminar el menú", { theme: "colored" });
+            }
         } catch (error) {
             console.error(error);
+            toast.error("Ha ocurrido un problema al eliminar el menú", { theme: "colored" });
         }
-    }
+    };
 
     return (
         <>

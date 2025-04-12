@@ -8,6 +8,7 @@ import {Team} from "../../../../api"
 import {useAuth} from "../../../../hooks"
 import { ENV } from '../../../../utils';
 import "./TeamForm.scss";
+import { toast } from 'react-toastify';
 
 const teamController = new Team()
 
@@ -19,22 +20,34 @@ export function TeamForm(props) {
         initialValues: initialValues(team),
         validationSchema: validationSchema(team),
         validateOnChange: false,
-        onSubmit: async (formValue) =>{
+        onSubmit: async (formValue) => {
             try {
-                if(!team){
-                    await teamController.createTeam(accessToken, formValue)
-                }else{
-// console.log(formValue);
-
-                    await teamController.updateTeam(accessToken, team.equ_id, formValue)
-                }
-                onReload();
-                close();
+                let response;
                 
+                if (!team) {
+                    response = await teamController.createTeam(accessToken, formValue);
+                } else {
+                    response = await teamController.updateTeam(accessToken, team.equ_id, formValue);
+                }
+                
+                // Comprobamos la respuesta y mostramos un mensaje de éxito o error
+                if (response.status === 200) {
+                    toast.success(!team ? "Equipo creado exitosamente" : "Equipo actualizado exitosamente", { theme: "colored" });
+                    onReload();
+                    close();
+                } else if (response.status === 400) {
+                    toast.warning(response.data?.msg || "Error en los datos del formulario", { theme: "colored" });
+                } else if (response.status === 404) {
+                    toast.warning(response.data?.msg || "Equipo no encontrado", { theme: "colored" });
+                } else {
+                    toast.error("Ha ocurrido un error inesperado", { theme: "colored" });
+                }
             } catch (error) {
-                console.error(error)
+                console.error(error);
+                toast.error("Error inesperado al guardar equipo", { theme: "colored" });
             }
         }
+        
     });
 
     const onDrop = useCallback((acceptedFiles)=>{

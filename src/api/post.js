@@ -23,12 +23,8 @@ export class Post {
         body: formData,
       };
 
-      const response = await fetch(url, params);
-      const result = await response.json();
-
-      if (response.status !== 200) throw result;
-
-      return result;
+      return await fetch(url, params);
+      
     } catch (error) {
       throw error;
     }
@@ -71,12 +67,8 @@ export class Post {
         body: formData,
       };
 
-      const response = await fetch(url, params);
-      const result = await response.json();
-
-      if (response.status !== 200) throw result;
-
-      return result;
+      return await fetch(url, params);
+      
     } catch (error) {
       throw error;
     }
@@ -92,12 +84,8 @@ export class Post {
         },
       };
 
-      const response = await fetch(url, params);
-      const result = await response.json();
-
-      if (response.status !== 200) throw result;
-
-      return result;
+      return await fetch(url, params);
+      
     } catch (error) {
       throw error;
     }
@@ -130,12 +118,8 @@ export class Post {
         body: JSON.stringify(data),
       };
 
-      const response = await fetch(url, params);
-      const result = await response.json();
-
-      if (response.status !== 200) throw result;
-
-      return result;
+      return await fetch(url, params);
+      
     } catch (error) {
       throw error;
     }
@@ -153,12 +137,8 @@ export class Post {
         body: JSON.stringify(data),
       };
 
-      const response = await fetch(url, params);
-      const result = await response.json();
-
-      if (response.status !== 200) throw result;
-
-      return result;
+      return await fetch(url, params);
+      
     } catch (error) {
       throw error;
     }

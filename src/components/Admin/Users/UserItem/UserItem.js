@@ -7,6 +7,7 @@ import { BasicModal } from '../../../Shared';
 import { UserForm } from '../UserForm/UserForm';
 import { User } from '../../../../api';
 import {useAuth} from "../../../../hooks"
+import { toast } from 'react-toastify';
 
 
 const userController = new User();
@@ -36,19 +37,33 @@ export function UserItem(props) {
         onOpenCloseConfirm();
     }
 
-    const onChangeStatus = async ()=>{
+    const onChangeStatus = async () => {
         try {
-            const nuevo = !user.usu_activo;
-
-            await userController.updateUser(accessToken, user.usu_id, {
-                activo: !user.usu_activo
+            const nuevoEstado = !user.usu_activo;
+            const response = await userController.updateUser(accessToken, user.usu_id, {
+                activo: nuevoEstado
             });
-            onReload();
-            onOpenCloseConfirm();
+    
+            if (response.status === 200) {
+                toast.success(
+                    nuevoEstado ? "Usuario activado correctamente" : "Usuario desactivado correctamente",
+                    { theme: "colored" }
+                );
+                onReload();
+                onOpenCloseConfirm();
+            } else if (response.status === 400) {
+                toast.warning(response.data?.msg || "Error al cambiar estado del usuario", { theme: "colored" });
+            } else if (response.status === 404) {
+                toast.warning(response.data?.msg || "Usuario no encontrado", { theme: "colored" });
+            } else {
+                toast.error("Error inesperado al cambiar estado", { theme: "colored" });
+            }
         } catch (error) {
             console.error(error);
+            toast.error("Error al intentar cambiar el estado del usuario", { theme: "colored" });
         }
     }
+    
 
     const openDeleteconfirm = () =>{
         setIsDelete(true);
@@ -56,15 +71,25 @@ export function UserItem(props) {
         onOpenCloseConfirm();
     }
 
-    const onDelete = async () =>{
+    const onDelete = async () => {
         try {
-            await userController.deleteUser(accessToken, user.usu_id)
-            onReload();
-            onOpenCloseConfirm();
+            const response = await userController.deleteUser(accessToken, user.usu_id);
+    
+            if (response.status === 200) {
+                toast.success("Usuario eliminado correctamente", { theme: "colored" });
+                onReload();
+                onOpenCloseConfirm();
+            } else if (response.status === 404) {
+                toast.warning("Usuario no encontrado", { theme: "colored" });
+            } else {
+                toast.error("Error al eliminar el usuario", { theme: "colored" });
+            }
         } catch (error) {
             console.error(error);
+            toast.error("Error al intentar eliminar el usuario", { theme: "colored" });
         }
-    }
+    };
+    
 
     return (
         <>

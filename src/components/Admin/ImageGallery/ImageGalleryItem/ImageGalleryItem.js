@@ -8,6 +8,7 @@ import { ImageGallery } from '../../../../api';
 import {useAuth} from "../../../../hooks"
 import "./ImageGalleryItem.scss";
 import { ImageGalleryForm } from '../ImageGalleryForm/ImageGalleryForm';
+import { toast } from 'react-toastify';
 
 const imgGalleryController = new ImageGallery();
 
@@ -36,15 +37,29 @@ export function ImageGalleryItem(props) {
         onOpenCloseConfirm();
     }
 
-    const onDelete = async () =>{
+    const onDelete = async () => {
         try {
-            await imgGalleryController.deleteImageGallery(accessToken, imgGallery.gim_id)
-            onReload();
-            onOpenCloseConfirm();
+            const response = await imgGalleryController.deleteImageGallery(accessToken, imgGallery.gim_id);
+    
+            if (response.status === 200) {
+                toast.success("Imagen eliminada exitosamente", { theme: "colored" });
+                onReload();
+                onOpenCloseConfirm();
+            } else if (response.status === 400) {
+                toast.warning(response.data?.msg || "Error al eliminar la imagen", { theme: "colored" });
+            } else if (response.status === 404) {
+                toast.warning(response.data?.msg || "Imagen no encontrada", { theme: "colored" });
+            } else if (response.status === 500) {
+                toast.error("Error interno del servidor", { theme: "colored" });
+            } else {
+                toast.error("Ha ocurrido un problema al eliminar la imagen", { theme: "colored" });
+            }
         } catch (error) {
             console.error(error);
+            toast.error("Error inesperado al intentar eliminar la imagen", { theme: "colored" });
         }
-    }
+    };
+    
 
     return (
         <>

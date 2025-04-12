@@ -30,12 +30,7 @@ export class Menu {
         body: JSON.stringify(data),
       };
 
-      const response = await fetch(url, params);
-      const result = await response.json();
-
-      if (response.status !== 200) throw result;
-
-      return result;
+      return await fetch(url, params);
     } catch (error) {
       throw error;
     }
@@ -53,12 +48,8 @@ export class Menu {
         body: JSON.stringify(data),
       };
 
-      const response = await fetch(url, params);
-      // const result = await response.json();
-
-      // if (response.status !== 200) throw result;
-
-      return response;
+      return await fetch(url, params);
+      
     } catch (error) {
       throw error;
     }
@@ -74,12 +65,8 @@ export class Menu {
         },
       };
 
-      const response = await fetch(url, params);
-      const result = await response.json();
-
-      if (response.status !== 200) throw result;
-
-      return result;
+      return await fetch(url, params);
+      
     } catch (error) {
       throw error;
     }

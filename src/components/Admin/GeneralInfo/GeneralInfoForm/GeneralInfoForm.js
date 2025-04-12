@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import { GeneralInfo } from "../../../../api";
 import { useAuth } from "../../../../hooks";
 import { initialValues, validationSchema } from "./GeneralInfoForm.form";
+import { toast } from "react-toastify";
 
 const generalInfoController = new GeneralInfo();
 
@@ -38,20 +39,41 @@ export function GeneralInfoForm() {
                     formacion: formValue.formacion,
                     investigacion: formValue.investigacion,
                 };
-
-                if (generalInfo) {
-                    await generalInfoController.updateGeneralInfo(accessToken, generalInfo.ing_id, data);
+        
+                let response;
+        
+                // Verificar si es creación o actualización de información general
+                if (!generalInfo) {
+                    // Crear información general
+                    response = await generalInfoController.createGeneralInfo(accessToken, data);
                 } else {
-                    await generalInfoController.createGeneralInfo(accessToken, data);
+                    // Actualizar información general
+                    response = await generalInfoController.updateGeneralInfo(accessToken, generalInfo.ing_id, data);
                 }
-
+        
+                // Comprobamos la respuesta y mostramos un mensaje de éxito o error
+                if (response.status === 200 || response.status === 201) {
+                    toast.success(!generalInfo ? "Información General creada exitosamente" : "Información General actualizada", { theme: "colored" });
+                } else if (response.status === 400) {
+                    toast.warning(response.data?.msg || "Error en los datos del formulario", { theme: "colored" });
+                } else if (response.status === 404) {
+                    toast.warning("Información General no encontrada", { theme: "colored" });
+                } else if (response.status === 500) {
+                    toast.error("Error interno del servidor", { theme: "colored" });
+                } else {
+                    toast.error("Ha ocurrido un problema inesperado", { theme: "colored" });
+                }
+        
                 // Recargar datos después de guardar
                 const updatedInfo = await generalInfoController.getGeneralInfo();
                 setGeneralInfo(updatedInfo[0]);
+                
             } catch (error) {
                 console.error(error);
+                toast.error("Ha ocurrido un problema al procesar la información general", { theme: "colored" });
             }
         },
+             
     });
 
     return (

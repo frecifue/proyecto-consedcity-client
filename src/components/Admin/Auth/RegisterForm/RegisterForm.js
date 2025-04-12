@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 import { initialValues, validationSchema } from './RegisterForm.form'
 import "./RegisterForm.scss"
 import { Auth } from '../../../../api/auth'
+import { toast } from 'react-toastify'
 
 const authController = new Auth()
 
@@ -17,16 +18,29 @@ export function RegisterForm(props) {
         initialValues: initialValues(),
         validationSchema: validationSchema,
         validateOnChange: false,
-        onSubmit: async (formValue) =>{
+        onSubmit: async (formValue) => {
             try {
-                setError("");
-                await authController.register(formValue)
-                openLogin();
+                setError(""); 
+        
+                const response = await authController.register(formValue);
+        
+                if (response?.status === 200) {
+                    toast.success("Registro exitoso. Un administrador activará tu usuario para poder ingresar.", { theme: "colored" });
+                    openLogin();
+                } else if (response?.status === 400) {
+                    setError("Error en los datos ingresados");
+                } else if (response?.status === 500) {
+                    setError("Error interno del servidor. Intenta más tarde.");
+                } else {
+                    setError("Ha ocurrido un problema al registrarse");
+                }
+        
             } catch (error) {
-                console.error(error)
-                setError("Error al registrarse")
+                console.error(error);
+                setError("Error inesperado al registrarse");
             }
         }
+        
     });
 
   return (

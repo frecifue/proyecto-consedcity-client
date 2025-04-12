@@ -7,6 +7,7 @@ import { BasicModal } from "../../../Shared";
 import { DocumentForm } from "../DocumentForm/DocumentForm";
 import "./DocumentItem.scss"
 import { ENV } from "../../../../utils";
+import { toast } from "react-toastify";
 
 const documentController = new Documents();
 
@@ -21,13 +22,27 @@ export function DocumentItem(props) {
 
   const onDelete = async () => {
     try {
-      await documentController.deleteDocument(accessToken, document.doc_id);
-      onReload();
-      onOpenCloseConfirm();
+        const response = await documentController.deleteDocument(accessToken, document.doc_id);
+        
+        if (response.status === 200) {
+            toast.success("Documento eliminado exitosamente", { theme: "colored" });
+            onReload();
+            onOpenCloseConfirm();
+        } else if (response.status === 400) {
+            toast.warning(response.data?.msg || "Error al eliminar el documento", { theme: "colored" });
+        } else if (response.status === 404) {
+            toast.warning(response.data?.msg || "Documento no encontrado", { theme: "colored" });
+        } else if (response.status === 500) {
+            toast.error("Error interno del servidor", { theme: "colored" });
+        } else {
+            toast.error("Ha ocurrido un problema al eliminar el documento", { theme: "colored" });
+        }
     } catch (error) {
-      console.error(error);
+        console.error(error);
+        toast.error("Ha ocurrido un problema al eliminar el documento", { theme: "colored" });
     }
   };
+
 
   return (
     <>

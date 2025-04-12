@@ -23,12 +23,8 @@ export class Documents {
         body: formData,
       };
 
-      const response = await fetch(url, params);
-      const result = await response.json();
-
-      if (response.status !== 200) throw result;
-
-      return result;
+      return await fetch(url, params);
+      
     } catch (error) {
       throw error;
     }
@@ -71,12 +67,8 @@ export class Documents {
         body: formData,
       };
 
-      const response = await fetch(url, params);
-      const result = await response.json();
-
-      if (response.status !== 200) throw result;
-
-      return result;
+      return await fetch(url, params);
+      
     } catch (error) {
       throw error;
     }
@@ -92,12 +84,8 @@ export class Documents {
         },
       };
 
-      const response = await fetch(url, params);
-      const result = await response.json();
-
-      if (response.status !== 200) throw result;
-
-      return result;
+      return await fetch(url, params);
+      
     } catch (error) {
       throw error;
     }

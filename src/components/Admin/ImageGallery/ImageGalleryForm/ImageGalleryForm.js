@@ -7,6 +7,7 @@ import {useAuth} from "../../../../hooks"
 import { ENV } from '../../../../utils';
 import { ImageGallery } from '../../../../api';
 import "./ImageGalleryForm.scss"
+import { toast } from 'react-toastify';
 
 
 const imgGalleryController = new ImageGallery()
@@ -19,27 +20,46 @@ export function ImageGalleryForm(props) {
         initialValues: initialValues(imgGallery),
         validationSchema: validationSchema(),
         validateOnChange: false,
-        onSubmit: async (formValue) =>{
+        onSubmit: async (formValue) => {
             try {
                 const data = {
                     nombre: formValue.nombre,
                     orden: formValue.orden,
-                    imagen: formValue.fileImagen
-                  };
-
-                if(!imgGallery){
-                    await imgGalleryController.createImageGallery(accessToken, data)
-                }else{
-                    
-                    await imgGalleryController.updateImageGallery(accessToken, imgGallery.gim_id, data)
+                    imagen: formValue.fileImagen,
+                };
+        
+                let response;
+        
+                // Verificar si es creación o actualización de la galería de imágenes
+                if (!imgGallery) {
+                    // Crear nueva imagen
+                    response = await imgGalleryController.createImageGallery(accessToken, data);
+                } else {
+                    // Actualizar imagen existente
+                    response = await imgGalleryController.updateImageGallery(accessToken, imgGallery.gim_id, data);
                 }
-                onReload();
-                onClose();
-                
+        
+                // Comprobamos la respuesta y mostramos un mensaje de éxito o error
+                if (response.status === 200) {
+                    toast.success(!imgGallery ? "Imagen registrada exitosamente" : "Imagen actualizada exitosamente", { theme: "colored" });
+                    onReload();
+                    onClose();
+                } else if (response.status === 400) {
+                    toast.warning(response.data?.msg || "Error en los datos del formulario", { theme: "colored" });
+                } else if (response.status === 404) {
+                    toast.warning(response.data?.msg || "Imagen no encontrada", { theme: "colored" });
+                } else if (response.status === 500) {
+                    toast.error("Error interno del servidor", { theme: "colored" });
+                } else {
+                    toast.error("Ha ocurrido un problema inesperado", { theme: "colored" });
+                }
+        
             } catch (error) {
-                console.error(error)
+                console.error(error);
+                toast.error("Error inesperado al procesar la imagen", { theme: "colored" });
             }
-        }
+        },        
+            
     });
 
     const onDrop = useCallback((acceptedFiles)=>{

@@ -7,6 +7,7 @@ import { useAuth } from "../../../../hooks";
 import { ENV } from "../../../../utils";
 import { initialValues, validationSchema } from "./DocumentForm.form";
 import "./DocumentForm.scss";
+import { toast } from "react-toastify";
 
 const documentController = new Documents();
 
@@ -14,61 +15,80 @@ export function DocumentForm(props) {
   const { onClose, onReload, document } = props;
   const { accessToken } = useAuth();
 
-  const formik = useFormik({
-    initialValues: initialValues(document),
-    validationSchema: validationSchema(),
-    validateOnChange: false,
-    onSubmit: async (formValue) => {
-      try {
-        if (document) {
-          await documentController.updateDocument(accessToken, document.doc_id, formValue);
-        } else {
-          await documentController.createDocument(accessToken, formValue);
-        }
+	const formik = useFormik({
+		initialValues: initialValues(document),
+		validationSchema: validationSchema(),
+		validateOnChange: false,
+		onSubmit: async (formValue) => {
+			try {
+				let response;
+		
+				// Verificar si es creación o actualización de documento
+				if (!document) {
+					// Crear documento
+					response = await documentController.createDocument(accessToken, formValue);
+				} else {
+					// Actualizar documento
+					response = await documentController.updateDocument(accessToken, document.doc_id, formValue);
+				}
+		
+				// Comprobamos la respuesta y mostramos un mensaje de éxito o error
+				if (response.status === 200) {
+					toast.success(!document ? "Documento creado exitosamente" : "Documento actualizado exitosamente", { theme: "colored" });
+					onReload();
+					onClose();
+				} else if (response.status === 400) {
+					toast.warning(response.data?.msg || "Error en los datos del formulario", { theme: "colored" });
+				} else if (response.status === 404) {
+					toast.warning(response.data?.msg || "Documento no encontrado", { theme: "colored" });
+				} else if (response.status === 500) {
+					toast.error("Error interno del servidor", { theme: "colored" });
+				} else {
+					toast.error("Ha ocurrido un problema inesperado", { theme: "colored" });
+				}
+			} catch (error) {
+				console.error(error);
+				toast.error("Error inesperado al guardar el documento", { theme: "colored" });
+			}
+		},
+		
+	});
 
-        onReload();
-        onClose();
-      } catch (error) {
-        console.error(error);
-      }
-    },
-  });
+	const onDrop = useCallback((acceptedFile) => {
+	const file = acceptedFile[0];
+	formik.setFieldValue("documento", URL.createObjectURL(file));
+	formik.setFieldValue("file", file);
+	}, [formik]);
 
-  const onDrop = useCallback((acceptedFile) => {
-    const file = acceptedFile[0];
-    formik.setFieldValue("documento", URL.createObjectURL(file));
-    formik.setFieldValue("file", file);
-  }, [formik]);
+	const { getRootProps, getInputProps } = useDropzone({
+		accept: {
+		"application/pdf": [],
+		},
+		maxSize: 5 * 1024 * 1024, // 5 MB
+		onDrop,
+		onDropRejected: (fileRejections) => {
+		fileRejections.forEach(({ file, errors }) => {
+			errors.forEach(err => {
+			if (err.code === "file-too-large") {
+				alert(`❌ El archivo "${file.name}" es demasiado grande. Máximo permitido: 5MB.`);
+			} else if (err.code === "file-invalid-type") {
+				alert(`❌ El archivo "${file.name}" tiene un formato no permitido. Solo se aceptan archivos PDF.`);
+			}
+			});
+		});
+		}
+	});
 
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: {
-      "application/pdf": [],
-    },
-    maxSize: 5 * 1024 * 1024, // 5 MB
-    onDrop,
-    onDropRejected: (fileRejections) => {
-      fileRejections.forEach(({ file, errors }) => {
-        errors.forEach(err => {
-          if (err.code === "file-too-large") {
-            alert(`❌ El archivo "${file.name}" es demasiado grande. Máximo permitido: 5MB.`);
-          } else if (err.code === "file-invalid-type") {
-            alert(`❌ El archivo "${file.name}" tiene un formato no permitido. Solo se aceptan archivos PDF.`);
-          }
-        });
-      });
-    }
-  });
-
-  const getFilePreview = () => {
-    if (formik.values.file) {
-      return formik.values.file.name;
-    } else if (formik.values.documento) {
-      const fullPath = `${ENV.BASE_PATH}/${formik.values.documento}`;
-      const fileName = fullPath.split("/").pop();
-      return fileName;
-    }
-    return null;
-  };
+	const getFilePreview = () => {
+		if (formik.values.file) {
+		return formik.values.file.name;
+		} else if (formik.values.documento) {
+		const fullPath = `${ENV.BASE_PATH}/${formik.values.documento}`;
+		const fileName = fullPath.split("/").pop();
+		return fileName;
+		}
+		return null;
+	};
 
   return (
     <Form className="document-form" onSubmit={formik.handleSubmit}>

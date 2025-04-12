@@ -8,6 +8,7 @@ import {image} from "../../../../assets"
 import {User} from "../../../../api"
 import {useAuth} from "../../../../hooks"
 import { ENV } from '../../../../utils';
+import { toast } from 'react-toastify';
 // import { ToastContainer, toast } from 'react-toastify';
 
 const userController = new User()
@@ -21,22 +22,35 @@ export function UserForm(props) {
         initialValues: initialValues(user),
         validationSchema: validationSchema(user),
         validateOnChange: false,
-        onSubmit: async (formValue) =>{
+        onSubmit: async (formValue) => {
             try {
-                if(!user){
-                    await userController.createUser(accessToken, formValue)
-                }else{
-                    // console.log(formValue);
-                    
-                    await userController.updateUser(accessToken, user.usu_id, formValue)
+                let response;
+        
+                if (!user) {
+                    response = await userController.createUser(accessToken, formValue);
+                } else {
+                    response = await userController.updateUser(accessToken, user.usu_id, formValue);
                 }
-                onReload();
-                close();
-                
+        
+                if (response.status === 200) {
+                    toast.success(!user ? "Usuario creado exitosamente" : "Usuario actualizado exitosamente", {
+                        theme: "colored"
+                    });
+                    onReload();
+                    close();
+                } else if (response.status === 400) {
+                    toast.warning(response.data?.msg || "Error en los datos del formulario", { theme: "colored" });
+                } else if (response.status === 404) {
+                    toast.warning(response.data?.msg || "Usuario no encontrado", { theme: "colored" });
+                } else {
+                    toast.error("Ha ocurrido un error inesperado", { theme: "colored" });
+                }
             } catch (error) {
-                console.error(error)
+                console.error(error);
+                toast.error("Error inesperado al guardar usuario", { theme: "colored" });
             }
         }
+        
     });
 
     const onDrop = useCallback((acceptedFiles)=>{
