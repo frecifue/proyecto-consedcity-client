@@ -25,7 +25,7 @@ export function ImagesPost(props) {
     }, [post.imagenes]);
 
     return (
-        <section className="image-gallery-section" id="image-gallery-section">
+        <section className="image-post-section" id="image-post-section">
             <Gallery items={images} />
         </section>
     

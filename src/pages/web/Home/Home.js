@@ -3,6 +3,7 @@ import { Banner, ContactForm, ListPosts, ListTeam } from '../../../components/We
 import {About} from "../../../components/Web/General_Info/About"
 import { OurWork } from '../../../components/Web/General_Info/OurWork'
 import {ImageGallery} from "../../../components/Web/ImageGallery"
+import { ListDocuments } from '../../../components/Web/Documents/ListDocuments'
 
 
 export function Home() {
@@ -14,6 +15,7 @@ export function Home() {
       <ListTeam/>
       <OurWork/>
       <ImageGallery/>
+      <ListDocuments/>
       <ContactForm/>
     </div>
   )

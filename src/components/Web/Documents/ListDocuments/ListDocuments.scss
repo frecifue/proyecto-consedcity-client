@@ -1,0 +1,45 @@
+@import "~/src/scss/index.scss";
+
+.list-documents-section {
+  margin-top: 70px;
+  padding: 2rem 1rem;
+
+  .list-documents__title {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 2.25rem;
+    letter-spacing: 4px;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: $text-dark !important;
+    // Puedes usar tu color preferido o dejar el default
+  }
+
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  
+    .item {
+      width: 50%; // 2 columnas por fila
+      padding: 20px;
+      box-sizing: border-box;
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+
+    a {
+      // color: $text-light !important;
+      opacity: 0.6;
+
+      &.active {
+        opacity: 1;
+        // border-color: $text-light !important;
+      }
+    }
+  }
+}

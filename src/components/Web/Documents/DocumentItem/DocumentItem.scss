@@ -1,0 +1,31 @@
+.document-item {
+    height: 200px; // o el alto máximo que prefieras
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  
+    .document-title-link {
+      display: inline-block;
+      font-weight: bold;
+      font-size: 1.1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+  
+    hr {
+      margin: 0.5rem 0;
+    }
+  
+    .description {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 4; // número de líneas visibles
+      -webkit-box-orient: vertical;
+      line-height: 1.4rem;
+      max-height: 5.6rem; // 4 líneas * 1.4rem
+    }
+  }
+  
