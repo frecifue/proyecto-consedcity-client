@@ -1,12 +1,24 @@
 @import "~/src/scss/index.scss";
 
+
+.post-container{
+  // background-image: url("../../../assets/jpg/contact.jpeg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .post {
   padding-top: 100px;
 
   .title {
+    font-size: 35px;
     color: $text-dark;
+    font-weight: normal;
     text-align: center;
-    margin-bottom: 6;
+    text-decoration: solid;;
+    // padding: 100px 0 40px 0;
+    font-weight: bold;
   }
 
   .content {
@@ -25,5 +37,6 @@
     height: auto;      /* Mantiene la proporción de la imagen */
     margin: 20px auto; /* Agrega un margen superior e inferior, y la centra */
     display: block;    /* Hace que la imagen sea un bloque (para centrarla con margin) */
+    border-radius: 20px;
   }
 }

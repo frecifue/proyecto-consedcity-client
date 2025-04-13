@@ -1,9 +1,14 @@
 @import "~/src/scss/index.scss";
 
+.list-documents-container{
+  background-color: rgba(248, 248, 255, 0.105);
+}
+
 .list-documents-section {
+  
 
   .list-documents__title {
-    font-size: 30px;
+    font-size: 35px;
     color: $text-dark;
     font-weight: normal;
     text-align: center;

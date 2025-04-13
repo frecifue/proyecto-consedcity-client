@@ -39,8 +39,9 @@ export function ListDocuments() {
     if (!documents) return <Loader active inline="centered" />;
 
     return (
-        // <Container className="list-documents-section" id="list-documents-section">
-        <section className="list-documents-section" id="list-documents-section"> 
+        <div className="list-documents-container">
+        <Container className="list-documents-section" id="list-documents-section">
+        {/* // <section className="list-documents-section" id="list-documents-section">  */}
         <h2 className="list-documents__title">ESTUDIOS E INVESTIGACIONES</h2>
             <div className="list">
             {map(documents, (item) => (
@@ -62,7 +63,8 @@ export function ListDocuments() {
                 onPageChange={changePage}
             />
             </div>
-        </section>
-        // </Container>
+        {/* </section> */}
+        </Container>
+        </div>
     );
 }

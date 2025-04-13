@@ -1,6 +1,11 @@
 @import "~/src/scss/index.scss";
 
 .list-posts-web {
+
+  background-image: url("../../../../assets/jpg/contact.jpeg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
   
 
   .list {
@@ -15,7 +20,7 @@
   }
 
   .post-title{
-    font-size: 30px;
+    font-size: 35px;
     color: $text-dark;
     font-weight: normal;
     text-align: center;

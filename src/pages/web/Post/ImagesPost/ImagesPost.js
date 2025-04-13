@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Gallery from "react-image-gallery";  // Importación por defecto
 import "react-image-gallery/styles/css/image-gallery.css";
-import { ENV } from "../../../utils";
+import { ENV } from '../../../../utils'
 import "./ImagesPost.scss"
 
 export function ImagesPost(props) {

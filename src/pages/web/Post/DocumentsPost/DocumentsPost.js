@@ -1,5 +1,5 @@
 import React from 'react'
-import { ENV } from '../../../utils'
+import { ENV } from '../../../../utils'
 import "./DocumentPost.scss"
 import { Button, Icon } from 'semantic-ui-react'
 
