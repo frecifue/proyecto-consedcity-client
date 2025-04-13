@@ -29,7 +29,7 @@ export function ImageGallery() {
 
     return (
         <section className="image-gallery-section" id="image-gallery-section">
-            <h2 className="text-center image-gallery-title">MOMENTOS CONSEDCITY</h2>
+            <h2 className="image-gallery-title">MOMENTOS CONSEDCITY</h2>
             <Gallery items={images} />
       </section>
     
