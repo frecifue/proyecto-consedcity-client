@@ -13,27 +13,30 @@ export function ImagePostItem(props) {
 
     return (
         <div className="image-post-item">
-        <Checkbox
-            checked={isSelected}
-            onChange={handleCheckboxChange}
-            className="image-post-item__checkbox"
-        />
-
-        <div className="image-post-item__content">
+          <label className="image-post-item__label">
+            <Checkbox
+              checked={isSelected}
+              onChange={handleCheckboxChange}
+              className="image-post-item__checkbox"
+            />
+      
             <div className="image-post-item__text">
-            <span className="image-post-item__title">{image.gim_nombre}</span>
+              <span className="image-post-item__title">{image.gim_nombre}</span>
             </div>
-
+          </label>
+      
+          <div className="image-post-item__content">
             <Button
-            as={Link}
-            primary
-            icon
-            to={`${ENV.BASE_PATH}/${image.gim_imagen}`}
-            target="_blank"
+              as={Link}
+              primary
+              icon
+              to={`${ENV.BASE_PATH}/${image.gim_imagen}`}
+              target="_blank"
             >
-            <Icon name="eye" />
+              <Icon name="eye" />
             </Button>
+          </div>
         </div>
-        </div>
-    );
+      );
+      
 }

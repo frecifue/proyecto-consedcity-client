@@ -31,7 +31,7 @@ export function Auth() {
   return (
     <div className="auth">
       {/* <Icon.LogoWhite className="logo" /> */}
-      <img src={Icon.LogoColor} alt="Logo" className="logo" />
+      <img src={Icon.LogoBlanco} alt="Logo" className="logo" />
       <Tab
         panes={panes}
         className="auth__forms"

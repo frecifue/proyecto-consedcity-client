@@ -37,4 +37,20 @@
   .ui.button {
     margin-left: auto;
   }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex-grow: 1;
+
+    .document-post-item__checkbox {
+      margin-right: 10px;
+    }
+
+    .document-post-item__text {
+      flex-grow: 1;
+    }
+  }
+
 }

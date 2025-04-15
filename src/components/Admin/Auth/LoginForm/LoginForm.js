@@ -46,7 +46,7 @@ export function LoginForm() {
             <Form.Input 
                 name="password" 
                 type="password" 
-                placeholder="Contraseña" 
+                placeholder="ContraseÃ±a" 
                 onChange={formik.handleChange} 
                 value={formik.values.password}
                 error={formik.errors.password}

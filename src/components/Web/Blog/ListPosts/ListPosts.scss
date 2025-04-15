@@ -1,47 +1,61 @@
 @import "~/src/scss/index.scss";
 
 .list-posts-web {
-
-  background-image: url("../../../../assets/jpg/contact.jpeg");
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
+    background-image: url("../../../../assets/jpg/contact.jpeg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
   
-
-  .list {
-    display: flex;
-    flex-wrap: wrap;
-
-    .item {
-      // width: 33.33%;
-      width: 50%;
-      padding: 20px;
+    .list {
+      display: flex;
+      flex-wrap: wrap;
+  
+      .item {
+        width: 50%;
+        max-height: 50%;
+        max-width: 800px;
+        padding: 20px;
+        
+        /* Asegura que las imágenes dentro de .item no se desborden */
+        .img {
+        //   width: 100%; /* La imagen no se desbordará horizontalmente */
+        //   height: auto; /* Mantiene la proporción de la imagen */
+        //   object-fit: cover; /* Recorta la imagen para que ocupe todo el contenedor */
+        //   border-radius: 10px;
+        //   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Opcional, para darle un efecto de sombra */
+        width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin: 2rem auto;
+    display: block;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+      }
     }
-  }
-
-  .post-title{
-    font-size: 35px;
-    color: $text-dark;
-    font-weight: normal;
-    text-align: center;
-    text-decoration: solid;;
-    padding: 100px 0 40px 0;
-    font-weight: bold;
-  }
-
-  .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-
-    a {
-      // color: $text-light !important;
-      opacity: 0.6;
-
-      &.active {
-        opacity: 1;
-        // border-color: $text-light !important;
+  
+    .post-title {
+      font-size: 35px;
+      color: $text-dark;
+      font-weight: normal;
+      text-align: center;
+      text-decoration: solid;
+      padding: 100px 0 40px 0;
+      font-weight: bold;
+    }
+  
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+  
+      a {
+        opacity: 0.6;
+  
+        &.active {
+          opacity: 1;
+        }
       }
     }
   }
-}
+  
