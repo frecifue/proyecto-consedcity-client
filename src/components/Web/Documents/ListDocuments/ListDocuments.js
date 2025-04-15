@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Container, Loader, Pagination } from "semantic-ui-react";
 import { map } from "lodash";
-// import { useNavigate, useSearchParams } from "react-router-dom";
 import { Documents } from "../../../../api";
 import { DocumentItem } from "../DocumentItem/DocumentItem";
-// import { ListPostItem } from "../ListPostItem";
 import "./ListDocuments.scss";
 
 const documentController = new Documents();
