@@ -20,7 +20,6 @@ export function TeamItem(props) {
 
     const [showConfirm, setShowConfirm] = useState(false);
     const [confirmMsg, setConfirmMsg] = useState("");
-    const [isDelete, setIsDelete] = useState(false);
 
     const onOpenCloseModal = () => setShowModal((prevState) => !prevState);
     const onOpenCloseConfirm = () => setShowConfirm((prevState) => !prevState);
@@ -31,7 +30,6 @@ export function TeamItem(props) {
     }
 
     const openDeleteconfirm = () =>{
-        setIsDelete(true);
         setConfirmMsg(`Eliminar equipo ${team.equ_nombre}`)
         onOpenCloseConfirm();
     }

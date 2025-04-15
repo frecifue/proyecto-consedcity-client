@@ -23,7 +23,7 @@ export function ListTeam(props) {
             console.error(error);
         }
       })();
-    }, [active, reload]);
+    }, [active, reload, accessToken]);
 
     if(!team) return <Loader active inline="centered"/>
     if(size(team) === 0) return "No se han encontrado equipo"

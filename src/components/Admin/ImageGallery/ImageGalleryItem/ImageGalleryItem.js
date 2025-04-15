@@ -3,7 +3,6 @@ import { Image, Button, Icon, Confirm } from 'semantic-ui-react';
 import { image } from '../../../../assets';
 import { ENV } from '../../../../utils';
 import { BasicModal } from '../../../Shared';
-// import { UserForm } from '../UserForm/UserForm';
 import { ImageGallery } from '../../../../api'; 
 import {useAuth} from "../../../../hooks"
 import "./ImageGalleryItem.scss";
@@ -21,7 +20,6 @@ export function ImageGalleryItem(props) {
 
     const [showConfirm, setShowConfirm] = useState(false);
     const [confirmMsg, setConfirmMsg] = useState("");
-    const [isDelete, setIsDelete] = useState(false);
 
     const onOpenCloseModal = () => setShowModal((prevState) => !prevState);
     const onOpenCloseConfirm = () => setShowConfirm((prevState) => !prevState);
@@ -32,7 +30,6 @@ export function ImageGalleryItem(props) {
     }
 
     const openDeleteconfirm = () =>{
-        setIsDelete(true);
         setConfirmMsg(`Eliminar imágen ${imgGallery.gim_nombre}`)
         onOpenCloseConfirm();
     }

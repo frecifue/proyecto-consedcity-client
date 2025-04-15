@@ -23,7 +23,7 @@ export function ListUsers(props) {
             console.error(error);
         }
       })();
-    }, [userActive, reload]);
+    }, [userActive, reload, accessToken]);
 
     if(!users) return <Loader active inline="centered"/>
     if(size(users) === 0) return "No se han encontrado usuarios"

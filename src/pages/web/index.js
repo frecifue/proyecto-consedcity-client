@@ -1,6 +1,2 @@
 export * from "./Home"
-export * from "./Posts"
-export * from "./Team"
 export * from "./Post"
-export * from "./Blog"
-export * from "./About"
