@@ -41,7 +41,6 @@ export function ListDocumentSelectable(props) {
         // Si hay documentos asociados al post, marcarlos como seleccionados
         if (post.documentos && post.documentos.length > 0) {
         const associatedDocuments = post.documentos.map(doc => doc.doc_id);
-        // console.log(associatedDocuments);
         
         // si post viene con el array documentos, recorreremos los documentos y tomaremos el doc_id
         // luego, lo enviamos al setSelectedDocuments

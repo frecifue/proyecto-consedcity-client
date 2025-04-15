@@ -13,7 +13,6 @@ export function ListPost(props) {
     const [pagination, setPagination] = useState(null);
     const [page, setPage] = useState(1);
 
-    console.log(posts);
     useEffect(() => {
       (async () => {
         try {

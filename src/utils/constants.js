@@ -61,6 +61,9 @@ export const ENV = {
             CREATE_DOCUMENT: "document",
             UPDATE_DOCUMENT: "document",
             DELETE_DOCUMENT: "document",
+        },
+        TYPE_USER:{
+            GET_TYPE_USERS: "type-users"
         }
     },
 };

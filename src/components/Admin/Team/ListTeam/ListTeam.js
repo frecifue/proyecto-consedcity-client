@@ -18,7 +18,6 @@ export function ListTeam(props) {
             setTeam(null);
             const response = await teamController.getTeams(accessToken);
             setTeam(response);
-         console.log(team);
             
         } catch (error) {
             console.error(error);

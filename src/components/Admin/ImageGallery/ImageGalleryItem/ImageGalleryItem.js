@@ -15,7 +15,7 @@ const imgGalleryController = new ImageGallery();
 export function ImageGalleryItem(props) {
     const {imgGallery, onReload} = props;
     const {accessToken} = useAuth();
-// console.log(imgGallery)
+
     const [showModal, setShowModal] = useState(false);
     const [titleModal, setTitleModal] = useState("");
 

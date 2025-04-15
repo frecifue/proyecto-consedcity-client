@@ -13,7 +13,6 @@ export function ListDocument(props) {
     const [pagination, setPagination] = useState(null);
     const [page, setPage] = useState(1);
 
-    console.log(documents);
     useEffect(() => {
       (async () => {
         try {

@@ -18,7 +18,6 @@ export function ListUsers(props) {
             setUsers(null);
             const response = await userController.getUsers(accessToken, userActive);
             setUsers(response);
-         console.log(users);
             
         } catch (error) {
             console.error(error);

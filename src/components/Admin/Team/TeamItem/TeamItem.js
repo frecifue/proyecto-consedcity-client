@@ -30,10 +30,6 @@ export function TeamItem(props) {
         onOpenCloseModal();
     }
 
-    const onChangeStatus = async ()=>{
-        console.log('activar/desactivar no disponible')
-    }
-
     const openDeleteconfirm = () =>{
         setIsDelete(true);
         setConfirmMsg(`Eliminar equipo ${team.equ_nombre}`)
@@ -94,7 +90,7 @@ export function TeamItem(props) {
             <Confirm
                 open={showConfirm}
                 onCancel={onOpenCloseConfirm}
-                onConfirm={isDelete ? onDelete : onChangeStatus}
+                onConfirm={onDelete}
                 content={confirmMsg}
                 size="mini"
             />

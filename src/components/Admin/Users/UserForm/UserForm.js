@@ -1,22 +1,23 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import "./UseForm.scss"
 import { Form, Image } from 'semantic-ui-react';
 import { useFormik } from 'formik';
 import { initialValues, validationSchema } from './UserForm.form';
 import { useDropzone } from 'react-dropzone';
 import {image} from "../../../../assets"
-import {User} from "../../../../api"
+import {User, TypeUser} from "../../../../api"
 import {useAuth} from "../../../../hooks"
 import { ENV } from '../../../../utils';
 import { toast } from 'react-toastify';
 // import { ToastContainer, toast } from 'react-toastify';
 
 const userController = new User()
+const typeUserController = new TypeUser()
 
 export function UserForm(props) {
     const {close, onReload, user} = props;
+    const [roleOptions, setRoleOptions] = useState([]);
     const {accessToken} = useAuth();
-// console.log(user);
 
     const formik = useFormik({
         initialValues: initialValues(user),
@@ -52,6 +53,28 @@ export function UserForm(props) {
         }
         
     });
+
+    // Cargar roles desde la API
+    useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                const response = await typeUserController.getTypeUsers(accessToken);
+                const options = response
+                    .map((type) => ({
+                        key: type.tus_id,
+                        text: type.tus_nombre,
+                        value: type.tus_id,
+                        disabled: type.tus_id === 1
+                    }));
+                setRoleOptions(options);
+            } catch (error) {
+                console.error("Error al cargar los roles:", error);
+                toast.error("No se pudieron cargar los roles", { theme: "colored" });
+            }
+        };
+
+        fetchRoles();
+    }, [accessToken]);
 
     const onDrop = useCallback((acceptedFiles)=>{
         const file = acceptedFiles[0];
@@ -156,22 +179,7 @@ export function UserForm(props) {
                     {user ? "Editar Usuario" : "Crear Usuario"}
                 </Form.Button>
             </Form>
-            {/* <ToastContainer /> */}
         </>
         
     )
 }
-
-// CAMBIAR ESTO Y TRAERLO POR BD!!!!
-const roleOptions = [
-    {
-        key: "colaborador",
-        text: "Colaborador",
-        value: "colaborador"
-    },
-    {
-        key: "admin",
-        text: "Administrador",
-        value: "admin"
-    }
-]
