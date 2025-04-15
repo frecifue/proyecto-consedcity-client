@@ -50,7 +50,7 @@ export function TeamForm(props) {
         
     });
 
-    const onDrop = useCallback((acceptedFiles)=>{
+    const onDropAccepted = useCallback((acceptedFiles)=>{
         const file = acceptedFiles[0];
         formik.setFieldValue("foto_perfil", URL.createObjectURL(file))
         formik.setFieldValue("fileFotoPerfil", file);
@@ -61,15 +61,15 @@ export function TeamForm(props) {
             'image/jpeg': [],
             'image/png': [],
         },
-        maxSize: 2 * 1024 * 1024, // 2 MB en bytes
-        onDrop,
+        maxSize: 5 * 1024 * 1024, // 5 MB en bytes
+        onDropAccepted,
         onDropRejected: (fileRejections) => {
             fileRejections.forEach(({ file, errors }) => {
                 errors.forEach(err => {
                     if (err.code === "file-too-large") {
-                        alert(`❌ El archivo "${file.name}" es demasiado grande. Máximo permitido: 2MB.`);
+                        toast.warning(`❌ El archivo "${file.name}" es demasiado grande. Máximo permitido: 5MB.`, { theme: "colored" });
                     } else if (err.code === "file-invalid-type") {
-                        alert(`❌ El archivo "${file.name}" tiene un formato no permitido. Solo se aceptan imágenes JPEG, PNG.`);
+                        toast.warning(`❌ El archivo "${file.name}" tiene un formato no permitido. Solo se aceptan imágenes JPEG, PNG.`, { theme: "colored" });
                     }
                 });
             });
@@ -129,7 +129,6 @@ export function TeamForm(props) {
                     {team ? "Editar Equipo" : "Crear Equipo"}
                 </Form.Button>
             </Form>
-            {/* <ToastContainer /> */}
         </>
         
     )

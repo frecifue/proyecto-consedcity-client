@@ -54,7 +54,7 @@ export function DocumentForm(props) {
 		
 	});
 
-	const onDrop = useCallback((acceptedFile) => {
+	const onDropAccepted = useCallback((acceptedFile) => {
 	const file = acceptedFile[0];
 	formik.setFieldValue("documento", URL.createObjectURL(file));
 	formik.setFieldValue("file", file);
@@ -65,14 +65,14 @@ export function DocumentForm(props) {
 		"application/pdf": [],
 		},
 		maxSize: 5 * 1024 * 1024, // 5 MB
-		onDrop,
+		onDropAccepted,
 		onDropRejected: (fileRejections) => {
 		fileRejections.forEach(({ file, errors }) => {
 			errors.forEach(err => {
 			if (err.code === "file-too-large") {
-				alert(`❌ El archivo "${file.name}" es demasiado grande. Máximo permitido: 5MB.`);
+				toast.warning(`❌ El archivo "${file.name}" es demasiado grande. Máximo permitido: 5MB.`, { theme: "colored" });
 			} else if (err.code === "file-invalid-type") {
-				alert(`❌ El archivo "${file.name}" tiene un formato no permitido. Solo se aceptan archivos PDF.`);
+				toast.warning(`❌ El archivo "${file.name}" tiene un formato no permitido. Solo se aceptan archivos PDF.`, { theme: "colored" });
 			}
 			});
 		});
@@ -100,17 +100,7 @@ export function DocumentForm(props) {
           value={formik.values.titulo}
           error={formik.errors.titulo}
         />
-      </Form.Group>
-
-      <Form.Group widths="equal">
-        <Form.Input
-          name="path_doc"
-          placeholder="URL del documento"
-          onChange={formik.handleChange}
-          value={formik.values.path_doc}
-          error={formik.errors.path_doc}
-        />
-        <Form.Input
+		<Form.Input
           name="orden"
           type="number"
           placeholder="Orden del documento"

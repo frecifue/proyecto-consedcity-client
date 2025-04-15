@@ -41,8 +41,8 @@ export function ListDocuments() {
     return (
         <div className="list-documents-container">
         <Container className="list-documents-section" id="list-documents-section">
-        {/* // <section className="list-documents-section" id="list-documents-section">  */}
-        <h2 className="list-documents__title">ESTUDIOS E INVESTIGACIONES</h2>
+        
+            <h2 className="list-documents__title">ESTUDIOS E INVESTIGACIONES</h2>
             <div className="list">
             {map(documents, (item) => (
                 <div key={item.doc_id} className="item">
@@ -63,7 +63,6 @@ export function ListDocuments() {
                 onPageChange={changePage}
             />
             </div>
-        {/* </section> */}
         </Container>
         </div>
     );

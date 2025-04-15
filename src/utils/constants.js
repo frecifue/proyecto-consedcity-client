@@ -57,7 +57,6 @@ export const ENV = {
         },
         DOCUMENTS:{
             GET_DOCUMENTS: "documents",
-            GET_DOCUMENT: "document",
             CREATE_DOCUMENT: "document",
             UPDATE_DOCUMENT: "document",
             DELETE_DOCUMENT: "document",
