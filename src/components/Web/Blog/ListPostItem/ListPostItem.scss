@@ -1,41 +1,42 @@
 @import "~/src/scss/index.scss";
 
 .list-post-item {
-  &:hover {
-    opacity: 0.6;
-  }
+    &:hover {
+        opacity: 0.6;
+    }
 
-  .ui.image {
-    // border-radius: 20px;
-    // max-width: 100%; /* Asegura que la imagen no se desborde */
-    // height: auto; /* Mantiene la proporción de la imagen */
-    // object-fit: cover; /* Recorta la imagen para ajustarse al contenedor sin deformarse */
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 16px;
-    margin: 2rem auto;
-    display: block;
-    // box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
+    .ui.image {
+        width: 100%;
+        height: 400px; /* Altura fija para que todas las imágenes tengan la misma altura */
+        object-fit: cover; /* Esto asegurará que la imagen cubra el espacio sin deformarse */
+        border-radius: 16px;
+        margin: 2rem auto;
+        display: block;
+    }
 
-  .titulo_noticia {
-    font-size: 16px;
-    color: $text-dark;
-    margin: 10px 0 0 0;
-    font-weight: bold;
-    
-  }
+    .titulo_noticia {
+        font-size: 16px;
+        color: $text-dark;
+        margin: 10px 0 0 0;
+        font-weight: bold;
+    }
 
-  .creacion_noticia {
-    color: $text-dark;
-    opacity: 0.8;
-    font-size: 12px;
-  }
+    .creacion_noticia {
+        color: $text-dark;
+        opacity: 0.8;
+        font-size: 12px;
+    }
 
-  .list-post-encabezado{
-    background-color: white;
-    border-radius: 10px;
-    text-align: center;
-  }
+    .list-post-encabezado {
+        background-color: white;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    // Media query para dispositivos pequeños (como móviles)
+    @media (max-width: 768px) {
+        .ui.image {
+            height: 200px; /* Ajustar la altura máxima en dispositivos móviles */
+        }
+    }
 }
