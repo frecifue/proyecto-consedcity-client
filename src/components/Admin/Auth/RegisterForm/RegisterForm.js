@@ -21,9 +21,8 @@ export function RegisterForm(props) {
         onSubmit: async (formValue) => {
             try {
                 setError(""); 
-        
                 const response = await authController.register(formValue);
-        
+
                 if (response?.status === 200) {
                     toast.success("Registro exitoso. Un administrador activará tu usuario para poder ingresar.", { theme: "colored" });
                     openLogin();
@@ -37,7 +36,7 @@ export function RegisterForm(props) {
         
             } catch (error) {
                 console.error(error);
-                setError("Error inesperado al registrarse");
+                setError("Error al registrarse");
             }
         }
         

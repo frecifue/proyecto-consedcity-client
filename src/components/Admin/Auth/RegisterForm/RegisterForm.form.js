@@ -15,9 +15,9 @@ export function validationSchema(){
     return Yup.object({
         nombres: Yup.string().required(true),
         primer_apellido: Yup.string().required(true),
-        email: Yup.string().email("Email no es v·lido").required(true),
+        email: Yup.string().email("Email no es v√°lido").required(true),
         password: Yup.string().required(true),
-        repeatPassword: Yup.string().required(true).oneOf([Yup.ref("password")], "Las contraseÒas deben ser iguales"),
+        repeatPassword: Yup.string().required(true).oneOf([Yup.ref("password")], "Las contrase√±as deben ser iguales"),
         conditionsAccepted: Yup.bool().isTrue(true),
     })
 }

@@ -31,6 +31,14 @@ export function Post() {
         <div className="post-container">
             <Container className="post">
                 <h1 className="title">{post.pos_titulo}</h1>
+                <div className="post-date">
+                Publicado el:{" "}
+                {new Date(post.pos_created_at).toLocaleDateString("es-CL", {
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                })}
+                </div>
                 <img src={`${ENV.BASE_PATH}/${post.pos_img_principal}`} alt="Logo" className="img" />
                 <div
                 className="content"

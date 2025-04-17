@@ -12,7 +12,7 @@ export class Team {
       });
 
       if (data.fileFotoPerfil) {
-        formData.append("foto_perfil", data.file);
+        formData.append("foto_perfil", data.fileFotoPerfil);
       }
 
       const url = `${this.baseApi}/${ENV.API_ROUTES.TEAM.CREATE_TEAM}`;

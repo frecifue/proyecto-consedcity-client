@@ -64,13 +64,13 @@ export function DocumentForm(props) {
 		accept: {
 		"application/pdf": [],
 		},
-		maxSize: 5 * 1024 * 1024, // 5 MB
+		maxSize: 15 * 1024 * 1024, // 15 MB
 		onDropAccepted,
 		onDropRejected: (fileRejections) => {
 		fileRejections.forEach(({ file, errors }) => {
 			errors.forEach(err => {
 			if (err.code === "file-too-large") {
-				toast.warning(`❌ El archivo "${file.name}" es demasiado grande. Máximo permitido: 5MB.`, { theme: "colored" });
+				toast.warning(`❌ El archivo "${file.name}" es demasiado grande. Máximo permitido: 15MB.`, { theme: "colored" });
 			} else if (err.code === "file-invalid-type") {
 				toast.warning(`❌ El archivo "${file.name}" tiene un formato no permitido. Solo se aceptan archivos PDF.`, { theme: "colored" });
 			}
@@ -131,7 +131,7 @@ export function DocumentForm(props) {
         ) : (
           <div>
             <i className="file pdf outline icon large"></i>
-            <p>Arrastra aquí un archivo PDF (máx. 5MB) o haz clic para seleccionar</p>
+            <p>Arrastra aquí un archivo PDF (máx. 15MB) o haz clic para seleccionar</p>
           </div>
         )}
       </div>
