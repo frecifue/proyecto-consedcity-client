@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 import {Menu} from "../../../../api"
 import { Loader } from 'semantic-ui-react';
 import { MenuItem } from '../MenuItem/MenuItem';
-import { ToastContainer } from 'react-toastify';
-
 
 const menuController = new Menu();
 

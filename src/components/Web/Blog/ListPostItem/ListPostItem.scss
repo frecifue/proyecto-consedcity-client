@@ -1,9 +1,9 @@
 @import "~/src/scss/index.scss";
 
 .list-post-item {
-    &:hover {
-        opacity: 0.6;
-    }
+    // &:hover {
+    //     opacity: 0.6;
+    // }
 
     .ui.image {
         width: 100%;
@@ -12,6 +12,10 @@
         border-radius: 16px;
         margin: 2rem auto;
         display: block;
+        transition: box-shadow 0.3s ease;
+        &:hover {
+            box-shadow: 0 0 50px rgba(9, 56, 107, 0.766);
+        }
     }
 
     .titulo_noticia {
