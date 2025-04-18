@@ -29,7 +29,7 @@ export function TeamForm(props) {
                 } else {
                     response = await teamController.updateTeam(accessToken, team.equ_id, formValue);
                 }
-                
+            console.log(response)    
                 // Comprobamos la respuesta y mostramos un mensaje de éxito o error
                 if (response.status === 200) {
                     toast.success(!team ? "Equipo creado exitosamente" : "Equipo actualizado exitosamente", { theme: "colored" });

@@ -16,8 +16,8 @@ export function ListUsers(props) {
       (async () => {
         try {
             setUsers(null);
-            const response = await userController.getUsers(accessToken, userActive);
-            setUsers(response);
+            const { data } = await userController.getUsers(accessToken, userActive);
+            setUsers(data);
             
         } catch (error) {
             console.error(error);

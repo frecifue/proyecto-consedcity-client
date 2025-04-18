@@ -14,9 +14,8 @@ export function ListMenu(props) {
       (async () => {
         try {
             setMenu(null);
-            const response = await menuController.getMenu(active);
-            setMenu(response);
-         
+            const {data} = await menuController.getMenu(active);
+            setMenu(data);
             
         } catch (error) {
             console.error(error);

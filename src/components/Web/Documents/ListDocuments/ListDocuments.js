@@ -15,13 +15,13 @@ export function ListDocuments() {
     useEffect(() => {
         (async () => {
         try {
-            const response = await documentController.getDocuments(page, 4);
-            setDocuments(response.documents);
+            const {data} = await documentController.getDocuments(page, 4);
+            setDocuments(data.documents);
             setPagination({
-            limit: response.limit,
-            page: response.page,
-            pages: response.totalPages,
-            total: response.total,
+            limit: data.limit,
+            page: data.page,
+            pages: data.totalPages,
+            total: data.total,
             });
         } catch (error) {
             console.error(error);

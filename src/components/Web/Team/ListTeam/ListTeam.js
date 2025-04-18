@@ -21,47 +21,51 @@ export function ListTeam() {
         (async () => {
         try {
             setTeam([]);
-            const response = await teamController.getTeams();
-            setTeam(response);
+            const { data } = await teamController.getTeams();
+            setTeam(data);
         } catch (error) {
             console.error(error);
         }
         })();
     }, []);
 
-    // if (size(team) === 0) return "";
-    if (!team) return <Loader active inline="centered" />;
+    // if (team.length === 0) return <Loader active inline="centered" />;
 
     return (
         <section className="carousel-container team-section" id="team-section">
-        <h2 className="text-center team-title">EQUIPO CONSEDCITY</h2>
-        <Swiper
-            modules={[Navigation, Pagination, Autoplay]} // Añadir los módulos aquí
-            navigation
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 3000, disableOnInteraction: false }} // Avance automático cada 3s
-            loop
-            spaceBetween={50} // Agregar espacio entre los slides si lo deseas
-            slidesPerView={1} // Mostrar un slide a la vez
-        >
-            {map(team, (item) => (
-            <SwiperSlide key={item.equ_id} className="carousel-slide">
-                <div className="slide-content">
-                <div className="content-wrapper">
-                    <div className="info-box">
-                    <p className="team-name">{item.equ_nombre}</p>
-                    <p className="team-description">{item.equ_descripcion}</p>
+          <h2 className="text-center team-title">EQUIPO CONSEDCITY</h2>
+      
+          {team.length > 0 ? (
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              navigation
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              loop
+              spaceBetween={50}
+              slidesPerView={1}
+            >
+              {map(team, (item) => (
+                <SwiperSlide key={item.equ_id} className="carousel-slide">
+                  <div className="slide-content">
+                    <div className="content-wrapper">
+                      <div className="info-box">
+                        <p className="team-name">{item.equ_nombre}</p>
+                        <p className="team-description">{item.equ_descripcion}</p>
+                      </div>
+                      <img
+                        src={`${ENV.BASE_PATH}/${item.equ_foto_perfil}`}
+                        alt={item.titulo_socio}
+                        className="team-image"
+                      />
                     </div>
-                    <img 
-                    src={`${ENV.BASE_PATH}/${item.equ_foto_perfil}`}
-                    alt={item.titulo_socio} 
-                    className="team-image" 
-                    />
-                </div>
-                </div>
-            </SwiperSlide>
-            ))}
-        </Swiper>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <p className="text-center mt-5">Pronto conocerás a nuestro equipo 👀</p>
+          )}
         </section>
-    );
+    );      
 }

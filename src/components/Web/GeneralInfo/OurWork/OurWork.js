@@ -12,8 +12,8 @@ export function OurWork() {
     useEffect(() => {
         (async () => {
         try {
-            const response = await generalInfoController.getGeneralInfo();
-            setGeneralInfo(response);
+            const {data} = await generalInfoController.getGeneralInfo();
+            setGeneralInfo(data);
         } catch (error) {
             console.error(error);
         }

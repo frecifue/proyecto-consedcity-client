@@ -14,8 +14,8 @@ export function ListImageGallery(props) {
       (async () => {
         try {
             setImgGallery(null);
-            const response = await imgGalleryController.getImageGallery();
-            setImgGallery(response);
+            const {data} = await imgGalleryController.getImageGallery();
+            setImgGallery(data);
             
         } catch (error) {
             console.error(error);
@@ -24,7 +24,7 @@ export function ListImageGallery(props) {
     }, [active, reload]);
 
     if(!imgGallery) return <Loader active inline="centered"/>
-    if(size(imgGallery) === 0) return "No se han encontrado usuarios"
+    if(size(imgGallery) === 0) return "No se han encontrado imagenes"
     
 
   return map(imgGallery, (item)=> <ImageGalleryItem key={item.gim_id} imgGallery={item} onReload={onReload}/>)

@@ -16,8 +16,8 @@ export function Post() {
     useEffect(() => {
         (async () => {
         try {
-            const response = await postController.getPost(path);
-            setPost(response);
+            const {data} = await postController.getPost(path);
+            setPost(data);
         } catch (error) {
             console.error(error);
         }

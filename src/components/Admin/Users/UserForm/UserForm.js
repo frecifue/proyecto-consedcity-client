@@ -58,8 +58,8 @@ export function UserForm(props) {
     useEffect(() => {
         const fetchRoles = async () => {
             try {
-                const response = await typeUserController.getTypeUsers(accessToken);
-                const options = response
+                const { data } = await typeUserController.getTypeUsers(accessToken);
+                const options = data
                     .map((type) => ({
                         key: type.tus_id,
                         text: type.tus_nombre,

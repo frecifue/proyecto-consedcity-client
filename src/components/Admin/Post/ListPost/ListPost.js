@@ -17,13 +17,13 @@ export function ListPost(props) {
       (async () => {
         try {
             setPosts(null);
-            const response = await postController.getPosts(page, 10);
-            setPosts(response.posts);
+            const {data} = await postController.getPosts(page, 10);
+            setPosts(data.posts);
             setPagination({
-              limit : response.limit,
-              page: response.page,
-              pages: response.totalPages,
-              total: response.total,
+              limit : data.limit,
+              page: data.page,
+              pages: data.totalPages,
+              total: data.total,
             });
          
             

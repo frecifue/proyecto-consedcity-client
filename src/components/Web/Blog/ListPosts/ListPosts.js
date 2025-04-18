@@ -18,13 +18,13 @@ export function ListPosts() {
     useEffect(() => {
         (async () => {
         try {
-            const response = await postController.getPosts(page, 4);
-            setPosts(response.posts);
+            const {data} = await postController.getPosts(page, 4);
+            setPosts(data.posts);
             setPagination({
-            limit: response.limit,
-            page: response.page,
-            pages: response.totalPages,
-            total: response.total,
+            limit: data.limit,
+            page: data.page,
+            pages: data.totalPages,
+            total: data.total,
             });
         } catch (error) {
             console.error(error);

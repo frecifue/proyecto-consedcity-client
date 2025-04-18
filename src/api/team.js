@@ -1,96 +1,114 @@
 import { ENV } from "../utils";
 
 export class Team {
-  baseApi = ENV.BASE_API;
+    baseApi = ENV.BASE_API;
 
-  async createTeam(accessToken, data) {
-    try {
-      const formData = new FormData();
-      
-      Object.keys(data).forEach((key) => {
-        formData.append(key, data[key]);
-      });
+    async getTeams() {
+        try {
+        const url = `${this.baseApi}/${ENV.API_ROUTES.TEAM.GET_TEAM}`;
 
-      if (data.fileFotoPerfil) {
-        formData.append("foto_perfil", data.fileFotoPerfil);
-      }
+        const response = await fetch(url);
+        const result = await response.json();
 
-      const url = `${this.baseApi}/${ENV.API_ROUTES.TEAM.CREATE_TEAM}`;
-      const params = {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: formData,
-      };
+        return {
+            status: response.status,
+            data: result, 
+        };
 
-      return await fetch(url, params);
-      
-    } catch (error) {
-      throw error;
+        } catch (error) {
+            throw error;
+        }
     }
-  }
 
-  async getTeams() {
-    try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.TEAM.GET_TEAM}`;
+    async createTeam(accessToken, data) {
+        try {
+        const formData = new FormData();
+        
+        Object.keys(data).forEach((key) => {
+            formData.append(key, data[key]);
+        });
 
-      const response = await fetch(url);
-      const result = await response.json();
+        if (data.fileFotoPerfil) {
+            formData.append("foto_perfil", data.fileFotoPerfil);
+        }
 
-      if (response.status !== 200) throw result;
+        const url = `${this.baseApi}/${ENV.API_ROUTES.TEAM.CREATE_TEAM}`;
+        const params = {
+            method: "POST",
+            headers: {
+            Authorization: `Bearer ${accessToken}`,
+            },
+            body: formData,
+        };
 
-      return result;
-    } catch (error) {
-      throw error;
+        const response = await fetch(url, params);
+        const result = await response.json();
+
+        return {
+            status: response.status,
+            data: result, 
+        };
+        
+        } catch (error) {
+            throw error;
+        }
     }
-  }
 
-  async updateTeam(accessToken, idTeam, teamData) {
-    try {
-      const data = teamData;
+    async updateTeam(accessToken, idTeam, teamData) {
+        try {
+        const data = teamData;
 
-      const formData = new FormData();
-      Object.keys(data).forEach((key) => {
-        formData.append(key, data[key]);
-      });
+        const formData = new FormData();
+        Object.keys(data).forEach((key) => {
+            formData.append(key, data[key]);
+        });
 
-      if (data.fileFotoPerfil) {
-        formData.append("foto_perfil", data.fileFotoPerfil);
-      }
+        if (data.fileFotoPerfil) {
+            formData.append("foto_perfil", data.fileFotoPerfil);
+        }
 
-      const url = `${ENV.BASE_API}/${ENV.API_ROUTES.TEAM.UPDATE_TEAM}/${idTeam}`;
-      const params = {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: formData,
-      };
+        const url = `${ENV.BASE_API}/${ENV.API_ROUTES.TEAM.UPDATE_TEAM}/${idTeam}`;
+        const params = {
+            method: "PATCH",
+            headers: {
+            Authorization: `Bearer ${accessToken}`,
+            },
+            body: formData,
+        };
 
-      return await fetch(url, params);
-      
-    } catch (error) {
-      throw error;
+        const response = await fetch(url, params);
+        const result = await response.json();
+
+        return {
+            status: response.status,
+            data: result, 
+        };
+        
+        } catch (error) {
+            throw error;
+        }
     }
-  }
 
-  async deleteTeam(accessToken, idTeam) {
-    try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.TEAM.DELETE_TEAM}/${idTeam}`;
-      const params = {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      };
+    async deleteTeam(accessToken, idTeam) {
+        try {
+        const url = `${this.baseApi}/${ENV.API_ROUTES.TEAM.DELETE_TEAM}/${idTeam}`;
+        const params = {
+            method: "DELETE",
+            headers: {
+            Authorization: `Bearer ${accessToken}`,
+            },
+        };
 
-      return await fetch(url, params);
-      
-    } catch (error) {
-      throw error;
+        const response = await fetch(url, params);
+        const result = await response.json();
+
+        return {
+            status: response.status,
+            data: result, 
+        };
+        
+        } catch (error) {
+            throw error;
+        }
     }
-  }
-
-  
 }

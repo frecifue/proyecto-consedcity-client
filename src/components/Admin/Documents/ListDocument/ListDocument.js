@@ -17,13 +17,13 @@ export function ListDocument(props) {
       (async () => {
         try {
             setDocuments(null);
-            const response = await documentController.getDocuments(page, 10);
-            setDocuments(response.documents);
+            const { data } = await documentController.getDocuments(page, 10);
+            setDocuments(data.documents);
             setPagination({
-              limit : response.limit,
-              page: response.page,
-              pages: response.totalPages,
-              total: response.total,
+              limit : data.limit,
+              page: data.page,
+              pages: data.totalPages,
+              total: data.total,
             });
          
             

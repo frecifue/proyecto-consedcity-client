@@ -19,7 +19,13 @@ export class Auth {
             }),
         };
 
-        return await fetch(url, params);
+        const response = await fetch(url, params);
+        const result = await response.json();
+
+        return {
+            status: response.status,
+            data: result, 
+        };
         
         } catch (error) {
         throw error;

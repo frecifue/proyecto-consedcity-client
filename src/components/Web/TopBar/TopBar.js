@@ -15,8 +15,8 @@ export function TopBar() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await menuController.getMenu(true);
-        setMenu(response);
+        const {data} = await menuController.getMenu(true);
+        setMenu(data);
       } catch (error) {
         console.error(error);
       }

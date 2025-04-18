@@ -23,13 +23,13 @@ export function ListImagesSelectable(props) {
         (async () => {
         try {
             setImages(null);
-            const response = await imgGalleryController.getImagesGallery(page, 10);
-            setImages(response.images);
+            const {data} = await imgGalleryController.getImagesGallery(page, 10);
+            setImages(data.images);
             setPagination({
-            limit: response.limit,
-            page: response.page,
-            pages: response.totalPages,
-            total: response.total,
+            limit: data.limit,
+            page: data.page,
+            pages: data.totalPages,
+            total: data.total,
             });
         } catch (error) {
             console.error(error);

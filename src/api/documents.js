@@ -3,6 +3,25 @@ import { ENV } from "../utils";
 export class Documents {
     baseApi = ENV.BASE_API;
 
+    async getDocuments(page = 1, limit = 10) {
+        try {
+        const pageFilter = `page=${page}`;
+        const limitFilter = `limit=${limit}`;
+        const url = `${this.baseApi}/${ENV.API_ROUTES.DOCUMENTS.GET_DOCUMENTS}?${pageFilter}&${limitFilter}`;
+
+        const response = await fetch(url);
+        const result = await response.json();
+
+        return {
+            status: response.status,
+            data: result, 
+        };
+
+        } catch (error) {
+        throw error;
+        }
+    }
+
     async createDocument(accessToken, data) {
         try {
         const formData = new FormData();
@@ -23,25 +42,14 @@ export class Documents {
             body: formData,
         };
 
-        return await fetch(url, params);
-        
-        } catch (error) {
-        throw error;
-        }
-    }
-
-    async getDocuments(page = 1, limit = 10) {
-        try {
-        const pageFilter = `page=${page}`;
-        const limitFilter = `limit=${limit}`;
-        const url = `${this.baseApi}/${ENV.API_ROUTES.DOCUMENTS.GET_DOCUMENTS}?${pageFilter}&${limitFilter}`;
-
-        const response = await fetch(url);
+        const response = await fetch(url, params);
         const result = await response.json();
 
-        if (response.status !== 200) throw result;
-
-        return result;
+        return {
+            status: response.status,
+            data: result, 
+        };
+        
         } catch (error) {
         throw error;
         }
@@ -67,7 +75,13 @@ export class Documents {
             body: formData,
         };
 
-        return await fetch(url, params);
+        const response = await fetch(url, params);
+        const result = await response.json();
+
+        return {
+            status: response.status,
+            data: result, 
+        };
         
         } catch (error) {
         throw error;
@@ -84,7 +98,13 @@ export class Documents {
             },
         };
 
-        return await fetch(url, params);
+        const response = await fetch(url, params);
+        const result = await response.json();
+
+        return {
+            status: response.status,
+            data: result, 
+        };
         
         } catch (error) {
         throw error;

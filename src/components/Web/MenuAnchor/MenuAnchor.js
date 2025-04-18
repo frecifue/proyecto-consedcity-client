@@ -16,8 +16,8 @@ export function MenuAnchor() {
     useEffect(() => {
         (async () => {
         try {
-            const response = await menuController.getMenu(1);
-            setMenu(response); // Guardamos la respuesta directamente en el estado
+            const {data} = await menuController.getMenu(1);
+            setMenu(data); // Guardamos la respuesta directamente en el estado
         } catch (error) {
             console.error(error);
         }

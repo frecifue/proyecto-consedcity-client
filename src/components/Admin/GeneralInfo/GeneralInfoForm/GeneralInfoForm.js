@@ -15,8 +15,8 @@ export function GeneralInfoForm() {
     useEffect(() => {
         (async () => {
             try {
-                const response = await generalInfoController.getGeneralInfo();
-                setGeneralInfo(response[0]);
+                const {data} = await generalInfoController.getGeneralInfo();
+                setGeneralInfo(data[0]);
             } catch (error) {
                 console.error(error);
             }
@@ -66,7 +66,7 @@ export function GeneralInfoForm() {
         
                 // Recargar datos después de guardar
                 const updatedInfo = await generalInfoController.getGeneralInfo();
-                setGeneralInfo(updatedInfo[0]);
+                setGeneralInfo(updatedInfo.data[0]);
                 
             } catch (error) {
                 console.error(error);

@@ -1,146 +1,178 @@
 import { ENV } from "../utils";
 
 export class Post {
-  baseApi = ENV.BASE_API;
+    baseApi = ENV.BASE_API;
 
-  async createPost(accessToken, data) {
-    try {
-      const formData = new FormData();
-      Object.keys(data).forEach((key) => {
-        formData.append(key, data[key]);
-      });
+    async getPost(path) {
+        try {
+        const url = `${this.baseApi}/${ENV.API_ROUTES.POST.GET_POST_PATH}/${path}`;
 
-      if (data.file) {
-        formData.append("img_principal", data.file);
-      }
+        const response = await fetch(url);
+        const result = await response.json();
 
-      const url = `${this.baseApi}/${ENV.API_ROUTES.POST.CREATE_POST}`;
-      const params = {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: formData,
-      };
-
-      return await fetch(url, params);
-      
-    } catch (error) {
-      throw error;
+        return {
+            status: response.status,
+            data: result, 
+        };
+        } catch (error) {
+        throw error;
+        }
     }
-  }
 
-  async getPosts(page = 1, limit = 10) {
-    try {
-      const pageFilter = `page=${page}`;
-      const limitFilter = `limit=${limit}`;
-      const url = `${this.baseApi}/${ENV.API_ROUTES.POST.GET_POST}?${pageFilter}&${limitFilter}`;
+    async getPosts(page = 1, limit = 10) {
+        try {
+        const pageFilter = `page=${page}`;
+        const limitFilter = `limit=${limit}`;
+        const url = `${this.baseApi}/${ENV.API_ROUTES.POST.GET_POST}?${pageFilter}&${limitFilter}`;
 
-      const response = await fetch(url);
-      const result = await response.json();
+        const response = await fetch(url);
+        const result = await response.json();
 
-      if (response.status !== 200) throw result;
-
-      return result;
-    } catch (error) {
-      throw error;
+        return {
+            status: response.status,
+            data: result, 
+        };
+        } catch (error) {
+        throw error;
+        }
     }
-  }
 
-  async updatePost(accessToken, idPost, data) {
-    try {
-      const formData = new FormData();
-      Object.keys(data).forEach((key) => {
-        formData.append(key, data[key]);
-      });
+    async createPost(accessToken, data) {
+        try {
+        const formData = new FormData();
+        Object.keys(data).forEach((key) => {
+            formData.append(key, data[key]);
+        });
 
-      if (data.file) {
-        formData.append("img_principal", data.file);
-      }
+        if (data.file) {
+            formData.append("img_principal", data.file);
+        }
 
-      const url = `${this.baseApi}/${ENV.API_ROUTES.POST.UPDATE_POST}/${idPost}`;
-      const params = {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: formData,
-      };
+        const url = `${this.baseApi}/${ENV.API_ROUTES.POST.CREATE_POST}`;
+        const params = {
+            method: "POST",
+            headers: {
+            Authorization: `Bearer ${accessToken}`,
+            },
+            body: formData,
+        };
 
-      return await fetch(url, params);
-      
-    } catch (error) {
-      throw error;
+        const response = await fetch(url, params);
+        const result = await response.json();
+
+        return {
+            status: response.status,
+            data: result, 
+        };
+        
+        } catch (error) {
+        throw error;
+        }
     }
-  }
 
-  async deletePost(accessToken, idPost) {
-    try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.POST.DELETE_POST}/${idPost}`;
-      const params = {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      };
+    async updatePost(accessToken, idPost, data) {
+        try {
+        const formData = new FormData();
+        Object.keys(data).forEach((key) => {
+            formData.append(key, data[key]);
+        });
 
-      return await fetch(url, params);
-      
-    } catch (error) {
-      throw error;
+        if (data.file) {
+            formData.append("img_principal", data.file);
+        }
+
+        const url = `${this.baseApi}/${ENV.API_ROUTES.POST.UPDATE_POST}/${idPost}`;
+        const params = {
+            method: "PATCH",
+            headers: {
+            Authorization: `Bearer ${accessToken}`,
+            },
+            body: formData,
+        };
+
+        const response = await fetch(url, params);
+        const result = await response.json();
+
+        return {
+            status: response.status,
+            data: result, 
+        };
+        
+        } catch (error) {
+        throw error;
+        }
     }
-  }
 
-  async getPost(path) {
-    try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.POST.GET_POST_PATH}/${path}`;
+    async deletePost(accessToken, idPost) {
+        try {
+        const url = `${this.baseApi}/${ENV.API_ROUTES.POST.DELETE_POST}/${idPost}`;
+        const params = {
+            method: "DELETE",
+            headers: {
+            Authorization: `Bearer ${accessToken}`,
+            },
+        };
 
-      const response = await fetch(url);
-      const result = await response.json();
+        const response = await fetch(url, params);
+        const result = await response.json();
 
-      if (response.status !== 200) throw result;
-
-      return result;
-    } catch (error) {
-      throw error;
+        return {
+            status: response.status,
+            data: result, 
+        };
+        
+        } catch (error) {
+        throw error;
+        }
     }
-  }
 
-  async addDocuments(accessToken, idPost, data) {
-    try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.POST.ADD_DOCUMENTS.replace(":posId", idPost)}`;
-      const params = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify(data),
-      };
+    async addDocuments(accessToken, idPost, data) {
+        try {
+        const url = `${this.baseApi}/${ENV.API_ROUTES.POST.ADD_DOCUMENTS.replace(":posId", idPost)}`;
+        const params = {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            },
+            body: JSON.stringify(data),
+        };
 
-      return await fetch(url, params);
-      
-    } catch (error) {
-      throw error;
+        const response = await fetch(url, params);
+        const result = await response.json();
+
+        return {
+            status: response.status,
+            data: result, 
+        };
+        
+        } catch (error) {
+        throw error;
+        }
     }
-  }
 
-  async addImages(accessToken, idPost, data) {
-    try {
-      const url = `${this.baseApi}/${ENV.API_ROUTES.POST.ADD_IMAGES.replace(":posId", idPost)}`;
-      const params = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify(data),
-      };
+    async addImages(accessToken, idPost, data) {
+        try {
+        const url = `${this.baseApi}/${ENV.API_ROUTES.POST.ADD_IMAGES.replace(":posId", idPost)}`;
+        const params = {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            },
+            body: JSON.stringify(data),
+        };
 
-      return await fetch(url, params);
-      
-    } catch (error) {
-      throw error;
+        const response = await fetch(url, params);
+        const result = await response.json();
+
+        return {
+            status: response.status,
+            data: result, 
+        };
+        
+        } catch (error) {
+        throw error;
+        }
     }
-  }
 }
