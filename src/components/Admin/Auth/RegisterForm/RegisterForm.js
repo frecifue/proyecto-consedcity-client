@@ -47,6 +47,7 @@ export function RegisterForm(props) {
         <Form.Input 
             name="nombres" 
             placeholder="Nombres" 
+            maxLength={50} 
             onChange={formik.handleChange} 
             value={formik.values.nombres}
             error={formik.errors.nombres}
@@ -54,6 +55,7 @@ export function RegisterForm(props) {
         <Form.Input 
             name="primer_apellido" 
             placeholder="Apellido Paterno" 
+            maxLength={50} 
             onChange={formik.handleChange} 
             value={formik.values.primer_apellido}
             error={formik.errors.primer_apellido}
@@ -61,6 +63,7 @@ export function RegisterForm(props) {
         <Form.Input 
             name="email" 
             placeholder="Email" 
+            maxLength={50} 
             onChange={formik.handleChange} 
             value={formik.values.email}
             error={formik.errors.email}
@@ -69,6 +72,7 @@ export function RegisterForm(props) {
             name="password" 
             type="password" 
             placeholder="Contraseña" 
+            maxLength={6} 
             onChange={formik.handleChange} 
             value={formik.values.password}
             error={formik.errors.password}
@@ -77,6 +81,7 @@ export function RegisterForm(props) {
             name="repeatPassword" 
             type="password" 
             placeholder="Repita Contraseña"  
+            maxLength={6} 
             onChange={formik.handleChange} 
             value={formik.values.repeatPassword}
             error={formik.errors.repeatPassword}

@@ -97,6 +97,7 @@ export function TeamForm(props) {
                     <Form.Input 
                         name="nombre" 
                         placeholder="Nombres"
+                        maxLength={100} 
                         onChange={formik.handleChange}
                         value={formik.values.nombre}
                         error={formik.errors.nombre}
@@ -119,6 +120,8 @@ export function TeamForm(props) {
                         name="orden"
                         type='number' 
                         placeholder="Orden"
+                        min={1}
+                        max={1000}
                         onChange={formik.handleChange}
                         value={formik.values.orden}
                         error={formik.errors.orden}

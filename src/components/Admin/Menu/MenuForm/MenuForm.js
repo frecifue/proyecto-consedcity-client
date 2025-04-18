@@ -64,6 +64,7 @@ export function MenuForm(props) {
         <Form.Input
             name="title"
             placeholder="Titulo"
+            maxLength={50} 
             onChange={formik.handleChange}
             value={formik.values.title}
             error={formik.errors.title}
@@ -72,6 +73,8 @@ export function MenuForm(props) {
             name="order"
             type="number"
             placeholder="Orden"
+            min={1}
+            max={1000}
             onChange={formik.handleChange}
             value={formik.values.order}
             error={formik.errors.order}
@@ -82,6 +85,7 @@ export function MenuForm(props) {
         name="path"
         placeholder="URL"
         fluid
+        maxLength={200} 
         onChange={formik.handleChange}
         value={formik.values.path}
         error={formik.errors.path}

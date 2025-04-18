@@ -112,6 +112,7 @@ export function ImageGalleryForm(props) {
                 <Form.Input
                     name="nombre"
                     placeholder="Nombre"
+                    maxLength={100} 
                     onChange={formik.handleChange}
                     value={formik.values.nombre}
                     error={formik.errors.nombre}
@@ -120,6 +121,8 @@ export function ImageGalleryForm(props) {
                     name="orden"
                     type="number"
                     placeholder="Orden"
+                    min={1}
+                    max={1000}
                     onChange={formik.handleChange}
                     value={formik.values.orden}
                     error={formik.errors.orden}

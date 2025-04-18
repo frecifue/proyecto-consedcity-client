@@ -104,65 +104,66 @@ export function PostForm(props) {
 
     return (
         <Form className="post-form" onSubmit={formik.handleSubmit}>
-        <Form.Group widths="equal">
-            <Form.Input
-            name="titulo"
-            placeholder="Titulo de la noticia"
-            // onChange={formik.handleChange}
-            onChange={handleTituloChange}
-            value={formik.values.titulo}
-            error={formik.errors.titulo}
-            />
-            <Form.Input
-            name="path_post"
-            placeholder="URL de la noticia"
-            readOnly
-            className="readonly-input"
-            onChange={formik.handleChange}
-            value={formik.values.path_post}
-            error={formik.errors.path_post}
-            />
-        </Form.Group>
-        
-        <Editor 
-            apiKey={process.env.REACT_APP_TINYMCE_API_KEY}
-            init={{ 
-                height: 400, 
-                menubar: true, 
-                contextmenu: false,
-                // plugins: [
-                //     "advlist autolink lists link image charmap print preview anchor",
-                //     "searchreplace visualblocks code fullscreen",
-                //     "insertdatetime media table paste code help wordcount",
-                // ],
-                // toolbar: 
-                //     "undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | link", 
-                plugins: [
-                    "link",
-                  ],
-                  toolbar: "undo redo | bold italic | link",
-            }}
-            initialValue={formik.values.contenido}
-            onBlur={(e) => formik.setFieldValue("contenido", e.target.getContent())}
-                /> 
+            <Form.Group widths="equal">
+                <Form.Input
+                name="titulo"
+                placeholder="Titulo de la noticia"
+                maxLength={150} 
+                onChange={handleTituloChange}
+                value={formik.values.titulo}
+                error={formik.errors.titulo}
+                />
+                <Form.Input
+                name="path_post"
+                placeholder="URL de la noticia"
+                readOnly
+                className="readonly-input"
+                maxLength={150} 
+                onChange={formik.handleChange}
+                value={formik.values.path_post}
+                error={formik.errors.path_post}
+                />
+            </Form.Group>
+            
+            <Editor 
+                apiKey={process.env.REACT_APP_TINYMCE_API_KEY}
+                init={{ 
+                    height: 400, 
+                    menubar: true, 
+                    contextmenu: false,
+                    // plugins: [
+                    //     "advlist autolink lists link image charmap print preview anchor",
+                    //     "searchreplace visualblocks code fullscreen",
+                    //     "insertdatetime media table paste code help wordcount",
+                    // ],
+                    // toolbar: 
+                    //     "undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | link", 
+                    plugins: [
+                        "link",
+                    ],
+                    toolbar: "undo redo | bold italic | link",
+                }}
+                initialValue={formik.values.contenido}
+                onBlur={(e) => formik.setFieldValue("contenido", e.target.getContent())}
+                    /> 
 
-        <div className="post-form__miniature" {...getRootProps()}>
-            <input {...getInputProps()} />
-            {getMiniature() ? (
-                <Image size="small" src={getMiniature()} />
-            ) : (
-            <div>
-                <span>Arrastra una imagen aquí o haz clic para seleccionar</span>
-                <p style={{ fontSize: "12px", color: "#888", marginTop: "8px" }}>
-                Solo se permiten archivos JPG o PNG de hasta 5MB.
-                </p>
+            <div className="post-form__miniature" {...getRootProps()}>
+                <input {...getInputProps()} />
+                {getMiniature() ? (
+                    <Image size="small" src={getMiniature()} />
+                ) : (
+                <div>
+                    <span>Arrastra una imagen aquí o haz clic para seleccionar</span>
+                    <p style={{ fontSize: "12px", color: "#888", marginTop: "8px" }}>
+                    Solo se permiten archivos JPG o PNG de hasta 5MB.
+                    </p>
+                </div>
+                )}
             </div>
-            )}
-        </div>
 
-        <Form.Button type="submit" primary fluid loading={formik.isSubmitting}>
-            {post ? "Actualizar Noticia" : "Crear Noticia"}
-        </Form.Button>
+            <Form.Button type="submit" primary fluid loading={formik.isSubmitting}>
+                {post ? "Actualizar Noticia" : "Crear Noticia"}
+            </Form.Button>
         </Form>
     );
 }

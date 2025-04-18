@@ -96,6 +96,7 @@ export function DocumentForm(props) {
         <Form.Input
           name="titulo"
           placeholder="Título del documento"
+		  maxLength={255} 
           onChange={formik.handleChange}
           value={formik.values.titulo}
           error={formik.errors.titulo}
@@ -104,6 +105,8 @@ export function DocumentForm(props) {
           name="orden"
           type="number"
           placeholder="Orden del documento"
+		  min={1}
+		  max={1000}
           onChange={formik.handleChange}
           value={formik.values.orden}
           error={formik.errors.orden}
@@ -115,6 +118,7 @@ export function DocumentForm(props) {
           name="descripcion"
           placeholder="Descripción del documento"
           rows={5}
+		  maxLength={255} 
           onChange={formik.handleChange}
           value={formik.values.descripcion}
           error={formik.errors.descripcion}

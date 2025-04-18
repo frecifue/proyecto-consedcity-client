@@ -15,11 +15,34 @@ export function initialValues(user){
 
 export function validationSchema(user){
     return Yup.object({
-        nombres: Yup.string().required(true),
-        primer_apellido: Yup.string().required(true),
-        segundo_apellido: Yup.string(),
-        email: Yup.string().email(true).required(true),
-        rol: Yup.number().required(true),
-        password: user ? Yup.string() : Yup.string().required(true),
-    })
+        nombres: Yup.string()
+            .min(2, "Debe tener al menos 2 caracteres")
+            .max(50, "No debe exceder los 50 caracteres")
+            .required(true),
+    
+        primer_apellido: Yup.string()
+            .min(2, "Debe tener al menos 2 caracteres")
+            .max(50, "No debe exceder los 50 caracteres")
+            .required(true),
+    
+        segundo_apellido: Yup.string()
+            .min(2, "Debe tener al menos 2 caracteres")
+            .max(50, "No debe exceder los 50 caracteres"),
+    
+        email: Yup.string()
+            .email("Debe ser un email válido")
+            .max(50, "No debe exceder los 50 caracteres")
+            .required(true),
+    
+        rol: Yup.number()
+            .required(true),
+    
+        password: user
+            ? Yup.string()
+            : Yup.string()
+                .min(6, "La contraseña debe tener exactamente 6 caracteres")
+                .max(6, "La contraseña debe tener exactamente 6 caracteres")
+                .required(true)
+    });
+    
 }

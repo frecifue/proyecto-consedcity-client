@@ -11,7 +11,18 @@ export function initialValues(img){
 
 export function validationSchema(){
     return Yup.object({
-        nombre: Yup.string().required(true),
-        orden: Yup.number().required(true),
-    })
+        nombre: Yup.string()
+            .min(5, "Debe tener al menos 5 caracteres")
+            .max(100, "Máximo 100 caracteres")
+            .required(true),
+      
+        orden: Yup.number()
+            .min(1, "El orden debe ser al menos 1")
+            .max(1000, "El orden no puede ser mayor a 1000")
+            .required(true),
+
+        imagen: Yup.string()
+            .required(true),
+      });
+      
 }

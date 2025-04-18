@@ -12,8 +12,19 @@ export function initialValues(team){
 
 export function validationSchema(){
     return Yup.object({
-        nombre: Yup.string().required(true),
-        descripcion: Yup.string().required(true),
-        orden: Yup.string().required(true),
-    })
+        nombre: Yup.string()
+            .min(3, "Debe tener al menos 3 caracteres")
+            .max(100, "Máximo 100 caracteres")
+            .required(true),
+          
+        descripcion: Yup.string()
+            .min(3, "Debe tener al menos 3 caracteres")
+            .max(200, "Máximo 200 caracteres")
+            .required(true),
+          
+        orden: Yup.number()
+            .min(1, "Debe ser mayor o igual a 1")
+            .max(1000, "Debe ser menor o igual a 1000")
+            .required(true),
+      });
 }

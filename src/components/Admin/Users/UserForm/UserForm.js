@@ -123,6 +123,7 @@ export function UserForm(props) {
                     <Form.Input 
                         name="nombres" 
                         placeholder="Nombres"
+                        maxLength={50} 
                         onChange={formik.handleChange}
                         value={formik.values.nombres}
                         error={formik.errors.nombres}
@@ -133,6 +134,7 @@ export function UserForm(props) {
                     <Form.Input 
                         name="primer_apellido" 
                         placeholder="Primer Apellido"
+                        maxLength={50} 
                         onChange={formik.handleChange}
                         value={formik.values.primer_apellido}
                         error={formik.errors.primer_apellido}
@@ -140,6 +142,7 @@ export function UserForm(props) {
                     <Form.Input 
                         name="segundo_apellido" 
                         placeholder="Segundo Apellido"
+                        maxLength={50} 
                         onChange={formik.handleChange}
                         value={formik.values.segundo_apellido}
                         error={formik.errors.segundo_apellido}
@@ -150,6 +153,7 @@ export function UserForm(props) {
                     <Form.Input 
                         name="email" 
                         placeholder="Email"
+                        maxLength={50} 
                         onChange={formik.handleChange}
                         value={formik.values.email}
                         error={formik.errors.email}
@@ -169,6 +173,7 @@ export function UserForm(props) {
                         name="password" 
                         type='password'
                         placeholder="Contraseña"
+                        maxLength={6} 
                         onChange={formik.handleChange}
                         value={formik.values.password}
                         error={formik.errors.password}

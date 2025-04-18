@@ -39,6 +39,7 @@ export function LoginForm() {
             <Form.Input 
                 name="email" 
                 placeholder="Email" 
+                maxLength={50} 
                 onChange={formik.handleChange} 
                 value={formik.values.email}
                 error={formik.errors.email}
@@ -47,6 +48,7 @@ export function LoginForm() {
                 name="password" 
                 type="password" 
                 placeholder="Contraseña" 
+                maxLength={6} 
                 onChange={formik.handleChange} 
                 value={formik.values.password}
                 error={formik.errors.password}

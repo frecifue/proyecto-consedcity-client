@@ -72,8 +72,8 @@ export function ContactForm() {
                                 <Form.Input
                                     name="nombre_contacto"
                                     placeholder="Ingresa tu nombre"
-                                    onChange={formik.handleChange}
                                     maxLength={100}
+                                    onChange={formik.handleChange}
                                     value={formik.values.nombre_contacto}
                                     error={formik.errors.nombre_contacto}
                                 />
@@ -84,8 +84,8 @@ export function ContactForm() {
                                     name="email_contacto"
                                     type="email"
                                     placeholder="Ingresa tu email"
-                                    onChange={formik.handleChange}
                                     maxLength={100}
+                                    onChange={formik.handleChange}
                                     value={formik.values.email_contacto}
                                     error={formik.errors.email_contacto}
                                 />
@@ -97,8 +97,8 @@ export function ContactForm() {
                                     name="mensaje_contacto"
                                     placeholder="Ingresa tu mensaje"
                                     rows="4"
-                                    onChange={formik.handleChange}
                                     maxLength={1000}
+                                    onChange={formik.handleChange}
                                     value={formik.values.mensaje_contacto}
                                     error={formik.errors.mensaje_contacto}
                                 />
