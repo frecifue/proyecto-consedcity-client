@@ -22,7 +22,6 @@ export function MenuForm(props) {
                     titulo: formValue.title,
                     path: menu ? formValue.path : `${formValue.protocol}${formValue.path}`,
                     orden: formValue.order,
-                    activo: formValue.active,
                 };
         
                 let response;
