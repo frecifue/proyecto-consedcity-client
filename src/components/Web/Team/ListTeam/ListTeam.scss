@@ -1,112 +1,112 @@
 @import "~/src/scss/index.scss";
 
-.carousel-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.slide-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  padding: 20px;
-}
-
-.content-wrapper {
-  display: flex;
-  justify-content: space-between; /* Alinea la imagen y la caja de texto lado a lado en pantallas grandes */
-  align-items: center;
-  width: 100%;
-  max-width: 1000px; /* Limita el ancho máximo para que no se estire demasiado */
-}
-
-.info-box {
-  background-color: white;
-  padding: 20px;
-  border-radius: 20px;
-  width: 500px;  /* Dimensiones fijas para la caja de texto */
-  height: 460px; /* Dimensiones fijas para la caja de texto */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  box-sizing: border-box;
-  text-align: center;
-  margin: 10px;
-}
-
-.team-name {
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 2.25rem;
-  letter-spacing: 4px;
-  color: #7f93d0;
-  margin-bottom: 10px;
-}
-
-.team-description {
-  font-size: 1.75rem;
-  margin: 20px 0 0;
-}
-
-.team-image {
-  border-radius: 20px;
-  width: 500px;  /* Asegura que la imagen tenga las mismas dimensiones que la caja */
-  height: 460px; /* Asegura que la imagen tenga las mismas dimensiones que la caja */
-  object-fit: cover;
-  margin-right: 15px; /* Ajusta el margen para la separación entre imagen y caja */
-}
-
-.team-title {
-  font-size: 35px;
-  color: $text-light;
-  font-weight: normal;
-  text-align: center;
-  text-decoration: solid;;
-  padding: 100px 0 40px 0;
-  font-weight: bold;
-}
-
 .team-section {
-  background-image: linear-gradient(0deg, rgba(44, 91, 204, 0.8), rgba(44, 91, 204, 0.8)),url("../../../..//assets/jpg/game-banner.jpg");
+  background-image: linear-gradient(
+    0deg,
+    rgba(44, 91, 204, 0.8),
+    rgba(44, 91, 204, 0.8)
+  ), url("../../../..//assets/jpg/game-banner.jpg");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-}
-
-/* Media Query para pantallas más pequeñas */
-@media screen and (max-width: 768px) {
-  .content-wrapper {
-    flex-direction: column; /* Apila los elementos en pantallas pequeñas */
-    width: 100%;
-  }
-
-  .info-box {
-    width: 100%; /* Asegura que ocupe el 100% del ancho */
-    height: auto; /* La altura es automática en pantallas pequeñas */
-    margin-bottom: 20px; /* Añade margen inferior para que no se pegue la imagen a la caja */
-  }
-
-  .team-image {
-    border-radius: 20px;
-    width: 500px;  /* Asegura que la imagen tenga las mismas dimensiones que la caja */
-    height: 460px; /* Asegura que la imagen tenga las mismas dimensiones que la caja */
-    object-fit: cover; /* Mantiene la imagen proporcional sin distorsionar, cubriendo el contenedor */
-    object-position: center; /* Centra la imagen en el contenedor */
-    margin-right: 15px; /* Ajusta el margen para la separación entre imagen y caja */
-  }
-
-  .team-description {
-    font-size: 1.2rem;
-  }
-
-  .team-name {
-    font-size: 1.5rem;
-  }
 
   .team-title {
-    font-size: 24px; /* Reducir el tamaño del título en pantallas pequeñas */
+    font-size: 35px;
+    color: $text-light;
+    font-weight: bold;
+    text-align: center;
+    padding: 100px 0 40px 0;
+  }
+
+  .carousel-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .slide-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    padding: 20px;
+  }
+
+  .content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+
+    .info-box {
+      background-color: white;
+      padding: 20px;
+      border-radius: 20px;
+      width: 500px;
+      height: 460px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-sizing: border-box;
+      text-align: center;
+      margin: 10px;
+
+      .team-name {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 2.25rem;
+        letter-spacing: 4px;
+        color: #7f93d0;
+        margin-bottom: 10px;
+      }
+
+      .team-description {
+        font-size: 1.75rem;
+        margin: 20px 0 0;
+      }
+    }
+
+    .team-image {
+      border-radius: 20px;
+      width: 500px;
+      height: 460px;
+      object-fit: cover;
+      margin-right: 15px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .content-wrapper {
+      flex-direction: column;
+      width: 100%;
+
+      .info-box {
+        width: 500px;
+        height: auto;
+        margin-bottom: 20px;
+
+        .team-name {
+          font-size: 1.5rem;
+        }
+
+        .team-description {
+          font-size: 1.2rem;
+        }
+      }
+
+      .team-image {
+        border-radius: 20px;
+        width: 500px;
+        height: 460px;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
+    .team-title {
+      font-size: 24px;
+    }
   }
 }

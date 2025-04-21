@@ -1,81 +1,80 @@
 @import "~/src/scss/index.scss";
 
 .about-section {
-    background-color: #fff;
-    padding: 0 0 60px;
-    display: flex;
-    justify-content: center;
+  background-color: #fff;
+  padding: 0 0 60px;
+  display: flex;
+  justify-content: center;
 
-    .container {
-        max-width: 1000px;
-        width: 100%;
-        text-align: center;
-    }
+  .container {
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
 
-    &__title {
-        font-size: 35px;
-        color: $text-dark;
-        font-weight: normal;
-        text-align: center;
-        text-decoration: solid;;
-        padding: 100px 0 40px 0;
-        font-weight: bold;
+    .about-section__title {
+      font-size: 35px;
+      color: $text-dark;
+      font-weight: bold;
+      text-align: center;
+      padding: 100px 0 40px 0;
     }
 
     .description {
-        font-size: 1.5rem;
-        color: #555;
-        margin-bottom: 40px;
-        line-height: 1.5;
+      font-size: 1.5rem;
+      color: #555;
+      margin-bottom: 40px;
+      line-height: 1.5;
     }
 
     .additional-content {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
 
-        .box {
-            flex: 1;
-            background-color: #fff;
-            padding: 20px;
-            text-align: center;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+      .box {
+        flex: 1;
+        background-color: #fff;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
 
-            &:hover {
-                transform: translateY(-5px);
-            }
-
-            h5 {
-                font-size: 1.4rem;
-                margin-bottom: 10px;
-                color: #222;
-            }
-
-            p {
-                font-size: 1.2rem;
-                color: #555;
-            }
+        &:hover {
+          transform: translateY(-5px);
         }
 
-        .grey-background {
-            background-color: #f5f5f5;
+        h5 {
+          font-size: 1.4rem;
+          margin-bottom: 10px;
+          color: #222;
         }
-    }
-}
 
-@media screen and (max-width: 768px) {
-    .about-section {
-      .additional-content {
-        flex-direction: column;
-        align-items: center;
-  
-        .box {
-          max-width: 100%;
-          width: 100%;
+        p {
+          font-size: 1.2rem;
+          color: #555;
+        }
+
+        &.grey-background {
+          background-color: #f5f5f5;
         }
       }
     }
   }
-  
+
+  @media screen and (max-width: 768px) {
+    .container {
+      .additional-content {
+        flex-direction: column;
+        align-items: center;
+
+        .box {
+          max-width: 100%;
+          width: 100%;
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+}

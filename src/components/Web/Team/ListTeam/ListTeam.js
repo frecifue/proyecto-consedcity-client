@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Loader } from "semantic-ui-react";
-import { map, size } from "lodash";
+import { map } from "lodash";
 import { Team } from "../../../../api";
 import { Swiper, SwiperSlide } from "swiper/react"; // Importación correcta para Swiper
 
