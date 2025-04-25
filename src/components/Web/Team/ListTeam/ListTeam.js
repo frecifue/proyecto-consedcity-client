@@ -32,14 +32,14 @@ export function ListTeam() {
 
     return (
         <section className="carousel-container team-section" id="team-section">
-          <h2 className="text-center team-title">EQUIPO CONSEDCITY</h2>
+          <h2 className="text-center team-title">EQUIPO PRINCIPAL</h2>
       
           {team.length > 0 ? (
             <Swiper
               modules={[Navigation, Pagination, Autoplay]}
               navigation
               pagination={{ clickable: true }}
-              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              // autoplay={{ delay: 3000, disableOnInteraction: false }}
               loop
               spaceBetween={50}
               slidesPerView={1}
