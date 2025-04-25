@@ -1,25 +1,26 @@
-$primary: #1890ff;
-$primary-hover: #0280b3;
+// src/scss/colors.scss
+$primary: #1890ff !default;
+$primary-hover: #0280b3 !default;
 
 // Text
-$text-light: #fff;
-$text-dark: #001b35;
+$text-light: #fff !default;
+$text-dark: #001b35 !default;
 
 // Background
-$background-dark: #001b35;
-$background-grey: #f0f3f4;
-$background-dark-web: #16212b;
-$background-white-web: #fff;
+$background-dark: #001b35 !default;
+$background-grey: #f0f3f4 !default;
+$background-dark-web: #16212b !default;
+$background-white-web: #fff !default;
 
 // Border
-$border-grey: #808080;
+$border-grey: #808080 !default;
 
 // Status
-$success: #84b84c;
-$error: #9f3a38;
+$success: #84b84c !default;
+$error: #9f3a38 !default;
 
 // Social Color
-$youtube: #cd201f;
-$twitter: #1da1f2;
-$facebook: #3b5998;
-$linkedin: #0077b5;
+$youtube: #cd201f !default;
+$twitter: #1da1f2 !default;
+$facebook: #3b5998 !default;
+$linkedin: #0077b5 !default;
