@@ -86,6 +86,7 @@ export function GeneralInfoForm() {
                     label="Descripción"
                     name="quienes_somos"
                     placeholder="Escribe sobre quiénes somos..."
+                    maxLength={500} 
                     onChange={formik.handleChange}
                     rows={7}
                     value={formik.values.quienes_somos}
@@ -101,6 +102,7 @@ export function GeneralInfoForm() {
                     label="Misión"
                     name="mision"
                     placeholder="Escribe la misión..."
+                    maxLength={500} 
                     onChange={formik.handleChange}
                     rows={5}
                     value={formik.values.mision}
@@ -110,6 +112,7 @@ export function GeneralInfoForm() {
                     label="Visión"
                     name="vision"
                     placeholder="Escribe la visión..."
+                    maxLength={500} 
                     onChange={formik.handleChange}
                     rows={5}
                     value={formik.values.vision}
@@ -125,6 +128,7 @@ export function GeneralInfoForm() {
                     label="Descripción"
                     name="nuestro_trabajo"
                     placeholder="Explica nuestro trabajo..."
+                    maxLength={500} 
                     onChange={formik.handleChange}
                     rows={5}
                     value={formik.values.nuestro_trabajo}
@@ -140,6 +144,7 @@ export function GeneralInfoForm() {
                     label="Difusión"
                     name="difusion"
                     placeholder="Explica la difusión..."
+                    maxLength={500} 
                     onChange={formik.handleChange}
                     rows={7}
                     value={formik.values.difusion}
@@ -149,6 +154,7 @@ export function GeneralInfoForm() {
                     label="Formación"
                     name="formacion"
                     placeholder="Explica la formación..."
+                    maxLength={500} 
                     onChange={formik.handleChange}
                     rows={7}
                     value={formik.values.formacion}
@@ -158,6 +164,7 @@ export function GeneralInfoForm() {
                     label="Investigación"
                     name="investigacion"
                     placeholder="Explica la investigación..."
+                    maxLength={500} 
                     onChange={formik.handleChange}
                     rows={7}
                     value={formik.values.investigacion}
