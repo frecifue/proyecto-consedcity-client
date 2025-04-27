@@ -16,7 +16,6 @@ export function AuthProvider(props) {
     const login = async (accessToken) => {
         try {
             const response = await userController.get_me(accessToken);
-
             delete response.usu_password;
             setUser(response);
             setToken(accessToken);
@@ -35,15 +34,31 @@ export function AuthProvider(props) {
         }
     }, []);
 
-    const logout = () => {
+    const logout = useCallback(() => {
         setUser(null);
         setToken(null);
-        authController.removeTokens();
-    };
+        authController.removeTokens(); // Eliminar los tokens desde el controlador
+    }, []);
+
+    // Detectar cambios en los tokens desde otras pestañas
+    useEffect(() => {
+        const handleStorageChange = (event) => {
+            if (event.key === process.env.REACT_APP_ACCESS_TOKEN_NAME || event.key === process.env.REACT_APP_REFRESH_TOKEN_NAME) {
+                console.log('Tokens cambiaron desde otra pestaña. Cerrando sesión...');
+                logout();
+            }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, [logout]);
 
     useEffect(() => {
         (async () => {
-            const accessToken = authController.getAccessToken();
+            const accessToken = authController.getAccessToken(); 
             const refreshToken = authController.getRefreshToken();
 
             if (!accessToken || !refreshToken) {
@@ -56,19 +71,22 @@ export function AuthProvider(props) {
                 if (hasExpiredToken(refreshToken)) {
                     logout();
                     setLoading(false);
-                    return;
                 } else {
                     await reLogin(refreshToken);
+                    setLoading(false);
                 }
             } else {
                 await login(accessToken);
+                setLoading(false);
             }
-
-            setLoading(false);
         })();
-    }, [reLogin]); // ? Ahora `useEffect` reconoce `reLogin` como estable
+    }, [reLogin, logout]);
 
     if (loading) return null;
 
-    return <AuthContext.Provider value={{ accessToken: token, user, login, logout }}>{children}</AuthContext.Provider>;
+    return (
+        <AuthContext.Provider value={{ accessToken: token, user, login, logout }}>
+            {children}
+        </AuthContext.Provider>
+    );
 }
