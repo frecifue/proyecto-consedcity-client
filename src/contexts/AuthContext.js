@@ -40,21 +40,21 @@ export function AuthProvider(props) {
         authController.removeTokens(); // Eliminar los tokens desde el controlador
     }, []);
 
-    // Detectar cambios en los tokens desde otras pestañas
-    useEffect(() => {
-        const handleStorageChange = (event) => {
-            if (event.key === process.env.REACT_APP_ACCESS_TOKEN_NAME || event.key === process.env.REACT_APP_REFRESH_TOKEN_NAME) {
-                console.log('Tokens cambiaron desde otra pestaña. Cerrando sesión...');
-                logout();
-            }
-        };
+    // // Detectar cambios en los tokens desde otras pestañas
+    // useEffect(() => {
+    //     const handleStorageChange = (event) => {
+    //         if (event.key === process.env.REACT_APP_ACCESS_TOKEN_NAME || event.key === process.env.REACT_APP_REFRESH_TOKEN_NAME) {
+    //             console.log('Tokens cambiaron desde otra pestaña. Cerrando sesión...');
+    //             logout();
+    //         }
+    //     };
 
-        window.addEventListener('storage', handleStorageChange);
+    //     window.addEventListener('storage', handleStorageChange);
 
-        return () => {
-            window.removeEventListener('storage', handleStorageChange);
-        };
-    }, [logout]);
+    //     return () => {
+    //         window.removeEventListener('storage', handleStorageChange);
+    //     };
+    // }, [logout]);
 
     useEffect(() => {
         (async () => {
