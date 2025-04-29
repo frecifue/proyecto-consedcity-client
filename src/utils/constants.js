@@ -1,5 +1,5 @@
 export const ENV = {
-    BASE_PATH: `http://${process.env.REACT_APP_SERVER_IP}`,
+    BASE_PATH: `${process.env.REACT_APP_SERVER_IP}`,
     BASE_API: process.env.REACT_APP_BASE_API,
     JWT: {
         ACCESS: process.env.REACT_APP_ACCESS_TOKEN_NAME,
