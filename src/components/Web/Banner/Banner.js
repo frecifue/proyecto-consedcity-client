@@ -13,7 +13,7 @@ export function Banner() {
             CONSEDCITY
         </h1>
         <h2>
-            Organización tecnológica y gamer con enfoque social de la región
+            Organización Gamer con enfoque social, región
             <br />
             del Biobío, Chile.
         </h2>
