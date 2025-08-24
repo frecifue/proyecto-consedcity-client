@@ -2,9 +2,9 @@ import React from "react";
 import { Button, Checkbox, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { ENV } from "../../../../utils";
-import "./ImagePostItem.scss"
+import "./ImageSelectableItem.scss"
 
-export function ImagePostItem(props) {
+export function ImageSelectableItem(props) {
     const { image, onSelect, isSelected } = props;
 
     const handleCheckboxChange = (e, { checked }) => {

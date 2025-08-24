@@ -1,3 +1,5 @@
 export * from "./ImageGalleryForm"
 export * from "./ImageGalleryItem"
 export * from "./ListImageGallery"
+export * from "./ListImagesSelectable"
+export * from "./ImageSelectableItem"

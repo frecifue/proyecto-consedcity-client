@@ -6,9 +6,9 @@ import { useAuth } from "../../../../hooks";
 import { BasicModal } from "../../../Shared";
 import "./PostItem.scss";
 import { PostForm } from "../PostForm";
-import { ListImagesSelectable } from "../ListImagesSelectable/ListImagesSelectable";
-import { ListDocumentSelectable } from "../ListDocumentSelectable";
 import { toast } from "react-toastify";
+import { ListDocumentSelectable } from "../../Documents";
+import { ListImagesSelectable } from "../../ImageGallery";
 
 const postController = new Post();
 
@@ -46,6 +46,24 @@ export function PostItem(props) {
         } catch (error) {
             console.error(error);
             toast.error("Error inesperado al eliminar la noticia", { theme: "colored" });
+        }
+    };
+
+    const onSaveDocuments = async (documentsIds, accessToken) => {
+        const data = { documentsIds };
+        const response = await postController.addDocuments(accessToken, post.pos_id, data);
+
+        if (response.status !== 200) {
+            throw new Error(response.data?.msg || "Error al guardar documentos en Noticia");
+        }
+    };
+
+    const onSaveImages = async (imagesIds, accessToken) => {
+        const data = { imagesIds };
+        const response = await postController.addImages(accessToken, post.pos_id, data);
+
+        if (response.status !== 200) {
+            throw new Error(response.data?.msg || "Error al guardar imagenes en Noticia");
         }
     };
 
@@ -91,7 +109,14 @@ export function PostItem(props) {
                 close={onOpenCloseDocumentsModal}
                 title="Agregar Documentos a la noticia"
             >
-                <ListDocumentSelectable active={true} onClose={onOpenCloseDocumentsModal} reload={false} onReload={onReload} post={post} />
+                <ListDocumentSelectable
+                    active={true}
+                    onClose={onOpenCloseDocumentsModal}
+                    reload={false}
+                    onReload={onReload}
+                    initialSelected={post.documentos?.map(d => d.doc_id) || []}
+                    onSave={onSaveDocuments}
+                />
             </BasicModal>
 
             <BasicModal
@@ -99,7 +124,14 @@ export function PostItem(props) {
                 close={onOpenCloseImagesModal}
                 title="Agregar Imágenes a la noticia"
             >
-                <ListImagesSelectable active={true} onClose={onOpenCloseImagesModal} reload={false} onReload={onReload} post={post} />
+                <ListImagesSelectable 
+                    active={true} 
+                    onClose={onOpenCloseImagesModal} 
+                    reload={false} 
+                    onReload={onReload} 
+                    initialSelected={post.imagenes?.map(g => g.gim_id) || []}
+                    onSave={onSaveImages}
+                />
             </BasicModal>
 
             <Confirm

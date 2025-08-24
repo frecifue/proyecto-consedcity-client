@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { map, size } from 'lodash';
 import { Loader, Pagination, Button } from 'semantic-ui-react';
-import { Documents, Post } from '../../../../api';
-import { DocumentPostItem } from '../DocumentPostItem/DocumentPostItem';
+import { Documents } from '../../../../api';
 import './ListDocumentSelectable.scss';
 import { useAuth } from '../../../../hooks';
 import { toast } from 'react-toastify';
+import { DocumentSelectableItem } from '../../Documents/DocumentSelectableItem/DocumentSelectableItem';
 
 const documentController = new Documents();
-const postController = new Post();
 
 export function ListDocumentSelectable(props) {
-    const { active, reload, onReload, onClose, post } = props;
+    const { active, reload, onReload, onClose, initialSelected = [], onSave } = props;
     const [documents, setDocuments] = useState(null);
     const [pagination, setPagination] = useState(null);
     const [page, setPage] = useState(1);
@@ -19,6 +18,7 @@ export function ListDocumentSelectable(props) {
 
     const { accessToken } = useAuth();
 
+    // Cargar documentos
     useEffect(() => {
         (async () => {
         try {
@@ -37,16 +37,12 @@ export function ListDocumentSelectable(props) {
         })();
     }, [active, reload, page]);
 
+    // Inicializar documentos seleccionados si vienen de fuera
     useEffect(() => {
-        // Si hay documentos asociados al post, marcarlos como seleccionados
-        if (post.documentos && post.documentos.length > 0) {
-        const associatedDocuments = post.documentos.map(doc => doc.doc_id);
-        
-        // si post viene con el array documentos, recorreremos los documentos y tomaremos el doc_id
-        // luego, lo enviamos al setSelectedDocuments
-        setSelectedDocuments(new Set(associatedDocuments));
+        if (initialSelected.length > 0) {
+            setSelectedDocuments(new Set(initialSelected));
         }
-    }, [post.documentos]);
+    }, [initialSelected]);
 
     const changePage = (_, data) => {
         setPage(data.activePage);
@@ -66,29 +62,14 @@ export function ListDocumentSelectable(props) {
 
     const handleAddDocuments = async () => {
         try {
-            // Convertimos el Set de documentos seleccionados a un array
             const selectedDocsArray = Array.from(selectedDocuments);
-    
-            const data = {
-                documentsIds: selectedDocsArray
-            }
-    
-            const response = await postController.addDocuments(accessToken, post.pos_id, data);
-    
-            if (response.status === 200) {
-                toast.success("Documentos agregados correctamente", { theme: "colored" });
-                onReload();
-                onClose();
-            } else if (response.status === 400) {
-                toast.warning(response.data?.msg || "Error en los datos de los documentos", { theme: "colored" });
-            } else if (response.status === 404) {
-                toast.warning(response.data?.msg || "Post no encontrado", { theme: "colored" });
-            } else if (response.status === 500) {
-                toast.error("Error al agregar los documentos", { theme: "colored" });
-            } else {
-                toast.error("Ha ocurrido un error inesperado", { theme: "colored" });
-            }
-            
+
+            // delegamos la lógica a la prop que venga desde el padre
+            await onSave(selectedDocsArray, accessToken);
+
+            toast.success("Documentos agregados correctamente", { theme: "colored" });
+            onReload();
+            onClose();
         } catch (error) {
             console.error('Error al agregar documentos:', error);
             toast.error("Error inesperado al agregar los documentos", { theme: "colored" });
@@ -107,7 +88,7 @@ export function ListDocumentSelectable(props) {
         <div className="list-documents-selectable__items">
             {map(documents, (item) => (
             <div key={item.doc_id} className="list-documents-selectable__item">
-                <DocumentPostItem 
+                <DocumentSelectableItem 
                 document={item} 
                 isSelected={selectedDocuments.has(item.doc_id)}
                 onSelect={toggleSelection}/>

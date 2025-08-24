@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { map, size } from 'lodash';
 import { Loader, Pagination, Button } from 'semantic-ui-react';
-import { ImageGallery, Post } from '../../../../api';
+import { ImageGallery } from '../../../../api';
 import { useAuth } from '../../../../hooks';
 import './ListImagesSelectable.scss';
-import { ImagePostItem } from '../ImagePostItem/ImagePostItem';
+import { ImageSelectableItem } from '../ImageSelectableItem/ImageSelectableItem';
 import { toast } from 'react-toastify';
 
 const imgGalleryController = new ImageGallery();
-const postController = new Post();
 
 export function ListImagesSelectable(props) {
-    const { active, reload, onReload, onClose, post } = props;
+    const { active, reload, onReload, onClose, initialSelected = [], onSave } = props;
     const [images, setImages] = useState(null);
     const [pagination, setPagination] = useState(null);
     const [page, setPage] = useState(1);
@@ -19,6 +18,7 @@ export function ListImagesSelectable(props) {
 
     const { accessToken } = useAuth();
 
+    // cargar las imagenes
     useEffect(() => {
         (async () => {
         try {
@@ -38,15 +38,10 @@ export function ListImagesSelectable(props) {
     }, [active, reload, page]);
 
     useEffect(() => {
-        // Si hay imagenes asociados al post, marcarlos como seleccionados
-        if (post.imagenes && post.imagenes.length > 0) {
-        const associatedImages = post.imagenes.map(gim => gim.gim_id);
-        
-        // si post viene con el array imagenes, recorreremos las imagenes y tomaremos el gim_id
-        // luego, lo enviamos al setSelectedImages
-        setSelectedImages(new Set(associatedImages));
+        if (initialSelected.length > 0) {
+            setSelectedImages(new Set(initialSelected));
         }
-    }, [post.imagenes]);
+    }, [initialSelected]);
 
     const changePage = (_, data) => {
         setPage(data.activePage);
@@ -66,29 +61,14 @@ export function ListImagesSelectable(props) {
 
     const handleAddImages = async () => {
         try {
-            // Convertimos el Set de imágenes seleccionadas a un array
-            const selectedImgArray = Array.from(selectedImages);
-    
-            const data = {
-                imagesIds: selectedImgArray
-            }
-    
-            const response = await postController.addImages(accessToken, post.pos_id, data);
-    
-            if (response.status === 200) {
-                toast.success("Imágenes agregadas correctamente", { theme: "colored" });
-                onReload();
-                onClose();
-            } else if (response.status === 400) {
-                toast.warning(response.data?.msg || "Error en los datos de las imágenes", { theme: "colored" });
-            } else if (response.status === 404) {
-                toast.warning(response.data?.msg || "Post no encontrado", { theme: "colored" });
-            } else if (response.status === 500) {
-                toast.error("Error al agregar las imágenes", { theme: "colored" });
-            } else {
-                toast.error("Ha ocurrido un error inesperado", { theme: "colored" });
-            }
-            
+            const selectedDocsArray = Array.from(selectedImages);
+
+            // delegamos la lógica a la prop que venga desde el padre
+            await onSave(selectedDocsArray, accessToken);
+
+            toast.success("Imágenes agregados correctamente", { theme: "colored" });
+            onReload();
+            onClose();
         } catch (error) {
             console.error('Error al agregar imágenes:', error);
             toast.error("Error inesperado al agregar las imágenes", { theme: "colored" });
@@ -106,7 +86,7 @@ export function ListImagesSelectable(props) {
         <div className="list-images-selectable__items">
             {map(images, (item) => (
             <div key={item.gim_id} className="list-images-selectable__item">
-                <ImagePostItem 
+                <ImageSelectableItem 
                 image={item} 
                 isSelected={selectedImages.has(item.gim_id)}
                 onSelect={toggleSelection}/>

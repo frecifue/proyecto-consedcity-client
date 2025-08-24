@@ -1,24 +1,24 @@
-import React, {useState, useEffect} from 'react'
-import { Team } from '../../../../api';
+import React, { useEffect, useState } from 'react'
+import { map, size } from 'lodash';
 import { Loader, Pagination } from 'semantic-ui-react';
-import { size, map } from 'lodash';
-import { TeamItem } from '../TeamItem';
-import "./ListTeam.scss"
+import { Project } from '../../../../api';
+import "./ListProjects.scss"
+import { ProjectItem } from '../ProjectItem';
 
-const teamController = new Team();
+const projectController = new Project();
 
-export function ListTeam(props) {
+export function ListProjects(props) {
     const {active, reload,  onReload} = props;
-    const [team, setTeam] = useState(null);
+    const [projects, setProjects] = useState(null);
     const [pagination, setPagination] = useState(null);
     const [page, setPage] = useState(1);
 
     useEffect(() => {
         (async () => {
             try {
-                setTeam(null);
-                const {data} = await teamController.getTeams(page, 10);
-                setTeam(data.teams);
+                setProjects(null);
+                const {data} = await projectController.getProjects(page, 10);
+                setProjects(data.projects);
                 setPagination({
                     limit : data.limit,
                     page: data.page,
@@ -36,14 +36,15 @@ export function ListTeam(props) {
         setPage(data.activePage)
     }
 
-    if(!team) return <Loader active inline="centered"/>
-    if(size(team) === 0) return "No se han encontrado equipo"
-        
-    return (
-        <div className='list-team'>
-            {map(team, (item)=> <TeamItem key={item.equ_id} team={item} onReload={onReload}/>)}
+    if(!projects) return <Loader active inline="centered"/>
+    if(size(projects) === 0) return "No se han encontrado proyectos"
 
-            <div className='list-team__pagination'>
+
+    return (
+        <div className='list-project'>
+            {map(projects, (project)=> <ProjectItem key={project.pos_id} project={project} onReload={onReload}/>)}
+
+            <div className='list-project__pagination'>
                 <Pagination
                 totalPages={pagination.pages}
                 defaultActivePage={pagination.page}

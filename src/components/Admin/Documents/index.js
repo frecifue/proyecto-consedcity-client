@@ -1,3 +1,5 @@
 export * from "./DocumentForm"
 export * from "./DocumentItem"
 export * from "./ListDocument"
+export * from "./DocumentSelectableItem"
+export * from "./ListDocumentSelectable"

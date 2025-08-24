@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Checkbox, Icon } from "semantic-ui-react";
-import "./DocumentPostItem.scss";
+import "./DocumentSelectableItem.scss";
 import { Link } from "react-router-dom";
 import { ENV } from "../../../../utils";
 
-export function DocumentPostItem(props) {
+export function DocumentSelectableItem(props) {
   const { document, onSelect, isSelected } = props;
 
   const handleCheckboxChange = (e, { checked }) => {
@@ -12,21 +12,21 @@ export function DocumentPostItem(props) {
   };
 
   return (
-    <div className="document-post-item">
-      <label className="document-post-item__label">
+    <div className="document-selectable-item">
+      <label className="document-selectable-item__label">
         <Checkbox
           checked={isSelected}
           onChange={handleCheckboxChange}
-          className="document-post-item__checkbox"
+          className="document-selectable-item__checkbox"
         />
 
-        <div className="document-post-item__text">
-          <span className="document-post-item__title">{document.doc_titulo}</span>
-          <span className="document-post-item__description">{document.doc_descripcion}</span>
+        <div className="document-selectable-item__text">
+          <span className="document-selectable-item__title">{document.doc_titulo}</span>
+          <span className="document-selectable-item__description">{document.doc_descripcion}</span>
         </div>
       </label>
 
-      <div className="document-post-item__content">
+      <div className="document-selectable-item__content">
         <Button
           as={Link}
           primary

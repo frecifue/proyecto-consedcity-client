@@ -1,4 +1,4 @@
-.document-post-item {
+.document-selectable-item {
   display: flex;
   align-items: flex-start;
   padding: 10px;
@@ -44,11 +44,11 @@
     cursor: pointer;
     flex-grow: 1;
 
-    .document-post-item__checkbox {
+    .document-selectable-item__checkbox {
       margin-right: 10px;
     }
 
-    .document-post-item__text {
+    .document-selectable-item__text {
       flex-grow: 1;
     }
   }

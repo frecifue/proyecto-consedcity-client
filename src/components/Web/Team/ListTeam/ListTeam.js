@@ -14,14 +14,14 @@ import { ENV } from "../../../../utils";
 const teamController = new Team();
 
 export function ListTeam() {
-  const [team, setTeam] = useState([]);
+    const [team, setTeam] = useState([]);
 
     useEffect(() => {
         (async () => {
         try {
             setTeam([]);
-            const { data } = await teamController.getTeams();
-            setTeam(data);
+            const {data} = await teamController.getTeams(1, 1000);
+            setTeam(data.teams);
         } catch (error) {
             console.error(error);
         }
