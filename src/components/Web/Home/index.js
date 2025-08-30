@@ -1,0 +1,5 @@
+export * from "./TeamHome"
+export * from "./DocumentsHome"
+export * from "./ImageGalleryHome"
+export * from "./BlogHome"
+export * from "./ProjectHome"

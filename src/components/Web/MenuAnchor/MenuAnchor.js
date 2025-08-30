@@ -1,84 +1,93 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Icon, Menu } from 'semantic-ui-react';
 import { Menu as MenuApi } from '../../../api';
 import "./MenuAnchor.scss";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const menuController = new MenuApi();
 
 export function MenuAnchor() {
     const [menu, setMenu] = useState([]);
-    const location = useLocation(); // <--- obtenemos la ruta actual
+    const location = useLocation(); 
+    const navigate = useNavigate();
 
-    // Detectamos si estamos en la ruta de un post
-    const isPostPage = location.pathname.startsWith('/blog/');
+    const historyStack = useRef([]); // stack de rutas internas
+
+    const isBlogPage = location.pathname.startsWith('/blog/');
+    const isProjectPage = location.pathname.startsWith('/project/');
 
     useEffect(() => {
         (async () => {
-        try {
-            const {data} = await menuController.getMenu(1);
-            setMenu(data); // Guardamos la respuesta directamente en el estado
-        } catch (error) {
-            console.error(error);
-        }
+            try {
+                const { data } = await menuController.getMenu(1);
+                setMenu(data);
+            } catch (error) {
+                console.error(error);
+            }
         })();
     }, []);
 
-    // Función para manejar el desplazamiento suave
+    // Apilar ruta actual cada vez que cambia location (solo rutas internas)
+    useEffect(() => {
+        if (!location.pathname.startsWith('/blog/') && !location.pathname.startsWith('/project/') && location.pathname !== '/') return;
+
+        const last = historyStack.current[historyStack.current.length - 1];
+        if (last !== location.pathname) {
+            historyStack.current.push(location.pathname);
+        }
+    }, [location.pathname]);
+
     const handleScroll = (targetId) => {
         const element = document.getElementById(targetId);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth',
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     };
 
-    // Función para manejar los clics en los items del menú
     const handleMenuItemClick = (path) => {
-        // Si el link es una URL externa (comienza con http o https)
         if (path.startsWith('http://') || path.startsWith('https://')) {
-            window.open(path, '_blank'); // Abre en una nueva pestaña
-        }
-        // Si el link es un ancla (comienza con #)
-        else if (path.startsWith('#')) {
-            handleScroll(path.slice(1)); // Llamamos a handleScroll con el id del ancla
-        }
-        // Si el path es vacío (para la acción de "home" o regresar arriba)
-        else if (path === 'home') {
-            window.location.href = '/'; // Fuerza la recarga de la página principal
+            window.open(path, '_blank');
+        } else if (path.startsWith('#')) {
+            handleScroll(path.slice(1));
+        } else if (path === 'home') {
+            navigate('/');
+        } else if (path === 'back') {
+            // Sacamos la ruta anterior del stack
+            historyStack.current.pop(); // quitamos la actual
+            const previous = historyStack.current.pop() || '/'; // obtenemos la anterior
+            navigate(previous);
+        } else {
+            // Navegación interna
+            navigate(path);
         }
     };
 
     return (
         <Menu fluid fixed="top" inverted className="anchor-menu">
-            <Menu.Item
-                onClick={() => {
-                    if (location.pathname === "/") {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else {
-                        window.location.href = "/";
-                    }
-                }}
-                >
+            <Menu.Item onClick={() => handleMenuItemClick('home')}>
                 <Icon name="home" />
                 ConsedCity
             </Menu.Item>
 
-        {/* Mostrar solo el botón de "Home" si estamos en una página de post */}
-        {!isPostPage && menu.map((item, index) => (
-            item.men_activo && (
-            <Menu.Item
-                key={index}
-                onClick={() => handleMenuItemClick(item.men_path)}
-            >
-                {item.men_titulo}
-            </Menu.Item>
-            )
-        ))}
+            {(isBlogPage || isProjectPage) && (
+                <Menu.Item onClick={() => handleMenuItemClick('back')}>
+                    <Icon name="arrow left" />
+                    Regresar
+                </Menu.Item>
+            )}
+
+            {!isBlogPage && !isProjectPage && menu.map((item, index) => (
+                item.men_activo && (
+                    <Menu.Item
+                        key={index}
+                        onClick={() => handleMenuItemClick(item.men_path)}
+                    >
+                        {item.men_titulo}
+                    </Menu.Item>
+                )
+            ))}
         </Menu>
     );
 }

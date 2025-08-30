@@ -1,70 +1,51 @@
-import React, { useState, useEffect } from "react";
+// ListTeam.jsx
+import React from "react";
 import { map } from "lodash";
-import { Team } from "../../../../api";
-import { Swiper, SwiperSlide } from "swiper/react"; // Importación correcta para Swiper
-
-import "swiper/css"; // Estilos básicos
-import "swiper/css/navigation"; // Estilos de navegación
-import "swiper/css/pagination"; // Estilos de paginación
-
-import "./ListTeam.scss"
+import { Swiper, SwiperSlide } from "swiper/react"; 
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { ENV } from "../../../../utils";
 
-const teamController = new Team();
+import "swiper/css"; 
+import "swiper/css/navigation"; 
+import "swiper/css/pagination"; 
+import "./ListTeam.scss";
 
-export function ListTeam() {
-    const [team, setTeam] = useState([]);
-
-    useEffect(() => {
-        (async () => {
-        try {
-            setTeam([]);
-            const {data} = await teamController.getTeams(1, 1000);
-            setTeam(data.teams);
-        } catch (error) {
-            console.error(error);
-        }
-        })();
-    }, []);
-
-    // if (team.length === 0) return <Loader active inline="centered" />;
+export function ListTeam({ team }) {
+    if (!team || team.length === 0) {
+        return null;
+    }
 
     return (
         <section className="carousel-container team-section" id="team-section">
-          <h2 className="text-center team-title">EQUIPO PRINCIPAL</h2>
-      
-          {team.length > 0 ? (
+            <h2 className="text-center team-title">EQUIPO PRINCIPAL</h2>
+
             <Swiper
-              modules={[Navigation, Pagination, Autoplay]}
-              navigation
-              pagination={{ clickable: true }}
-              autoplay={{ delay: 3000, disableOnInteraction: false }}
-              loop
-              spaceBetween={50}
-              slidesPerView={1}
+                modules={[Navigation, Pagination, Autoplay]}
+                navigation
+                pagination={{ clickable: true }}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                loop
+                spaceBetween={50}
+                slidesPerView={1}
             >
-              {map(team, (item) => (
-                <SwiperSlide key={item.equ_id} className="carousel-slide">
-                  <div className="slide-content">
-                    <div className="content-wrapper">
-                      <div className="info-box">
-                        <p className="team-name">{item.equ_nombre}</p>
-                        <p className="team-description">{item.equ_descripcion}</p>
-                      </div>
-                      <img
-                        src={`${ENV.BASE_PATH}/${item.equ_foto_perfil}`}
-                        alt={item.titulo_socio}
-                        className="team-image"
-                      />
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
+                {map(team, (item) => (
+                    <SwiperSlide key={item.equ_id} className="carousel-slide">
+                        <div className="slide-content">
+                            <div className="content-wrapper">
+                                <div className="info-box">
+                                    <p className="team-name">{item.equ_nombre}</p>
+                                    <p className="team-description">{item.equ_descripcion}</p>
+                                </div>
+                                <img
+                                    src={`${ENV.BASE_PATH}/${item.equ_foto_perfil}`}
+                                    alt={item.titulo_socio}
+                                    className="team-image"
+                                />
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                ))}
             </Swiper>
-          ) : (
-            <p className="text-center mt-5">Pronto conocerás a nuestro equipo 👀</p>
-          )}
         </section>
-    );      
+    );
 }

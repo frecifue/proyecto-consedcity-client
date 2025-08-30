@@ -47,6 +47,14 @@ export function ProjectForm(props) {
         },        
     });
 
+    // Regex para validar path mientras se escribe
+    const handlePathChange = (e) => {
+        const value = e.target.value;
+        // Solo permitir caracteres válidos: minúsculas, números, guion
+        const sanitized = value.toLowerCase().replace(/[^a-z0-9-]/g, "");
+        formik.setFieldValue("path", sanitized);
+    };
+
     return (
         <Form className="project-form" onSubmit={formik.handleSubmit}>
             <Form.Group widths="equal">
@@ -69,6 +77,36 @@ export function ProjectForm(props) {
                     error={formik.errors.anio}
                 />  
             </Form.Group>
+
+            <Form.Group widths="equal">
+                <Form.Input
+                    name="path"
+                    placeholder="Path (solo minúsculas, números y guiones)"
+                    maxLength={100}
+                    onChange={handlePathChange} // aplicamos la restricción
+                    value={formik.values.path}
+                    error={formik.errors.path}
+                />
+
+                <Form.Input
+                    name="orden"
+                    type="number"
+                    placeholder="Orden"
+                    min={0}
+                    onChange={formik.handleChange}
+                    value={formik.values.orden}
+                    error={formik.errors.orden}
+                />
+            </Form.Group>
+
+            <Form.Input
+                name="descripcion_corta"
+                placeholder="Descripción Corta"
+                maxLength={200}
+                onChange={formik.handleChange}
+                value={formik.values.descripcion_corta}
+                error={formik.errors.descripcion_corta}
+            />
 
             <Form.TextArea
                 name="descripcion"

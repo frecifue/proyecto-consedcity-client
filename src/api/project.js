@@ -3,6 +3,22 @@ import { ENV } from "../utils";
 export class Project {
     baseApi = ENV.BASE_API;
 
+    async getProject(proId) {
+        try {
+        const url = `${this.baseApi}/${ENV.API_ROUTES.PROJECTS.GET_PROJECT}/${proId}`;
+
+        const response = await fetch(url);
+        const result = await response.json();
+
+        return {
+            status: response.status,
+            data: result, 
+        };
+        } catch (error) {
+        throw error;
+        }
+    }
+
     async getProjects(page = 1, limit = 10) {
         try {
         const pageFilter = `page=${page}`;

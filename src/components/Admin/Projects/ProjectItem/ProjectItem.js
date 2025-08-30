@@ -10,6 +10,7 @@ import { ListDocumentSelectable } from "../../Documents";
 import { ListImagesSelectable } from "../../ImageGallery";
 import { ListTeamSelectable } from "../../Team/ListTeamSelectable/ListTeamSelectable";
 import { ListPostSelectable } from "../../Post/ListPostSelectable/ListPostSelectable";
+import { Link } from "react-router-dom";
 
 const projectController = new Project();
 
@@ -100,9 +101,9 @@ export function ProjectItem(props) {
                 </div>
 
                 <div>
-                {/* <Button as={Link} primary icon to={`/blog/${post.pos_path}`} target="_blank">
+                <Button as={Link} primary icon to={`/project/${project.pro_path}`} target="_blank">
                     <Icon name="eye" />
-                </Button> */}
+                </Button>
                 <Button icon color="green" onClick={onOpenCloseDocumentsModal}>
                     <Icon name="file pdf outline" />
                 </Button>
