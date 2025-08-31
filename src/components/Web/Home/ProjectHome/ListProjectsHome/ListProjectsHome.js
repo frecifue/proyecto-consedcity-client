@@ -9,12 +9,12 @@ const projectController = new Project();
 export function ListProjectsHome() {
     const [projects, setProjects] = useState(null);
     const [paginationData, setPaginationData] = useState();
-    const [page, setPage] = useState(1); // 👈 solo estado interno
+    const [page, setPage] = useState(1); 
 
     useEffect(() => {
         (async () => {
             try {
-                const { data } = await projectController.getProjects(page, 4);
+                const { data } = await projectController.getProjects(page, 4, false);
                 setProjects(data.projects);
                 setPaginationData({
                     limit: data.limit,
@@ -40,7 +40,7 @@ export function ListProjectsHome() {
             pagination={
                 <Pagination
                     totalPages={paginationData.pages}
-                    activePage={page} // 👈 usamos el estado interno
+                    activePage={page} 
                     ellipsisItem={null}
                     firstItem={null}
                     lastItem={null}

@@ -15,7 +15,7 @@ export function ListDocumentsHome() {
     useEffect(() => {
         (async () => {
         try {
-            const {data} = await documentController.getDocuments(page, 4);
+            const {data} = await documentController.getDocuments(page, 4, true);
             setDocuments(data.documents);
             setPagination({
             limit: data.limit,

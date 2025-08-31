@@ -17,7 +17,7 @@ export function ListTeamHome() {
         (async () => {
         try {
             setTeam([]);
-            const {data} = await teamController.getTeams(1, 1000);
+            const {data} = await teamController.getTeams(1, 1000, true);
             setTeam(data.teams);
         } catch (error) {
             console.error(error);

@@ -124,6 +124,15 @@ export function PostForm(props) {
                 error={formik.errors.path_post}
                 />
             </Form.Group>
+
+            <Form.Checkbox
+                toggle
+                label="Mostrar en Home"
+                name="en_home"
+                checked={formik.values.en_home}
+                onChange={(_, data) => formik.setFieldValue("en_home", data.checked)}
+                error={formik.errors.en_home}
+            />
             
             <Editor 
                 apiKey={process.env.REACT_APP_TINYMCE_API_KEY}

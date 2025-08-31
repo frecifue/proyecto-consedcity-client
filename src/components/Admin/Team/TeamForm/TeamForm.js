@@ -126,6 +126,16 @@ export function TeamForm(props) {
                         value={formik.values.orden}
                         error={formik.errors.orden}
                         />
+
+                    <Form.Checkbox
+                        toggle
+                        label="Mostrar en Home"
+                        name="en_home"
+                        checked={formik.values.en_home}
+                        onChange={(_, data) => formik.setFieldValue("en_home", data.checked)}
+                        error={formik.errors.en_home}
+                    />
+
                 </Form.Group>
 
                 <Form.Button type='submit' primary fluid loading={formik.isSubmitting}>

@@ -13,7 +13,7 @@ export function ImageGalleryHome() {
     useEffect(() => {
         async function fetchImages() {
             try {
-                const {data} = await imageGalleryController.getImagesGallery(1, 10); // Página 1, límite de 10 imágenes
+                const {data} = await imageGalleryController.getImagesGallery(1, 10, true); 
                 const formattedImages = data.images.map((img) => ({
                     original: `${ENV.BASE_PATH}/${img.gim_imagen}`,
                     thumbnail: `${ENV.BASE_PATH}/${img.gim_imagen}`,

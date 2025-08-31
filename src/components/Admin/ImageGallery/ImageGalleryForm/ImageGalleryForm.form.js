@@ -6,6 +6,7 @@ export function initialValues(img){
         fileImagen: null,
         nombre: img?.gim_nombre || "",
         orden: img?.gim_orden || "",
+        en_home: img?.gim_en_home ?? false, 
     };
 }
 
@@ -23,6 +24,8 @@ export function validationSchema(){
 
         imagen: Yup.string()
             .required(true),
+
+        en_home: Yup.boolean().required(true),
       });
       
 }

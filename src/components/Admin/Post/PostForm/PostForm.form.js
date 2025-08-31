@@ -7,6 +7,7 @@ export function initialValues(post) {
         contenido: post?.pos_contenido || "",
         img_principal: post?.pos_img_principal || "",
         file: null,
+        en_home: post?.pos_en_home ?? false, 
     };
 }
 
@@ -27,6 +28,8 @@ export function validationSchema() {
       
         img_principal: Yup.string()
             .required(true),
+
+        en_home: Yup.boolean().required(true),
       });
       
 }

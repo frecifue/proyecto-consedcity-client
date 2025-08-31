@@ -19,21 +19,23 @@ export class Project {
         }
     }
 
-    async getProjects(page = 1, limit = 10) {
+    async getProjects(page = 1, limit = 10, relations = true) {
         try {
-        const pageFilter = `page=${page}`;
-        const limitFilter = `limit=${limit}`;
-        const url = `${this.baseApi}/${ENV.API_ROUTES.PROJECTS.GET_PROJECTS}?${pageFilter}&${limitFilter}`;
+            const pageFilter = `page=${page}`;
+            const limitFilter = `limit=${limit}`;
+            const relationsFilter = `relations=${relations}`;
 
-        const response = await fetch(url);
-        const result = await response.json();
+            const url = `${this.baseApi}/${ENV.API_ROUTES.PROJECTS.GET_PROJECTS}?${pageFilter}&${limitFilter}&${relationsFilter}`;
 
-        return {
-            status: response.status,
-            data: result, 
-        };
+            const response = await fetch(url);
+            const result = await response.json();
+
+            return {
+                status: response.status,
+                data: result, 
+            };
         } catch (error) {
-        throw error;
+            throw error;
         }
     }
 

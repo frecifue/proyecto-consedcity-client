@@ -1,4 +1,3 @@
-// ListPostsContainer.jsx
 import React, { useState, useEffect } from "react";
 import { Loader, Pagination } from "semantic-ui-react";
 import { Post } from "../../../../../api";
@@ -14,7 +13,7 @@ export function ListPostsHome() {
     useEffect(() => {
         (async () => {
             try {
-                const { data } = await postController.getPosts(page, 4);
+                const { data } = await postController.getPosts(page, 4, false, true);
                 setPosts(data.posts);
                 setPaginationData({
                     limit: data.limit,

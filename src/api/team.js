@@ -3,11 +3,12 @@ import { ENV } from "../utils";
 export class Team {
     baseApi = ENV.BASE_API;
 
-    async getTeams(page = 1, limit = 10) {
+    async getTeams(page = 1, limit = 10, en_home = undefined) {
         try {
             const pageFilter = `page=${page}`;
             const limitFilter = `limit=${limit}`;
-            const url = `${this.baseApi}/${ENV.API_ROUTES.TEAM.GET_TEAM}?${pageFilter}&${limitFilter}`;
+            const enHomeFilter = en_home !== undefined ? `&en_home=${en_home}` : "";
+            const url = `${this.baseApi}/${ENV.API_ROUTES.TEAM.GET_TEAM}?${pageFilter}&${limitFilter}${enHomeFilter}`;
 
             const response = await fetch(url);
             const result = await response.json();
@@ -17,9 +18,9 @@ export class Team {
                 data: result, 
             };
 
-            } catch (error) {
-                throw error;
-            }
+        } catch (error) {
+            throw error;
+        }
     }
 
     async createTeam(accessToken, data) {
