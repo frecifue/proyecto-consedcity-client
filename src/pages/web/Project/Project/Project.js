@@ -31,8 +31,8 @@ export function Project() {
             <Description name={project?.pro_nombre} description={project?.pro_descripcion}/>
             <ListPosts posts={project?.posts}/>
             <ListTeam team={project?.equipos}/>
-            <ImageGallery images={project?.imagenes}/>
             <ListDocuments documents={project?.documentos}/>
+            <ImageGallery images={project?.imagenes}/>
         </div>
     )
 }
