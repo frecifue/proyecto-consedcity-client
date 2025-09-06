@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Icon, Confirm } from "semantic-ui-react";
+import { Button, Icon, Confirm, Label } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { Post } from "../../../../api";
 import { useAuth } from "../../../../hooks";
@@ -25,7 +25,7 @@ export function PostItem(props) {
     const onOpenCloseConfirm = () => setShowConfirm((prevState) => !prevState);
     const onOpenCloseDocumentsModal = () => setShowDocumentsModal((prev) => !prev);
     const onOpenCloseImagesModal = () => setShowImagesModal((prev) => !prev);
-
+console.log(post)
     const onDelete = async () => {
         try {
             const response = await postController.deletePost(accessToken, post.pos_id);
@@ -77,21 +77,22 @@ export function PostItem(props) {
                 </div>
 
                 <div>
-                <Button as={Link} primary icon to={`/blog/${post.pos_path}`} target="_blank">
-                    <Icon name="eye" />
-                </Button>
-                <Button icon color="green" onClick={onOpenCloseDocumentsModal}>
-                    <Icon name="file pdf outline" />
-                </Button>
-                <Button icon color="pink" onClick={onOpenCloseImagesModal}>
-                    <Icon name="image" />
-                </Button>
-                <Button icon color="yellow" onClick={onOpenCloseModal}>
-                    <Icon name="pencil" />
-                </Button>
-                <Button icon color="red" onClick={onOpenCloseConfirm}>
-                    <Icon name="trash" />
-                </Button>
+                    {post.pos_en_home ? <Label circular color="green">En Home</Label> : ''}
+                    <Button as={Link} primary icon to={`/blog/${post.pos_path}`} target="_blank">
+                        <Icon name="eye" />
+                    </Button>
+                    <Button icon color="green" onClick={onOpenCloseDocumentsModal}>
+                        <Icon name="file pdf outline" />
+                    </Button>
+                    <Button icon color="pink" onClick={onOpenCloseImagesModal}>
+                        <Icon name="image" />
+                    </Button>
+                    <Button icon color="yellow" onClick={onOpenCloseModal}>
+                        <Icon name="pencil" />
+                    </Button>
+                    <Button icon color="red" onClick={onOpenCloseConfirm}>
+                        <Icon name="trash" />
+                    </Button>
                 </div>
             </div>
 

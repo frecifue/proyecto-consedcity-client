@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Image, Button, Icon, Confirm } from 'semantic-ui-react'; 
+import { Image, Button, Icon, Confirm, Label } from 'semantic-ui-react'; 
 import { image } from '../../../../assets';
 import { ENV } from '../../../../utils';
 import { BasicModal } from '../../../Shared';
@@ -67,7 +67,9 @@ export function TeamItem(props) {
                         <p>{team.equ_nombre}</p>
                     </div>
                 </div>
-                <div >
+                <div>
+                    {team.equ_en_home ? <Label circular color="green">En Home</Label> : ''}
+                    <Label circular color="orange">{team.equ_orden}</Label>
                     <Button icon color="yellow" onClick={openUpdatedTeam}>
                         <Icon name='pencil'/>
                     </Button>

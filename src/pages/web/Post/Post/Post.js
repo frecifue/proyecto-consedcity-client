@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Container, Loader } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import { useParams } from "react-router-dom";
 import { Post as PostController } from "../../../../api";
 import { ENV } from '../../../../utils'
 import "./Post.scss";
 import DocumentsPost from "../DocumentsPost/DocumentsPost";
 import { ImagesPost } from "../ImagesPost/ImagesPost";
+import { ResourceNotFound } from "../../../../components/Shared";
 
 const postController = new PostController();
 
@@ -16,15 +17,30 @@ export function Post() {
     useEffect(() => {
         (async () => {
         try {
-            const {data} = await postController.getPost(path);
-            setPost(data);
+            const {data, status} = await postController.getPost(path);
+            // setPost(data);
+            if (status >= 400) {
+                    setPost(null);
+                } else {
+                    setPost(data);
+                }
         } catch (error) {
             console.error(error);
+            setPost(null);
         }
         })();
     }, [path]);
 
-    if (!post) return <Loader active inline="centered" />;
+    if (!post) {
+        return (
+            <ResourceNotFound
+                title="Noticia no encontrada"
+                message="La noticia que buscas no existe o fue eliminada."
+                linkText="Volver al Inicio"
+                linkTo="/"
+            />
+        );
+    }
 
     return (
         <>

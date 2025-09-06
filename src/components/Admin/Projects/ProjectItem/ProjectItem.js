@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Icon, Confirm } from "semantic-ui-react";
+import { Button, Icon, Confirm, Label } from "semantic-ui-react";
 import { Project } from "../../../../api";
 import { useAuth } from "../../../../hooks";
 import { BasicModal } from "../../../Shared";
@@ -101,27 +101,28 @@ export function ProjectItem(props) {
                 </div>
 
                 <div>
-                <Button as={Link} primary icon to={`/project/${project.pro_path}`} target="_blank">
-                    <Icon name="eye" />
-                </Button>
-                <Button icon color="green" onClick={onOpenCloseDocumentsModal}>
-                    <Icon name="file pdf outline" />
-                </Button>
-                <Button icon color="pink" onClick={onOpenCloseImagesModal}>
-                    <Icon name="image" />
-                </Button>
-                <Button icon color="blue" onClick={onOpenCloseTeamsModal}>
-                    <Icon name="group" />
-                </Button>
-                <Button icon color="purple" onClick={onOpenClosePostsModal}>
-                    <Icon name="list" />
-                </Button>
-                <Button icon color="yellow" onClick={onOpenCloseModal}>
-                    <Icon name="pencil" />
-                </Button>
-                <Button icon color="red" onClick={onOpenCloseConfirm}>
-                    <Icon name="trash" />
-                </Button>
+                    <Label circular color="orange">{project.pro_orden}</Label>
+                    <Button as={Link} primary icon to={`/project/${project.pro_path}`} target="_blank">
+                        <Icon name="eye" />
+                    </Button>
+                    <Button icon color="green" onClick={onOpenCloseDocumentsModal}>
+                        <Icon name="file pdf outline" />
+                    </Button>
+                    <Button icon color="pink" onClick={onOpenCloseImagesModal}>
+                        <Icon name="image" />
+                    </Button>
+                    <Button icon color="blue" onClick={onOpenCloseTeamsModal}>
+                        <Icon name="group" />
+                    </Button>
+                    <Button icon color="purple" onClick={onOpenClosePostsModal}>
+                        <Icon name="list" />
+                    </Button>
+                    <Button icon color="yellow" onClick={onOpenCloseModal}>
+                        <Icon name="pencil" />
+                    </Button>
+                    <Button icon color="red" onClick={onOpenCloseConfirm}>
+                        <Icon name="trash" />
+                    </Button>
                 </div>
             </div>
 
