@@ -83,7 +83,9 @@ export function ProjectForm(props) {
                     name="path"
                     placeholder="Path (solo minúsculas, números y guiones)"
                     maxLength={100}
-                    onChange={handlePathChange} // aplicamos la restricción
+                    onChange={handlePathChange} 
+                    className={project ? "readonly-input": ""}
+                    readOnly={!!project}
                     value={formik.values.path}
                     error={formik.errors.path}
                 />
