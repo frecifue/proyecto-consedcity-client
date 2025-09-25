@@ -4,8 +4,7 @@ import "./ListProjects.scss";
 import { ListProjectItem } from "../ListProjectItem";
 
 export function ListProjects({ projects, pagination, onPageChange }) {
-    if (!projects) return null;
-    if (projects.length === 0) return <p>No hay proyectos disponibles</p>;
+    if (!projects || projects.length === 0) return null;
 
     return (
         <section className="list-projects-web" id="list-projects-section">
