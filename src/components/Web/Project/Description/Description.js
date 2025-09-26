@@ -10,7 +10,10 @@ export function Description({name, description}) {
         <section className="project-section" id="project-section">
             <div className="container">
                 <h2 className="project-section__title">{name}</h2>
-                <p className="description">{description}</p>
+                <div
+                    className="description"
+                    dangerouslySetInnerHTML={{ __html: description }}
+                    />
             </div>
         </section>
     );
