@@ -1,0 +1,15 @@
+.project-page {
+    &__add {
+        position: absolute;
+        right: 0;
+        top: 0;
+    
+        > .ui.button {
+          margin: 0;
+        }
+    }
+  
+    // .ui.menu.secondary {
+    //   min-height: 0px;
+    // }
+  }

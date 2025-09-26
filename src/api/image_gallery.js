@@ -3,11 +3,13 @@ import { ENV } from "../utils";
 export class ImageGallery {
     baseApi = ENV.BASE_API;
 
-    async getImagesGallery(page = 1, limit = 10) {
+    async getImagesGallery(page = 1, limit = 10, en_home = undefined) {
         try {
         const pageFilter = `page=${page}`;
         const limitFilter = `limit=${limit}`;
-        const url = `${this.baseApi}/${ENV.API_ROUTES.IMAGE_GALLERY.GET_IMAGES_GALLERY}?${pageFilter}&${limitFilter}`;
+        const enHomeFilter = en_home !== undefined ? `&en_home=${en_home}` : "";
+
+        const url = `${this.baseApi}/${ENV.API_ROUTES.IMAGE_GALLERY.GET_IMAGES_GALLERY}?${pageFilter}&${limitFilter}${enHomeFilter}`;
 
         const response = await fetch(url);
         const result = await response.json();

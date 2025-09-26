@@ -7,6 +7,7 @@ export function initialValues(document) {
         orden: document?.doc_orden || "",
         documento: document?.doc_documento || "",
         file: null,
+        en_home: document?.doc_en_home ?? false, 
     };
 }
 
@@ -28,5 +29,7 @@ export function validationSchema() {
     
         documento: Yup.string()
             .required(true),
+
+        en_home: Yup.boolean().required(true),
       });
 }

@@ -9,18 +9,17 @@ export function WebLayout(props) {
     return (
         <div className="web-layout">
             <div className="web-layout__header">
-            <MenuAnchor/>
+                <MenuAnchor/>
             </div>
 
             {children}
 
             <div className="web-layout__footer">
                 <Container>
-                <Footer.Follow/>
-                <Footer.Info />
+                    <Footer.Follow/>
+                    <Footer.Info />
                 </Container>
-                <Container>
-                
+                <Container>    
                 </Container>
             </div>
         </div>

@@ -3,17 +3,20 @@ import { ENV } from "../utils";
 export class Team {
     baseApi = ENV.BASE_API;
 
-    async getTeams() {
+    async getTeams(page = 1, limit = 10, en_home = undefined) {
         try {
-        const url = `${this.baseApi}/${ENV.API_ROUTES.TEAM.GET_TEAM}`;
+            const pageFilter = `page=${page}`;
+            const limitFilter = `limit=${limit}`;
+            const enHomeFilter = en_home !== undefined ? `&en_home=${en_home}` : "";
+            const url = `${this.baseApi}/${ENV.API_ROUTES.TEAM.GET_TEAM}?${pageFilter}&${limitFilter}${enHomeFilter}`;
 
-        const response = await fetch(url);
-        const result = await response.json();
+            const response = await fetch(url);
+            const result = await response.json();
 
-        return {
-            status: response.status,
-            data: result, 
-        };
+            return {
+                status: response.status,
+                data: result, 
+            };
 
         } catch (error) {
             throw error;

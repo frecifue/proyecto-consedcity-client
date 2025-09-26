@@ -1,0 +1,32 @@
+@import "~/src/scss/index.scss";
+
+.project-section {
+    background-color: #fff;
+    padding: 0 0 60px;
+    display: flex;
+    justify-content: center;
+
+    .container {
+        max-width: 1000px;
+        width: 100%;
+        text-align: center;
+
+        .project-section__title {
+            font-size: 35px;
+            color: $text-dark;
+            font-weight: bold;
+            text-align: center;
+            padding: 100px 0 40px 0;
+        }
+
+        .description {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.5;
+            text-align: justify;
+            margin-left: 25px;
+            margin-right: 25px;
+        }
+    }
+}

@@ -63,6 +63,17 @@ export const ENV = {
         },
         TYPE_USER:{
             GET_TYPE_USERS: "type-users"
+        },
+        PROJECTS:{
+            GET_PROJECTS: "projects",
+            GET_PROJECT: "project",
+            CREATE_PROJECT: "project",
+            UPDATE_PROJECT: "project",
+            DELETE_PROJECT: "project",
+            ADD_DOCUMENTS: "project/:proId/add-documents",
+            ADD_IMAGES: "project/:proId/add-images",
+            ADD_POSTS: "project/:proId/add-posts",
+            ADD_TEAMS: "project/:proId/add-teams"
         }
     },
 };

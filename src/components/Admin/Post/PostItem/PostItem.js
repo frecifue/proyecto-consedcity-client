@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Button, Icon, Confirm } from "semantic-ui-react";
+import { Button, Icon, Confirm, Label } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { Post } from "../../../../api";
 import { useAuth } from "../../../../hooks";
 import { BasicModal } from "../../../Shared";
 import "./PostItem.scss";
 import { PostForm } from "../PostForm";
-import { ListImagesSelectable } from "../ListImagesSelectable/ListImagesSelectable";
-import { ListDocumentSelectable } from "../ListDocumentSelectable";
 import { toast } from "react-toastify";
+import { ListDocumentSelectable } from "../../Documents";
+import { ListImagesSelectable } from "../../ImageGallery";
 
 const postController = new Post();
 
@@ -25,7 +25,7 @@ export function PostItem(props) {
     const onOpenCloseConfirm = () => setShowConfirm((prevState) => !prevState);
     const onOpenCloseDocumentsModal = () => setShowDocumentsModal((prev) => !prev);
     const onOpenCloseImagesModal = () => setShowImagesModal((prev) => !prev);
-
+console.log(post)
     const onDelete = async () => {
         try {
             const response = await postController.deletePost(accessToken, post.pos_id);
@@ -49,6 +49,24 @@ export function PostItem(props) {
         }
     };
 
+    const onSaveDocuments = async (documentsIds, accessToken) => {
+        const data = { documentsIds };
+        const response = await postController.addDocuments(accessToken, post.pos_id, data);
+
+        if (response.status !== 200) {
+            throw new Error(response.data?.msg || "Error al guardar documentos en Noticia");
+        }
+    };
+
+    const onSaveImages = async (imagesIds, accessToken) => {
+        const data = { imagesIds };
+        const response = await postController.addImages(accessToken, post.pos_id, data);
+
+        if (response.status !== 200) {
+            throw new Error(response.data?.msg || "Error al guardar imagenes en Noticia");
+        }
+    };
+
 
     return (
         <>
@@ -59,21 +77,22 @@ export function PostItem(props) {
                 </div>
 
                 <div>
-                <Button as={Link} primary icon to={`/blog/${post.pos_path}`} target="_blank">
-                    <Icon name="eye" />
-                </Button>
-                <Button icon color="green" onClick={onOpenCloseDocumentsModal}>
-                    <Icon name="file pdf outline" />
-                </Button>
-                <Button icon color="pink" onClick={onOpenCloseImagesModal}>
-                    <Icon name="image" />
-                </Button>
-                <Button icon color="yellow" onClick={onOpenCloseModal}>
-                    <Icon name="pencil" />
-                </Button>
-                <Button icon color="red" onClick={onOpenCloseConfirm}>
-                    <Icon name="trash" />
-                </Button>
+                    {post.pos_en_home ? <Label circular color="green">En Home</Label> : ''}
+                    <Button as={Link} primary icon to={`/blog/${post.pos_path}`} target="_blank">
+                        <Icon name="eye" />
+                    </Button>
+                    <Button icon color="green" onClick={onOpenCloseDocumentsModal}>
+                        <Icon name="file pdf outline" />
+                    </Button>
+                    <Button icon color="pink" onClick={onOpenCloseImagesModal}>
+                        <Icon name="image" />
+                    </Button>
+                    <Button icon color="yellow" onClick={onOpenCloseModal}>
+                        <Icon name="pencil" />
+                    </Button>
+                    <Button icon color="red" onClick={onOpenCloseConfirm}>
+                        <Icon name="trash" />
+                    </Button>
                 </div>
             </div>
 
@@ -91,7 +110,14 @@ export function PostItem(props) {
                 close={onOpenCloseDocumentsModal}
                 title="Agregar Documentos a la noticia"
             >
-                <ListDocumentSelectable active={true} onClose={onOpenCloseDocumentsModal} reload={false} onReload={onReload} post={post} />
+                <ListDocumentSelectable
+                    active={true}
+                    onClose={onOpenCloseDocumentsModal}
+                    reload={false}
+                    onReload={onReload}
+                    initialSelected={post.documentos?.map(d => d.doc_id) || []}
+                    onSave={onSaveDocuments}
+                />
             </BasicModal>
 
             <BasicModal
@@ -99,7 +125,14 @@ export function PostItem(props) {
                 close={onOpenCloseImagesModal}
                 title="Agregar Imágenes a la noticia"
             >
-                <ListImagesSelectable active={true} onClose={onOpenCloseImagesModal} reload={false} onReload={onReload} post={post} />
+                <ListImagesSelectable 
+                    active={true} 
+                    onClose={onOpenCloseImagesModal} 
+                    reload={false} 
+                    onReload={onReload} 
+                    initialSelected={post.imagenes?.map(g => g.gim_id) || []}
+                    onSave={onSaveImages}
+                />
             </BasicModal>
 
             <Confirm

@@ -1,7 +1,3 @@
 export * from "./ListPost"
 export * from "./PostItem"
 export * from "./PostForm"
-export * from "./ImagePostItem"
-export * from "./ListImagesSelectable"
-export * from "./DocumentPostItem"
-export * from "./ListDocumentSelectable"

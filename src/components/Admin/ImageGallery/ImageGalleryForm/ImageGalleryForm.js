@@ -25,6 +25,7 @@ export function ImageGalleryForm(props) {
                     nombre: formValue.nombre,
                     orden: formValue.orden,
                     imagen: formValue.fileImagen,
+                    en_home: formValue.en_home
                 };
 
                 let response;
@@ -108,15 +109,17 @@ export function ImageGalleryForm(props) {
                 )}
             </div>
 
+            <Form.Input
+                name="nombre"
+                placeholder="Nombre"
+                maxLength={100} 
+                onChange={formik.handleChange}
+                value={formik.values.nombre}
+                error={formik.errors.nombre}
+            />
+
             <Form.Group widths="equal">
-                <Form.Input
-                    name="nombre"
-                    placeholder="Nombre"
-                    maxLength={100} 
-                    onChange={formik.handleChange}
-                    value={formik.values.nombre}
-                    error={formik.errors.nombre}
-                />
+                
                 <Form.Input
                     name="orden"
                     type="number"
@@ -126,6 +129,15 @@ export function ImageGalleryForm(props) {
                     onChange={formik.handleChange}
                     value={formik.values.orden}
                     error={formik.errors.orden}
+                />
+
+                <Form.Checkbox
+                    toggle
+                    label="Mostrar en Home"
+                    name="en_home"
+                    checked={formik.values.en_home}
+                    onChange={(_, data) => formik.setFieldValue("en_home", data.checked)}
+                    error={formik.errors.en_home}
                 />
             </Form.Group>
 

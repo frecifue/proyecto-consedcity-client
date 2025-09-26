@@ -1,0 +1,42 @@
+import React from "react";
+import { Button, Checkbox, Icon } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import { ENV } from "../../../../utils";
+import "./ImageSelectableItem.scss"
+
+export function ImageSelectableItem(props) {
+    const { image, onSelect, isSelected } = props;
+
+    const handleCheckboxChange = (e, { checked }) => {
+        onSelect(image.gim_id, checked);
+    };
+
+    return (
+        <div className="image-post-item">
+          <label className="image-post-item__label">
+            <Checkbox
+              checked={isSelected}
+              onChange={handleCheckboxChange}
+              className="image-post-item__checkbox"
+            />
+      
+            <div className="image-post-item__text">
+              <span className="image-post-item__title">{image.gim_nombre}</span>
+            </div>
+          </label>
+      
+          <div className="image-post-item__content">
+            <Button
+              as={Link}
+              primary
+              icon
+              to={`${ENV.BASE_PATH}/${image.gim_imagen}`}
+              target="_blank"
+            >
+              <Icon name="eye" />
+            </Button>
+          </div>
+        </div>
+      );
+      
+}

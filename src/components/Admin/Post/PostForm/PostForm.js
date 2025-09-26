@@ -106,24 +106,33 @@ export function PostForm(props) {
         <Form className="post-form" onSubmit={formik.handleSubmit}>
             <Form.Group widths="equal">
                 <Form.Input
-                name="titulo"
-                placeholder="Titulo de la noticia"
-                maxLength={150} 
-                onChange={handleTituloChange}
-                value={formik.values.titulo}
-                error={formik.errors.titulo}
+                    name="titulo"
+                    placeholder="Titulo de la noticia"
+                    maxLength={150} 
+                    onChange={handleTituloChange}
+                    value={formik.values.titulo}
+                    error={formik.errors.titulo}
                 />
                 <Form.Input
-                name="path_post"
-                placeholder="URL de la noticia"
-                readOnly
-                className="readonly-input"
-                maxLength={150} 
-                onChange={formik.handleChange}
-                value={formik.values.path_post}
-                error={formik.errors.path_post}
+                    name="path_post"
+                    placeholder="URL de la noticia"
+                    readOnly
+                    className="readonly-input"
+                    maxLength={150} 
+                    onChange={formik.handleChange}
+                    value={formik.values.path_post}
+                    error={formik.errors.path_post}
                 />
             </Form.Group>
+
+            <Form.Checkbox
+                toggle
+                label="Mostrar en Home"
+                name="en_home"
+                checked={formik.values.en_home}
+                onChange={(_, data) => formik.setFieldValue("en_home", data.checked)}
+                error={formik.errors.en_home}
+            />
             
             <Editor 
                 apiKey={process.env.REACT_APP_TINYMCE_API_KEY}

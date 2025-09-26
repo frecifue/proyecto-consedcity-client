@@ -90,59 +90,71 @@ export function DocumentForm(props) {
 		return null;
 	};
 
-  return (
-    <Form className="document-form" onSubmit={formik.handleSubmit}>
-      <Form.Group widths="equal">
-        <Form.Input
-          name="titulo"
-          placeholder="Título del documento"
-		  maxLength={255} 
-          onChange={formik.handleChange}
-          value={formik.values.titulo}
-          error={formik.errors.titulo}
-        />
-		<Form.Input
-          name="orden"
-          type="number"
-          placeholder="Orden del documento"
-		  min={1}
-		  max={1000}
-          onChange={formik.handleChange}
-          value={formik.values.orden}
-          error={formik.errors.orden}
-        />
-      </Form.Group>
+	return (
+		<Form className="document-form" onSubmit={formik.handleSubmit}>
 
-      <Form.Group widths="equal">
-        <Form.TextArea
-          name="descripcion"
-          placeholder="Descripción del documento"
-          rows={5}
-		  maxLength={255} 
-          onChange={formik.handleChange}
-          value={formik.values.descripcion}
-          error={formik.errors.descripcion}
-        />
-      </Form.Group>
+			<Form.Input
+				name="titulo"
+				placeholder="Título del documento"
+				maxLength={255} 
+				onChange={formik.handleChange}
+				value={formik.values.titulo}
+				error={formik.errors.titulo}
+			/>
 
-      <div className="document-form__miniature" {...getRootProps()}>
-        <input {...getInputProps()} />
-        {getFilePreview() ? (
-          <div className="document-form__file-info">
-            <i className="file pdf outline icon large"></i>
-            <p>{getFilePreview()}</p>
-          </div>
-        ) : (
-          <div>
-            <i className="file pdf outline icon large"></i>
-            <p>Arrastra aquí un archivo PDF (máx. 15MB) o haz clic para seleccionar</p>
-          </div>
-        )}
-      </div>
+			<Form.Group widths="equal">
+				
+				<Form.Input
+					name="orden"
+					type="number"
+					placeholder="Orden del documento"
+					min={1}
+					max={1000}
+					onChange={formik.handleChange}
+					value={formik.values.orden}
+					error={formik.errors.orden}
+				/>
 
-      <Form.Button type="submit" primary fluid loading={formik.isSubmitting}>
-        {document ? "Actualizar Documento" : "Crear Documento"}
-      </Form.Button>
-    </Form>
-  );
+				<Form.Checkbox
+					toggle
+					label="Mostrar en Home"
+					name="en_home"
+					checked={formik.values.en_home}
+					onChange={(_, data) => formik.setFieldValue("en_home", data.checked)}
+					error={formik.errors.en_home}
+				/>
+			</Form.Group>
+
+			<Form.Group widths="equal">
+				<Form.TextArea
+					name="descripcion"
+					placeholder="Descripción del documento"
+					rows={5}
+					maxLength={255} 
+					onChange={formik.handleChange}
+					value={formik.values.descripcion}
+					error={formik.errors.descripcion}
+				/>
+			</Form.Group>
+
+			<div className="document-form__miniature" {...getRootProps()}>
+				<input {...getInputProps()} />
+				{getFilePreview() ? (
+				<div className="document-form__file-info">
+					<i className="file pdf outline icon large"></i>
+					<p>{getFilePreview()}</p>
+				</div>
+				) : (
+				<div>
+					<i className="file pdf outline icon large"></i>
+					<p>Arrastra aquí un archivo PDF (máx. 15MB) o haz clic para seleccionar</p>
+				</div>
+				)}
+			</div>
+
+			<Form.Button type="submit" primary fluid loading={formik.isSubmitting}>
+				{document ? "Actualizar Documento" : "Crear Documento"}
+			</Form.Button>
+		</Form>
+	);
 }

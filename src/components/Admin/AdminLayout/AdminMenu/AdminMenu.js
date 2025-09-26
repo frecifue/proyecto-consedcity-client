@@ -43,6 +43,11 @@ export function AdminMenu() {
                         <Icon name="group" />
                         Equipo
                     </Menu.Item>
+
+                    <Menu.Item as={Link} to="/admin/projects" active={isCurrentPath("/admin/projects")}>
+                        <Icon name="cogs" />
+                        Proyectos
+                    </Menu.Item>
                 </>
             )}
 

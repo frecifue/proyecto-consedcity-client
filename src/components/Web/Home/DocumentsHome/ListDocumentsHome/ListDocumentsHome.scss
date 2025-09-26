@@ -1,0 +1,47 @@
+@import "~/src/scss/index.scss";
+
+.list-documents-container{
+  background-color: rgba(248, 248, 255, 0.105);
+}
+
+.list-documents-section {
+  
+
+  .list-documents__title {
+    font-size: 35px;
+    color: $text-dark;
+    font-weight: normal;
+    text-align: center;
+    text-decoration: solid;;
+    padding: 100px 0 40px 0;
+    font-weight: bold;
+  }
+
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  
+    .item {
+      width: 50%; // 2 columnas por fila
+      padding: 20px;
+      box-sizing: border-box;
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+
+    a {
+      // color: $text-light !important;
+      opacity: 0.6;
+
+      &.active {
+        opacity: 1;
+        // border-color: $text-light !important;
+      }
+    }
+  }
+}

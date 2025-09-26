@@ -19,21 +19,24 @@ export class Post {
         }
     }
 
-    async getPosts(page = 1, limit = 10) {
+    async getPosts(page = 1, limit = 10, relations = true, en_home = undefined) {
         try {
-        const pageFilter = `page=${page}`;
-        const limitFilter = `limit=${limit}`;
-        const url = `${this.baseApi}/${ENV.API_ROUTES.POST.GET_POST}?${pageFilter}&${limitFilter}`;
+            const pageFilter = `page=${page}`;
+            const limitFilter = `limit=${limit}`;
+            const relationsFilter = `relations=${relations}`; 
+            const enHomeFilter = en_home !== undefined ? `&en_home=${en_home}` : "";
 
-        const response = await fetch(url);
-        const result = await response.json();
+            const url = `${this.baseApi}/${ENV.API_ROUTES.POST.GET_POST}?${pageFilter}&${limitFilter}&${relationsFilter}${enHomeFilter}`;
 
-        return {
-            status: response.status,
-            data: result, 
-        };
+            const response = await fetch(url);
+            const result = await response.json();
+
+            return {
+                status: response.status,
+                data: result, 
+            };
         } catch (error) {
-        throw error;
+            throw error;
         }
     }
 

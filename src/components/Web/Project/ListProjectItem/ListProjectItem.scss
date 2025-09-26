@@ -1,0 +1,52 @@
+@import "~/src/scss/index.scss";
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    &__image img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+
+    &__content {
+        padding: 1rem;
+    }
+
+    &__title {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        text-align: center; // Título centrado
+    }
+
+    &__description {
+        font-size: 0.95rem;
+        color: #555;
+        margin-bottom: 0.5rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Limita a 3 líneas */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: justify; // Descripción justificada
+    }
+
+    &__date {
+        font-size: 0.8rem;
+        color: #888;
+    }
+}

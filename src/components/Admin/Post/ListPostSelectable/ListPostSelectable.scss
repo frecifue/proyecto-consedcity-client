@@ -1,0 +1,33 @@
+.list-post-selectable {
+    .list-post-selectable__header {
+        margin-bottom: 1em;
+        display: flex;
+        align-items: center;
+    }
+
+    .list-post-selectable__header .checkbox {
+        margin-right: 10px;
+    }
+
+    .list-post-selectable__items {
+        margin-bottom: 20px;
+    }
+
+    .list-post-selectable__item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+
+        .checkbox {
+            margin-right: 10px;
+        }
+
+        .document-item {
+            margin-left: 15px;
+        }
+    }
+
+    .list-post-selectable__pagination {
+        text-align: center;
+    }
+}

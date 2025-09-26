@@ -1,37 +1,28 @@
 import React, { useEffect, useState } from "react";
-import Gallery from "react-image-gallery";  // Importación por defecto
+import Gallery from "react-image-gallery";  
 import "react-image-gallery/styles/css/image-gallery.css";
-import { ImageGallery as ImageGalleryAPI } from "../../../api";  // Asegúrate de que la ruta sea correcta
+import "./ImageGallery.scss";
 import { ENV } from "../../../utils";
-import "./ImageGallery.scss"
 
-const imageGalleryController = new ImageGalleryAPI();
-
-export function ImageGallery() {
-    const [images, setImages] = useState([]);
+export function ImageGallery({ images = [] }) {
+    const [formattedImages, setFormattedImages] = useState([]);
 
     useEffect(() => {
-        async function fetchImages() {
-            try {
-                const {data} = await imageGalleryController.getImagesGallery(1, 10); // Página 1, límite de 10 imágenes
-                const formattedImages = data.images.map((img) => ({
-                    original: `${ENV.BASE_PATH}/${img.gim_imagen}`,
-                    thumbnail: `${ENV.BASE_PATH}/${img.gim_imagen}`,
-                }));
-                setImages(formattedImages);
-            } catch (error) {
-                console.error("Error al cargar las imágenes:", error);
-            }
+        if (images.length > 0) {
+            const items = images.map(img => ({
+                original: `${ENV.BASE_PATH}/${img.gim_imagen}`,
+                thumbnail: `${ENV.BASE_PATH}/${img.gim_imagen}`
+            }));
+            setFormattedImages(items);
         }
+    }, [images]);
 
-        fetchImages();
-    }, []);
+    if (!formattedImages || formattedImages.length === 0) return null;
 
     return (
         <section className="image-gallery-section" id="image-gallery-section">
-            <h2 className="image-gallery-title">MOMENTOS CONSEDCITY</h2>
-            <Gallery items={images} />
-      </section>
-    
+            <h2 className="image-gallery-title">GALERÍA DE IMÁGENES</h2>
+            <Gallery items={formattedImages} />
+        </section>
     );
 }

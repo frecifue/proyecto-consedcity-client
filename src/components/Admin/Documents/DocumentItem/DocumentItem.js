@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Icon, Confirm } from "semantic-ui-react";
+import { Button, Icon, Confirm, Label } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { Documents } from "../../../../api";
 import { useAuth } from "../../../../hooks";
@@ -53,15 +53,17 @@ export function DocumentItem(props) {
         </div>
 
         <div>
-          <Button as={Link} primary icon to={`${ENV.BASE_PATH}/${document.doc_documento}`} target="_blank">
-            <Icon name="eye" />
-          </Button>
-          <Button icon color="yellow" onClick={onOpenCloseModal}>
-            <Icon name="pencil" />
-          </Button>
-          <Button icon color="red" onClick={onOpenCloseConfirm}>
-            <Icon name="trash" />
-          </Button>
+            {document.doc_en_home ? <Label circular color="green">En Home</Label> : ''}
+            <Label circular color="orange">{document.doc_orden}</Label>
+            <Button as={Link} primary icon to={`${ENV.BASE_PATH}/${document.doc_documento}`} target="_blank">
+                <Icon name="eye" />
+            </Button>
+            <Button icon color="yellow" onClick={onOpenCloseModal}>
+                <Icon name="pencil" />
+            </Button>
+            <Button icon color="red" onClick={onOpenCloseConfirm}>
+                <Icon name="trash" />
+            </Button>
         </div>
       </div>
 
