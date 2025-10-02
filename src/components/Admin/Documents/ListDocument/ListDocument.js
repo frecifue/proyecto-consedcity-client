@@ -43,7 +43,11 @@ export function ListDocument(props) {
 
   return (
     <div className='list-documents'>
-      {map(documents, (item)=> <DocumentItem key={item.doc_id} document={item} onReload={onReload}/>)}
+      {map(documents, (item) => (
+        <div key={item.doc_id} className="list-documents__item">
+          <DocumentItem document={item} onReload={onReload} />
+        </div>
+      ))}
 
       <div className='list-documents__pagination'>
         <Pagination
