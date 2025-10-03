@@ -6,13 +6,13 @@
     overflow: hidden;
   
     .document-title-link {
-      display: inline-block;
+      display: block;        // ocupa todo el ancho
       font-weight: bold;
       font-size: 1.1rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 100%;
+      white-space: normal;   // 🔑 permite que se rompa en varias líneas
+      word-wrap: break-word; // 🔑 asegura que no se desborde
+      overflow-wrap: break-word;
+      max-width: 100%;
     }
   
     hr {

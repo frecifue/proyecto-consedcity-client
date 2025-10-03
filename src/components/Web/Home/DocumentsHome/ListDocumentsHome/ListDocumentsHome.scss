@@ -2,28 +2,37 @@
 
 .list-documents-container {
   background-color: rgba(248, 248, 255, 0.105);
+  width: 100%; // asegura que el contenedor no se expanda
+  overflow-x: hidden; // evita scroll horizontal innecesario
 }
 
 .list-documents-section {
+  max-width: 100%; // que nunca pase el viewport
+  padding: 0 15px; // agrega respiración lateral en móviles
+
   .list-documents__title {
     font-size: 35px;
     color: $text-dark;
     font-weight: bold;
     text-align: center;
-    padding: 100px 0 40px 0;
+    padding: 60px 0 30px 0;
+
+    @media (max-width: 768px) {
+      font-size: 24px; // reduce el título en móvil
+      padding: 40px 0 20px 0;
+    }
   }
 
   .list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); // máximo 2 columnas
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 
     .item {
-      padding: 20px;
+      padding: 15px; // menos padding en móvil
       box-sizing: border-box;
     }
 
-    // Responsive: 1 columna en móviles
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
     }
@@ -33,6 +42,7 @@
     display: flex;
     justify-content: center;
     margin-top: 30px;
+    flex-wrap: wrap; // para que no se salga en pantallas chicas
 
     a {
       opacity: 0.6;
