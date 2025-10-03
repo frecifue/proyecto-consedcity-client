@@ -1,31 +1,31 @@
 @import "~/src/scss/index.scss";
 
-.list-documents-container{
+.list-documents-container {
   background-color: rgba(248, 248, 255, 0.105);
 }
 
 .list-documents-section {
-  
-
   .list-documents__title {
     font-size: 35px;
     color: $text-dark;
-    font-weight: normal;
-    text-align: center;
-    text-decoration: solid;;
-    padding: 100px 0 40px 0;
     font-weight: bold;
+    text-align: center;
+    padding: 100px 0 40px 0;
   }
 
   .list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // máximo 2 columnas
+    gap: 20px;
+
     .item {
-      width: 50%; // 2 columnas por fila
       padding: 20px;
       box-sizing: border-box;
+    }
+
+    // Responsive: 1 columna en móviles
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -35,12 +35,10 @@
     margin-top: 30px;
 
     a {
-      // color: $text-light !important;
       opacity: 0.6;
 
       &.active {
         opacity: 1;
-        // border-color: $text-light !important;
       }
     }
   }
