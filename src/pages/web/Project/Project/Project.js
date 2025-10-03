@@ -5,19 +5,21 @@ import { Project as ProjectApi } from "../../../../api";
 import { useParams } from 'react-router-dom';
 import { ListPosts } from '../../../../components/Web/Blog/ListPosts/ListPosts';
 import { ResourceNotFound } from '../../../../components/Shared/';
+import { Loader } from 'semantic-ui-react';
 
 const projectController = new ProjectApi();
 
 export function Project() {
-
-    const [project, setProject] = useState(null);
+    const [project, setProject] = useState(undefined); 
+    const [loading, setLoading] = useState(true);
 
     const { path } = useParams();
 
     useEffect(() => {
         (async () => {
+            setLoading(true);
             try {
-                const {data, status} = await projectController.getProject(path);
+                const { data, status } = await projectController.getProject(path);
 
                 if (status >= 400) {
                     setProject(null);
@@ -27,11 +29,17 @@ export function Project() {
             } catch (error) {
                 console.error(error);
                 setProject(null);
-            } 
-            })();
+            } finally {
+                setLoading(false);
+            }
+        })();
     }, [path]);
 
-    if (!project) {
+    if (loading) {
+        return <Loader active inline="centered" />;
+    }
+
+    if (project === null) {
         return (
             <ResourceNotFound
                 title="Proyecto no encontrado"
