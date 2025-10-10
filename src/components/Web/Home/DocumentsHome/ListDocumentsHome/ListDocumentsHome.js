@@ -40,7 +40,7 @@ export function ListDocumentsHome() {
         <div className="list-documents-container">
         <Container className="list-documents-section" id="list-documents-section">
         
-            <h2 className="list-documents__title">ESTUDIOS E INVESTIGACIONES</h2>
+            <h2 className="list-documents__title">ESTUDIOS Y GUÍAS</h2>
             <div className="list">
             {map(documents, (item) => (
                 <div key={item.doc_id} className="item">

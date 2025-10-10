@@ -12,7 +12,7 @@ export function ListDocuments({ documents, paginationComponent }) {
     return (
         <div className="list-documents-container">
             <Container className="list-documents-section" id="list-documents-section">
-                <h2 className="list-documents__title">DOCUMENTOS DEL PROYECTO</h2>
+                <h2 className="list-documents__title">ESTUDIOS Y GUÍAS DEL PROYECTO</h2>
                 <div className="list">
                     {map(documents, (item) => (
                         <div key={item.doc_id} className="item">
