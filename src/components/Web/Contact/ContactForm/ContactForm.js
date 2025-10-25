@@ -49,7 +49,7 @@ export function ContactForm() {
             <div className="contact-section__content">
                 <div className="contact-section__layout">
                     <div className="contact-section__left">
-                        <p>¿Te gustaría colaborar con nosotros/as? ¿Quieres estar al tanto de nuestros próximos eventos? ¿Estás interesado en contribuir con fondos o materiales? O tal vez solo deseas ponerte en contacto o hacer una consulta.</p>
+                        <p>¿Te gustaría colaborar con nosotros/as? ¿Quieres estar al tanto de nuestros próximos eventos? ¿Estás interesado/a en contribuir con fondos o materiales? O tal vez solo deseas ponerte en contacto o hacer una consulta.</p>
                         <p>Puedes ponerte en contacto con nosotros/as mediante el formulario o a través de nuestras redes sociales.</p>
                     </div>
                     <div className="contact-section__right">
