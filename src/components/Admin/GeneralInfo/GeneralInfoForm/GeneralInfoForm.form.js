@@ -9,17 +9,19 @@ export function initialValues(generalInfo) {
     difusion: generalInfo?.ing_nuestro_trabajo_difusion || "",
     formacion: generalInfo?.ing_nuestro_trabajo_formacion || "",
     investigacion: generalInfo?.ing_nuestro_trabajo_investigacion || "",
+    videojuegos: generalInfo?.ing_nuestro_trabajo_creacion_videojuegos || "",
   };
 }
 
 export function validationSchema() {
   return Yup.object({
-    quienes_somos: Yup.string().required(true),
-    mision: Yup.string().required(true),
-    vision: Yup.string().required(true),
-    nuestro_trabajo: Yup.string().required(true),
-    difusion: Yup.string().required(true),
-    formacion: Yup.string().required(true),
-    investigacion: Yup.string().required(true),
+    quienes_somos: Yup.string().required(true).max(2000, "Máximo 2000 caracteres"),
+    mision: Yup.string().required(true).max(1000, "Máximo 1000 caracteres"),
+    vision: Yup.string().required(true).max(1000, "Máximo 1000 caracteres"),
+    nuestro_trabajo: Yup.string().required(true).max(1000, "Máximo 1000 caracteres"),
+    difusion: Yup.string().required(true).max(1000, "Máximo 1000 caracteres"),
+    formacion: Yup.string().required(true).max(1000, "Máximo 1000 caracteres"),
+    investigacion: Yup.string().required(true).max(1000, "Máximo 1000 caracteres"),
+    videojuegos: Yup.string().required(true).max(1000, "Máximo 1000 caracteres"),
   });
 }

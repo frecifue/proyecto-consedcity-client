@@ -25,7 +25,11 @@ export function About() {
         <section className="about-section" id="about-section">
         <div className="container">
             <h2 className="about-section__title">QUIÉNES SOMOS</h2>
-            <p className="description">{generalInfo[0]?.ing_quienes_somos}</p>
+
+            <div
+                className="description"
+                dangerouslySetInnerHTML={{ __html: generalInfo[0]?.ing_quienes_somos }}
+            />
 
             <div className="additional-content">
             <div className="box">

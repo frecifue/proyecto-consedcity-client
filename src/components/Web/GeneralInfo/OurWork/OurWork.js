@@ -41,9 +41,13 @@ export function OurWork() {
                         <h5>FORMACIÓN</h5>
                         <p>{generalInfo[0]?.ing_nuestro_trabajo_formacion}</p>
                     </div>
-                    <div className="box">
+                    <div className="box grey-background">
                         <h5>INVESTIGACIÓN</h5>
                         <p>{generalInfo[0]?.ing_nuestro_trabajo_investigacion}</p>
+                    </div>
+                    <div className="box">
+                        <h5>CREACIÓN DE VIDEOJUEGOS</h5>
+                        <p>{generalInfo[0]?.ing_nuestro_trabajo_creacion_videojuegos}</p>
                     </div>
                 </div>
             </div>

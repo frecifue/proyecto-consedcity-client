@@ -5,6 +5,7 @@ import { GeneralInfo } from "../../../../api";
 import { useAuth } from "../../../../hooks";
 import { initialValues, validationSchema } from "./GeneralInfoForm.form";
 import { toast } from "react-toastify";
+import { Editor } from "@tinymce/tinymce-react";
 
 const generalInfoController = new GeneralInfo();
 
@@ -38,6 +39,7 @@ export function GeneralInfoForm() {
                     difusion: formValue.difusion,
                     formacion: formValue.formacion,
                     investigacion: formValue.investigacion,
+                    videojuegos: formValue.videojuegos,
                 };
         
                 let response;
@@ -81,8 +83,8 @@ export function GeneralInfoForm() {
             {/* Sección: Quiénes Somos */}
             <h3>Quiénes Somos</h3>
             <hr/>
-            <Form.Group widths="equal" style={{ marginBottom: "1rem" }}>
-                <Form.TextArea
+            {/* <Form.Group widths="equal" style={{ marginBottom: "1rem"}}> */}
+                {/* <Form.TextArea
                     label="Descripción"
                     name="quienes_somos"
                     placeholder="Escribe sobre quiénes somos..."
@@ -91,8 +93,22 @@ export function GeneralInfoForm() {
                     rows={7}
                     value={formik.values.quienes_somos}
                     error={formik.errors.quienes_somos}
-                />
-            </Form.Group>
+                /> */}
+                <Editor 
+                    apiKey={process.env.REACT_APP_TINYMCE_API_KEY}
+                    init={{ 
+                        height: 400, 
+                        menubar: true, 
+                        contextmenu: false,
+                        plugins: [
+                            "link",
+                        ],
+                        toolbar: "undo redo | bold italic | link",
+                    }}
+                    initialValue={formik.values.quienes_somos}
+                    onBlur={(e) => formik.setFieldValue("quienes_somos", e.target.getContent())}
+                /> 
+            {/* </Form.Group> */}
 
             {/* Sección: Misión y Visión */}
             <h3>Misión y Visión</h3>
@@ -102,7 +118,7 @@ export function GeneralInfoForm() {
                     label="Misión"
                     name="mision"
                     placeholder="Escribe la misión..."
-                    maxLength={500} 
+                    maxLength={1000} 
                     onChange={formik.handleChange}
                     rows={5}
                     value={formik.values.mision}
@@ -112,7 +128,7 @@ export function GeneralInfoForm() {
                     label="Visión"
                     name="vision"
                     placeholder="Escribe la visión..."
-                    maxLength={500} 
+                    maxLength={1000} 
                     onChange={formik.handleChange}
                     rows={5}
                     value={formik.values.vision}
@@ -128,7 +144,7 @@ export function GeneralInfoForm() {
                     label="Descripción"
                     name="nuestro_trabajo"
                     placeholder="Explica nuestro trabajo..."
-                    maxLength={500} 
+                    maxLength={1000} 
                     onChange={formik.handleChange}
                     rows={5}
                     value={formik.values.nuestro_trabajo}
@@ -144,7 +160,7 @@ export function GeneralInfoForm() {
                     label="Difusión"
                     name="difusion"
                     placeholder="Explica la difusión..."
-                    maxLength={500} 
+                    maxLength={1000} 
                     onChange={formik.handleChange}
                     rows={7}
                     value={formik.values.difusion}
@@ -154,7 +170,7 @@ export function GeneralInfoForm() {
                     label="Formación"
                     name="formacion"
                     placeholder="Explica la formación..."
-                    maxLength={500} 
+                    maxLength={1000} 
                     onChange={formik.handleChange}
                     rows={7}
                     value={formik.values.formacion}
@@ -164,11 +180,21 @@ export function GeneralInfoForm() {
                     label="Investigación"
                     name="investigacion"
                     placeholder="Explica la investigación..."
-                    maxLength={500} 
+                    maxLength={1000} 
                     onChange={formik.handleChange}
                     rows={7}
                     value={formik.values.investigacion}
                     error={formik.errors.investigacion}
+                />
+                <Form.TextArea
+                    label="Videojuegos"
+                    name="videojuegos"
+                    placeholder="Explica la creación de videojuegos..."
+                    maxLength={1000} 
+                    onChange={formik.handleChange}
+                    rows={7}
+                    value={formik.values.videojuegos}
+                    error={formik.errors.videojuegos}
                 />
             </Form.Group>
 
