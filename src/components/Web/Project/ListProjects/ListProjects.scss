@@ -1,12 +1,6 @@
 @import "~/src/scss/index.scss";
 
 .list-projects-web {
-  background-image: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.2),
-      rgba(0, 0, 0, 0.2)
-    ),
-    url("../../../../assets/jpg/contact.jpeg");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -29,7 +23,7 @@
 
   .project-title {
     font-size: 35px;
-    color: $text-light;
+    color: $text-dark;
     font-weight: bold;
     text-align: center;
     text-decoration: solid;
